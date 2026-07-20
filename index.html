@@ -6,11 +6,14 @@
 <title> Saldo+ — Dashboard Integrado </title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='0' y='0' width='30' height='30' fill='%2300B4AA'/%3E%3Crect x='34' y='0' width='30' height='30' fill='%23FD0087'/%3E%3Crect x='0' y='34' width='30' height='30' fill='%23002364'/%3E%3Crect x='34' y='34' width='30' height='30' fill='%23F08203'/%3E%3Cg fill='%23fff'%3E%3Crect x='12' y='6' width='6' height='18'/%3E%3Crect x='6' y='12' width='18' height='6'/%3E%3C/g%3E%3Cg fill='%23fff'%3E%3Crect x='46' y='6' width='6' height='18'/%3E%3Crect x='40' y='12' width='18' height='6'/%3E%3C/g%3E%3Cg fill='%23fff'%3E%3Crect x='12' y='40' width='6' height='18'/%3E%3Crect x='6' y='46' width='18' height='6'/%3E%3C/g%3E%3Cg fill='%23fff'%3E%3Crect x='46' y='40' width='6' height='18'/%3E%3Crect x='40' y='46' width='18' height='6'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<!-- Bibliotecas -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 <style>
   :root{
     --navy:#002364; --navy-light:#7B8CB0; --cyan:#00B4AA;
@@ -19,12 +22,9 @@
   }
   *{box-sizing:border-box;}
   .plus-strip{
-    width:100%;
-    height:30px;
+    width:100%; height:30px;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='30'%3E%3Crect x='0' width='30' height='30' fill='%2300B4AA'/%3E%3Crect x='30' width='30' height='30' fill='%23FD0087'/%3E%3Crect x='60' width='30' height='30' fill='%23002364'/%3E%3Crect x='90' width='30' height='30' fill='%23F08203'/%3E%3Cg fill='%23fff'%3E%3Crect x='12' y='6' width='6' height='18'/%3E%3Crect x='6' y='12' width='18' height='6'/%3E%3Crect x='42' y='6' width='6' height='18'/%3E%3Crect x='36' y='12' width='18' height='6'/%3E%3Crect x='72' y='6' width='6' height='18'/%3E%3Crect x='66' y='12' width='18' height='6'/%3E%3Crect x='102' y='6' width='6' height='18'/%3E%3Crect x='96' y='12' width='18' height='6'/%3E%3C/g%3E%3C/svg%3E");
-    background-repeat:repeat-x;
-    background-size:120px 30px;
-    background-position:left top;
+    background-repeat:repeat-x; background-size:120px 30px; background-position:left top;
   }
   body{margin:0;font-family:'Poppins',sans-serif;background:var(--bg);color:var(--navy);}
   header.top{background:var(--navy);padding:20px 28px;border-bottom:4px solid var(--cyan);}
@@ -51,16 +51,17 @@
   .kpi.b5{border-top:3px solid var(--green);}
   .kpi .label{font-size:11px;color:var(--text-muted);font-weight:500;letter-spacing:.03em;}
   .kpi .value{font-size:21px;font-weight:600;color:var(--navy);}
-  .card{background:var(--card);border-radius:10px;padding:16px 18px;}
+  .card{background:var(--card);border-radius:10px;padding:16px 18px;position:relative;}
   .card h3{font-size:14px;font-weight:600;color:var(--navy);margin:0 0 4px;}
   .card .sub{font-size:12px;color:var(--text-muted);margin:0 0 12px;}
   .chart-wrap{position:relative;width:100%;}
   .dl-btn{
-    display:inline-flex;align-items:center;gap:6px;margin-top:10px;
-    font-family:'Poppins',sans-serif;font-size:12px;font-weight:500;color:var(--navy);
-    background:#EEF2F9;border:none;border-radius:6px;padding:6px 12px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;margin-top:14px;
+    font-family:'Poppins',sans-serif;font-size:11.5px;font-weight:600;color:var(--navy);
+    background:#EEF2F9;border:none;border-radius:6px;padding:7px 14px;cursor:pointer;
+    transition: background 0.2s;
   }
-  .dl-btn:hover{background:#E0E7F2;}
+  .dl-btn:hover{background:#DCE4F2;}
   .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--text-muted);margin-top:10px;}
   .legend span{display:flex;align-items:center;gap:5px;}
   .dot{width:9px;height:9px;border-radius:2px;display:inline-block;}
@@ -68,7 +69,6 @@
   .insight{font-size:12.5px;line-height:1.5;color:var(--navy);background:#EAF9F7;border-left:3px solid var(--cyan);border-radius:6px;padding:9px 12px;margin-top:10px;}
   .badge{display:inline-block;background:#FBE7EF;color:#8A1E4A;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;margin-bottom:8px;}
   
-  /* Novos estilos para a aba qualitativa */
   .school-quote { margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid #F2F4F8; }
   .school-quote:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
   .tag { font-size: 10px; font-weight: 500; color: #fff; border-radius: 999px; padding: 3px 9px; display: inline-block; margin: 2px 4px 2px 0; }
@@ -102,9 +102,7 @@
 
 <main>
 
-<!-- ============================================== -->
-<!-- PÁGINA 1: VISÃO GERAL                          -->
-<!-- ============================================== -->
+<!-- PÁGINA 1: VISÃO GERAL -->
 <section class="page active" id="p1">
   <div class="kpis">
     <div class="kpi b1"><div class="label">INSCRITOS</div><div class="value">1.096</div></div>
@@ -117,6 +115,7 @@
       <h3>1 · Volume de alunos por etapa</h3>
       <p class="sub">Inscritos, engajados e concluintes — Semestre Atual</p>
       <div class="chart-wrap" style="height:260px;"><canvas id="c1"></canvas></div>
+      <button class="dl-btn" onclick="baixarCard(this, '1_volume_alunos')">⬇ Baixar Imagem</button>
     </div>
     <div class="card">
       <h3>2 · Estrutura institucional</h3>
@@ -147,80 +146,86 @@
           <div style="font-size:11px;color:var(--text-muted);font-weight:500;margin-top:4px;">DIAS EM MÉDIA</div>
         </div>
       </div>
+      <button class="dl-btn" onclick="baixarCard(this, '2_estrutura_institucional')">⬇ Baixar Imagem</button>
     </div>
   </div>
   <div class="grid wide">
     <div class="card">
       <h3>3 · Meta de inscritos x realizado</h3>
       <div class="chart-wrap" style="height:140px;"><canvas id="c3"></canvas></div>
+      <button class="dl-btn" onclick="baixarCard(this, '3_meta_inscritos')">⬇ Baixar Imagem</button>
     </div>
   </div>
 </section>
 
-<!-- ============================================== -->
-<!-- PÁGINA 2: TAXAS E COMPARATIVOS                 -->
-<!-- ============================================== -->
+<!-- PÁGINA 2: TAXAS E COMPARATIVOS -->
 <section class="page" id="p2">
   <div class="grid">
     <div class="card">
       <h3>4 · Painel de taxas-chave</h3>
       <div class="chart-wrap" style="height:260px;"><canvas id="c4"></canvas></div>
+      <button class="dl-btn" onclick="baixarCard(this, '4_taxas_chave')">⬇ Baixar Imagem</button>
     </div>
     <div class="card">
       <h3>5 · Duas visões de conclusão</h3>
       <div class="chart-wrap" style="height:260px;"><canvas id="c5"></canvas></div>
+      <button class="dl-btn" onclick="baixarCard(this, '5_visoes_conclusao')">⬇ Baixar Imagem</button>
     </div>
     <div class="card">
       <h3>6 · Comparativo Piloto x Semestre Atual</h3>
       <div class="chart-wrap" style="height:280px;"><canvas id="c6"></canvas></div>
+      <button class="dl-btn" onclick="baixarCard(this, '6_comparativo_piloto')">⬇ Baixar Imagem</button>
     </div>
     <div class="card">
       <h3>11 · Engajamento entre semestres</h3>
       <div class="chart-wrap" style="height:280px;"><canvas id="c11"></canvas></div>
+      <button class="dl-btn" onclick="baixarCard(this, '11_engajamento_semestres')">⬇ Baixar Imagem</button>
     </div>
     <div class="card">
       <h3>12 · Atingimento da meta de inscritos</h3>
       <div class="chart-wrap" style="height:260px;"><canvas id="c12"></canvas></div>
+      <button class="dl-btn" onclick="baixarCard(this, '12_atingimento_meta')">⬇ Baixar Imagem</button>
     </div>
     <div class="card">
       <h3>13 · Evolução Relativa (Piloto → Atual)</h3>
       <div class="chart-wrap" style="height:260px;"><canvas id="c13"></canvas></div>
+      <button class="dl-btn" onclick="baixarCard(this, '13_evolucao_relativa')">⬇ Baixar Imagem</button>
     </div>
   </div>
   <div class="grid wide">
     <div class="card">
       <h3>14 · Crescimento absoluto: Piloto → Semestre Atual</h3>
       <div class="chart-wrap" style="height:220px;"><canvas id="c14"></canvas></div>
+      <button class="dl-btn" onclick="baixarCard(this, '14_crescimento_absoluto')">⬇ Baixar Imagem</button>
     </div>
   </div>
 </section>
 
-<!-- ============================================== -->
-<!-- PÁGINA 3: ESCOLAS E TURMAS                     -->
-<!-- ============================================== -->
+<!-- PÁGINA 3: ESCOLAS E TURMAS -->
 <section class="page" id="p3">
   <div class="note">Legenda das siglas: <strong>CED</strong> = Centro Educacional · <strong>CEM</strong> = Centro de Ensino Médio · <strong>CEMI</strong> = Centro de Ensino Médio Integrado.</div>
   <div class="grid">
     <div class="card">
       <h3>8 · Ranking das escolas por ativação</h3>
       <div class="chart-wrap" style="height:320px;"><canvas id="c8"></canvas></div>
+      <button class="dl-btn" onclick="baixarCard(this, '8_ranking_ativacao')">⬇ Baixar Imagem</button>
     </div>
     <div class="card">
       <h3>9 · Perfil das escolas (inscritos)</h3>
       <div class="chart-wrap" style="height:320px;"><canvas id="c9"></canvas></div>
+      <button class="dl-btn" onclick="baixarCard(this, '9_perfil_inscritos')">⬇ Baixar Imagem</button>
     </div>
   </div>
   <div class="grid wide">
     <div class="card">
       <h3>10 · Engajamento por turma</h3>
       <div class="chart-wrap" style="height:900px;"><canvas id="c10"></canvas></div>
+      <button class="dl-btn" onclick="baixarCard(this, '10_engajamento_turma')">⬇ Baixar Imagem</button>
     </div>
   </div>
 </section>
 
-<!-- ============================================== -->
-<!-- PÁGINA NOVA 4 (p6): VISITAS E BARREIRAS (React)-->
-<!-- ============================================== -->
+<!-- PÁGINA 4: VISITAS E BARREIRAS -->
 <section class="page" id="p6">
   <div class="kpis">
     <div class="kpi b1"><div class="label">ESCOLAS VISITADAS</div><div class="value">8</div></div>
@@ -229,7 +234,7 @@
       <div class="value">6</div>
     </div>
     <div class="kpi b5">
-      <div class="label">ALTO ENGAJAMENTO / SEM BARREIRA <span style="font-size:10px;font-weight:500;color:var(--text-muted);">(25%)</span></div>
+      <div class="label">ALTO ENGAJAMENTO <span style="font-size:10px;font-weight:500;color:var(--text-muted);">(25%)</span></div>
       <div class="value">2</div>
     </div>
   </div>
@@ -246,6 +251,7 @@
         <canvas id="cBarreiras"></canvas>
       </div>
       <div class="insight"> A descontinuidade de professor(a) ou gestão afeta o engajamento em quase 40% das unidades visitadas, figurando como o maior ofensor do programa, seguido diretamente por problemas de infraestrutura de internet/equipamentos.</div>
+      <button class="dl-btn" onclick="baixarCard(this, 'motivos_citados')">⬇ Baixar Imagem</button>
     </div>
   </div>
 
@@ -264,6 +270,7 @@
         <span style="font-size:11.5px;font-weight:600;color:var(--navy)">CEMI Taguatinga:</span>
         <span style="font-size:11px;color:var(--text-muted)">A escola não se posicionou nem atendeu às solicitações de agendamento.</span>
       </div>
+      <button class="dl-btn" onclick="baixarCard(this, 'quote_gestao')">⬇ Baixar Imagem</button>
     </div>
 
     <div class="card" style="border-top: 3px solid var(--cyan)">
@@ -276,6 +283,7 @@
         <span style="font-size:11.5px;font-weight:600;color:var(--navy)">CED Jardins Mangueiral:</span>
         <span style="font-size:11px;color:var(--text-muted)">A escola dispõe de apenas 20 computadores, exigindo divisão das turmas.</span>
       </div>
+      <button class="dl-btn" onclick="baixarCard(this, 'quote_infra')">⬇ Baixar Imagem</button>
     </div>
 
     <div class="card" style="border-top: 3px solid var(--navy)">
@@ -288,18 +296,20 @@
         <span style="font-size:11.5px;font-weight:600;color:var(--navy)">Cemab:</span>
         <span style="font-size:11px;color:var(--text-muted)">O planejamento do professor já estava definido antes da adesão, impedindo a aplicação em sala.</span>
       </div>
+      <button class="dl-btn" onclick="baixarCard(this, 'quote_rotina')">⬇ Baixar Imagem</button>
     </div>
 
     <div class="card" style="border-top: 3px solid var(--gold)">
       <h3 style="color:var(--gold)">Outras Barreiras Citadas</h3>
       <div class="school-quote">
-        <span style="font-size:11.5px;font-weight:600;color:var(--navy)">Incra 08 (Uso da metodologia sem a plataforma):</span>
+        <span style="font-size:11.5px;font-weight:600;color:var(--navy)">Incra 08:</span>
         <span style="font-size:11px;color:var(--text-muted)">Duas turmas já recebiam a metodologia, mas ainda não constavam cadastradas.</span>
       </div>
       <div class="school-quote">
         <span style="font-size:11.5px;font-weight:600;color:var(--navy)">CED Jardins Mangueiral (Sem nota):</span>
         <span style="font-size:11px;color:var(--text-muted)">Unidade curricular sem atribuição de nota reduz o interesse em priorizar a trilha.</span>
       </div>
+      <button class="dl-btn" onclick="baixarCard(this, 'quote_outros')">⬇ Baixar Imagem</button>
     </div>
   </div>
 
@@ -343,13 +353,12 @@
         <span class="matriz-school">CED 104 Recanto das Emas</span>
         <span class="tag" style="background:var(--green)">Sem barreira identificada</span>
       </div>
+      <button class="dl-btn" onclick="baixarCard(this, 'matriz_codificacao')">⬇ Baixar Imagem</button>
     </div>
   </div>
 </section>
 
-<!-- ============================================== -->
-<!-- PÁGINA 5: IMPACTO SOCIAL                       -->
-<!-- ============================================== -->
+<!-- PÁGINA 5: IMPACTO SOCIAL -->
 <section class="page" id="p5">
   <div class="kpis">
     <div class="kpi b1"><div class="label">ALUNOS INSCRITOS</div><div class="value">1.096</div></div>
@@ -360,10 +369,12 @@
     <div class="card">
       <h3>Funil de engajamento</h3>
       <div class="chart-wrap" style="height:260px;"><canvas id="cFunil"></canvas></div>
+      <button class="dl-btn" onclick="baixarCard(this, 'funil_engajamento')">⬇ Baixar Imagem</button>
     </div>
     <div class="card">
       <h3>ITF (Índice de Transformação) T0 x T1</h3>
       <div class="chart-wrap" style="height:260px;"><canvas id="cRadar"></canvas></div>
+      <button class="dl-btn" onclick="baixarCard(this, 'itf_radar')">⬇ Baixar Imagem</button>
     </div>
   </div>
   <div class="grid wide">
@@ -371,18 +382,16 @@
       <span class="badge">Cruzamento sugerido</span>
       <h3>Intenção do Pé-de-Meia × Taxa de conclusão da trilha</h3>
       <div class="chart-wrap" style="height:260px;"><canvas id="cCruzamento"></canvas></div>
+      <button class="dl-btn" onclick="baixarCard(this, 'cruzamento_pe_de_meia')">⬇ Baixar Imagem</button>
     </div>
   </div>
 </section>
 
-<!-- ============================================== -->
-<!-- PÁGINA 6: AVANÇADO (Mapas)                     -->
-<!-- ============================================== -->
+<!-- PÁGINA 6: AVANÇADO (Mapas) -->
 <section class="page" id="p4">
   <div class="grid wide">
     <div class="card">
       <h3>7 · Funil de volume e conversão</h3>
-      <!-- SVG Funil (Mantido do original) -->
       <div class="chart-wrap" style="height:330px;">
         <svg viewBox="0 0 760 330" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
           <rect x="40" y="24" width="520" height="64" style="fill:var(--navy);"/>
@@ -403,10 +412,12 @@
           <text x="625" y="289" style="font:500 12px 'Poppins',sans-serif; fill:#6B7280;">(15,3%)</text>
         </svg>
       </div>
+      <button class="dl-btn" onclick="baixarCard(this, '7_funil_svg')">⬇ Baixar Imagem</button>
     </div>
     <div class="card">
       <h3>15 · Mapa de calor de engajamento por escola</h3>
       <div id="mapaCalor" style="width:100%;height:420px;border-radius:8px;overflow:hidden;background:#f5f5f5;"></div>
+      <button class="dl-btn" onclick="baixarCard(this, '15_mapa_calor')">⬇ Baixar Imagem</button>
     </div>
   </div>
 </section>
@@ -418,6 +429,9 @@
 </footer>
 
 <script>
+// DESATIVAR ANIMAÇÕES: Essencial para que o html2canvas consiga capturar o gráfico já montado.
+Chart.defaults.animation = false;
+
 Chart.register(ChartDataLabels);
 Chart.defaults.font.family = "'Poppins', sans-serif";
 Chart.defaults.color = '#6B7280';
@@ -428,7 +442,7 @@ const NAVY = '#002364', CYAN = '#00B4AA', ORANGE = '#F08203', MAGENTA = '#FD0087
 const fmtPct1 = v => v.toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1}) + '%';
 const fmtInt = v => v.toLocaleString('pt-BR');
 
-// Gráficos originais (Resumidos para a integração)
+// Configuração dos Gráficos
 new Chart(document.getElementById('c1'), {
   type:'bar', data:{labels:['Inscritos','Engajados','Concluintes'], datasets:[{data:[1096,504,168],backgroundColor:[NAVY,CYAN,ORANGE],borderRadius:4}]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{datalabels:{display:true,anchor:'end',align:'end',color:NAVY,font:{weight:600}}},scales:{x:{grid:{display:false}},y:{grid:{color:'#E5E7EB'}}}}
@@ -490,14 +504,8 @@ new Chart(document.getElementById('cCruzamento'), {
   options:{responsive:true,maintainAspectRatio:false,plugins:{datalabels:{display:true,anchor:'end',align:'end',color:NAVY,font:{weight:600},formatter:fmtPct1}},scales:{x:{grid:{display:false}},y:{grid:{color:'#E5E7EB'}}}}
 });
 
-// NOVO GRÁFICO: Barreiras de Engajamento (convertido do React Recharts para Chart.js)
-const barreirasLabels = [
-  'Gestão/Professor(a) descontínua(o)',
-  'Infraestrutura/conectividade',
-  'Rotina/calendário escolar',
-  'Uso da metodologia sem a plataforma',
-  'Sem atribuição de nota'
-];
+// Gráfico: Barreiras de Engajamento
+const barreirasLabels = ['Gestão/Professor(a) descontínua(o)', 'Infraestrutura/conectividade', 'Rotina/calendário escolar', 'Uso da metodologia sem a plataforma', 'Sem atribuição de nota'];
 const barreirasData = [3, 2, 2, 1, 1];
 const barreirasColors = [MAGENTA, CYAN, NAVY, ORANGE, GOLD];
 
@@ -519,30 +527,18 @@ new Chart(document.getElementById('cBarreiras'), {
     plugins: {
       legend: { display: false },
       datalabels: {
-        display: true, 
-        anchor: 'end', 
-        align: 'end', 
-        color: NAVY,
-        font: { size: 12, weight: 600 },
+        display: true, anchor: 'end', align: 'end', color: NAVY, font: { size: 12, weight: 600 },
         formatter: (v) => v + ' (' + (v/8*100).toLocaleString('pt-BR',{maximumFractionDigits:1}) + '%)'
       }
     },
     scales: {
-      x: { 
-        min: 0, 
-        max: 4, 
-        grid: { color: '#E5E7EB' }, 
-        ticks: { color: '#6B7280', font: { size: 10 }, stepSize: 1 } 
-      },
-      y: { 
-        grid: { display: false }, 
-        ticks: { color: NAVY, font: { size: 11, weight: 500 } } 
-      }
+      x: { min: 0, max: 4, grid: { color: '#E5E7EB' }, ticks: { color: '#6B7280', font: { size: 10 }, stepSize: 1 } },
+      y: { grid: { display: false }, ticks: { color: NAVY, font: { size: 11, weight: 500 } } }
     }
   }
 });
 
-// Navegação em Abas e Inicialização de Mapa
+// Inicialização do Mapa
 let mapaCalorInstance = null;
 function initMapaCalor(){
   if (mapaCalorInstance) {
@@ -555,7 +551,11 @@ function initMapaCalor(){
     return;
   }
   mapaCalorInstance = L.map('mapaCalor', { scrollWheelZoom:false }).setView([-15.82, -47.95], 10);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {maxZoom: 19}).addTo(mapaCalorInstance);
+  
+  // CrossOrigin ajuda na hora de exportar o Leaflet via html2canvas
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    maxZoom: 19, crossOrigin: true
+  }).addTo(mapaCalorInstance);
   
   const escolas = [
     {lat:-15.9006715, lng:-48.0715538, ativ:88.9},
@@ -571,6 +571,7 @@ function initMapaCalor(){
   L.heatLayer(heatData, {radius: 45, blur: 30, maxZoom: 12, max: 1, gradient: {0:'#00B4AA', 0.55:'#F08203', 0.8:'#FD0087', 1:'#B3001B'}}).addTo(mapaCalorInstance);
 }
 
+// Navegação das Abas
 document.querySelectorAll('.tab-btn').forEach(function(btn){
   btn.addEventListener('click', function(){
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -580,6 +581,32 @@ document.querySelectorAll('.tab-btn').forEach(function(btn){
     if (btn.dataset.page === 'p4') { initMapaCalor(); }
   });
 });
+
+// FUNÇÃO MÁGICA DE DOWNLOAD (html2canvas)
+function baixarCard(buttonElement, filename) {
+  // Esconde o botão momentaneamente para não aparecer na imagem
+  buttonElement.style.display = 'none';
+  const cardElement = buttonElement.closest('.card');
+  
+  html2canvas(cardElement, {
+    scale: window.devicePixelRatio || 2, // Garante alta resolução
+    backgroundColor: '#FFFFFF', // Fundo branco sólido
+    useCORS: true, // Necessário para exportar o mapa (se houver)
+    logging: false
+  }).then(function(canvas) {
+    const link = document.createElement('a');
+    link.download = filename + '.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    
+    // Restaura o botão após o download
+    buttonElement.style.display = 'inline-flex';
+  }).catch(function(error) {
+    console.error("Erro ao gerar imagem:", error);
+    buttonElement.style.display = 'inline-flex';
+    alert("Ocorreu um erro ao gerar a imagem.");
+  });
+}
 </script>
 
 </body>
