@@ -6,7 +6,6 @@ Dashboard interativo em HTML, desenvolvido para consolidar e apresentar os princ
 
 O Saldo+ é implementado em escolas públicas do Distrito Federal através da plataforma Ludos Pro. Este dashboard reúne, em uma única página, os indicadores operacionais (inscrição, ativação, conclusão, retenção), a distribuição por escola/turma e os resultados de impacto social (ITF — Índice de Transformação Financeira, mudança de comportamento financeiro, intenção de uso do benefício Pé-de-Meia).
 
-Todo o conteúdo é estático (sem backend) e os dados dos gráficos estão embutidos diretamente no HTML/JS — ideal para publicar como página estática (ex: GitHub Pages) ou compartilhar como arquivo único.
 
 ## Abas do dashboard
 
