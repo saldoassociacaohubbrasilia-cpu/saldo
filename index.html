@@ -195,7 +195,12 @@
   <div class="grid wide">
     <div class="card">
       <h3>14 · Crescimento absoluto: Piloto → Semestre Atual</h3>
+      <p class="sub">Cada barra vai do valor no Piloto até o valor no Semestre Atual · número no centro é a variação percentual</p>
       <div class="chart-wrap" style="height:220px;"><canvas id="c14"></canvas></div>
+      <div class="legend">
+        <span><span class="dot" style="background:var(--navy);"></span>Valor no Piloto</span>
+        <span><span class="dot" style="background:var(--gold);"></span>Valor no Semestre Atual</span>
+      </div>
       <button class="dl-btn" onclick="baixarCard(this, '14_crescimento_absoluto')">⬇ Baixar Imagem</button>
     </div>
   </div>
@@ -442,6 +447,7 @@ Chart.register(ChartDataLabels);
 Chart.defaults.font.family = "'Poppins', sans-serif";
 Chart.defaults.color = '#6B7280';
 Chart.defaults.set('plugins.datalabels', { display: false });
+Chart.defaults.set('plugins.legend', { display: false });
 
 const NAVY = '#002364', CYAN = '#00B4AA', ORANGE = '#F08203', MAGENTA = '#FD0087', GOLD = '#B5650F', GREEN = '#1E9E6B';
 
@@ -481,13 +487,40 @@ new Chart(document.getElementById('c13'), {
   type:'bar', data:{labels:['Meta','Ativação','Conclusão'], datasets:[{data:[64.56,74.01,76.01],backgroundColor:[NAVY,CYAN,ORANGE],borderRadius:4}]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{datalabels:{display:true,anchor:'end',align:'end',font:{weight:600},formatter:v=>'+'+fmtPct1(v)}},scales:{x:{grid:{display:false}}}}
 });
+const dumbbellLabels = ['Total de Estudantes Inscritos','Engajamento Inicial','Total de Concluintes'];
+const dumbbellRanges = [[333,1096],[88,504],[29,168]];
+const dumbbellGrowth = [229,473,479];
 new Chart(document.getElementById('c14'), {
-  type:'bar', data:{labels:['Inscritos','Engajados','Concluintes'], datasets:[{data:[[333,1096],[88,504],[29,168]],backgroundColor:'rgba(0,180,170,0.55)',borderRadius:13,barThickness:26}]},
-  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,scales:{x:{grid:{color:'#E5E7EB'}},y:{grid:{display:false}}}}
+  type:'bar',
+  data:{
+    labels:dumbbellLabels,
+    datasets:[{
+      data:dumbbellRanges,
+      backgroundColor:'rgba(0,180,170,0.55)',
+      borderRadius:13,
+      barThickness:26,
+      datalabels:{
+        display:true,
+        labels:{
+          start:{anchor:'start',align:'left',color:NAVY,font:{size:10,weight:600},formatter:v=>fmtInt(v[0])},
+          end:{anchor:'end',align:'right',color:GOLD,font:{size:10,weight:700},formatter:v=>fmtInt(v[1])},
+          growth:{anchor:'center',align:'center',color:'#fff',font:{size:10,weight:700},formatter:(v,ctx)=>'+'+dumbbellGrowth[ctx.dataIndex]+'%'}
+        }
+      }
+    }]
+  },
+  options:{
+    indexAxis:'y',
+    responsive:true,maintainAspectRatio:false,
+    scales:{
+      x:{min:0,max:1250,grid:{color:'#E5E7EB'},ticks:{color:'#6B7280',font:{size:10}}},
+      y:{grid:{display:false},ticks:{color:NAVY,font:{size:11}}}
+    }
+  }
 });
 new Chart(document.getElementById('c8'), {
   type:'bar', data:{labels:['CED 104','CEMI','CED 01','CED Jardins','Incra 08','Pompílio','Cemab','CEM 03'], datasets:[{data:[88.9,70.6,64.4,49.1,35.5,6.2,2.1,0],backgroundColor:CYAN,borderRadius:4}]},
-  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{datalabels:{display:true,anchor:'end',align:'end',color:NAVY,font:{weight:600},formatter:fmtPct1}},scales:{x:{grid:{color:'#E5E7EB'}},y:{grid:{display:false}}}}
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{datalabels:{display:true,anchor:'end',align:'end',color:NAVY,font:{weight:600},formatter:fmtPct1}},scales:{x:{min:0,max:100,grid:{color:'#E5E7EB'}},y:{grid:{display:false}}}}
 });
 new Chart(document.getElementById('c9'), {
   type:'bar', data:{labels:['CED 01','CED 104','CEM 03','Cemab','CED Jardins','CEMI','Incra 08','Pompílio'], datasets:[{data:[270,189,151,143,116,102,76,48],backgroundColor:NAVY,borderRadius:4}]},
