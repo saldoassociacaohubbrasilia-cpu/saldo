@@ -67,6 +67,7 @@
   .dot{width:9px;height:9px;border-radius:2px;display:inline-block;}
   .note{font-size:12px;color:var(--text-muted);background:#EEF2F9;border-radius:8px;padding:10px 14px;margin-bottom:16px;}
   .insight{font-size:12.5px;line-height:1.5;color:var(--navy);background:#EAF9F7;border-left:3px solid var(--cyan);border-radius:6px;padding:9px 12px;margin-top:10px;}
+  .verified{font-size:12.5px;line-height:1.5;color:#0F6B45;background:#E3F6EF;border-left:3px solid #1E9E6B;border-radius:6px;padding:9px 12px;margin-top:10px;}
   .badge{display:inline-block;background:#FBE7EF;color:#8A1E4A;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;margin-bottom:8px;}
   
   .school-quote { margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid #F2F4F8; }
@@ -88,7 +89,7 @@
 
 <header class="top">
   <h1> Saldo+ </h1>
-  <p>Dashboard versão 2.0 · Primeiro Semestre de 2026</p>
+  <p>Dashboard versão 2.1 · Primeiro Semestre de 2026 · corrigido e validado em 21/07/2026</p>
 </header>
 
 <nav class="tabs">
@@ -146,13 +147,19 @@
           <div style="font-size:11px;color:var(--text-muted);font-weight:500;margin-top:4px;">DIAS EM MÉDIA</div>
         </div>
       </div>
+      <div class="note" style="margin-top:12px;margin-bottom:0;">"7 regionais de ensino" não consta na planilha "Dados Limpos" nem no roster da Ludos Pro — mantido, mas ainda sem fonte confirmada.</div>
       <button class="dl-btn" onclick="baixarCard(this, '2_estrutura_institucional')">⬇ Baixar Imagem</button>
     </div>
   </div>
   <div class="grid wide">
     <div class="card">
       <h3>3 · Meta de inscritos x realizado</h3>
+      <p class="sub">Meta: 1.000 inscritos · Realizado: 1.096 (109,6% da meta)</p>
       <div class="chart-wrap" style="height:140px;"><canvas id="c3"></canvas></div>
+      <div class="legend">
+        <span><span class="dot" style="background:var(--navy);"></span>Até a meta</span>
+        <span><span class="dot" style="background:var(--cyan);"></span>Acima da meta</span>
+      </div>
       <button class="dl-btn" onclick="baixarCard(this, '3_meta_inscritos')">⬇ Baixar Imagem</button>
     </div>
   </div>
@@ -212,19 +219,45 @@
   <div class="grid">
     <div class="card">
       <h3>8 · Ranking das escolas por ativação</h3>
+      <p class="sub">Percentual de alunos que iniciaram a trilha, por escola</p>
       <div class="chart-wrap" style="height:320px;"><canvas id="c8"></canvas></div>
+      <div class="note">Nomes das 8 escolas conferidos e corretos contra o roster real da Ludos Pro. Os <strong>percentuais de ativação por escola ainda não são rastreáveis</strong> — o roster só tem matrícula, não atividade/progresso. Precisa do arquivo "Performance_Progressao" para validar os números abaixo.</div>
       <button class="dl-btn" onclick="baixarCard(this, '8_ranking_ativacao')">⬇ Baixar Imagem</button>
     </div>
     <div class="card">
       <h3>9 · Perfil das escolas (inscritos)</h3>
+      <p class="sub">Volume de alunos inscritos por escola</p>
       <div class="chart-wrap" style="height:320px;"><canvas id="c9"></canvas></div>
+      <div class="verified">✓ Conferido contra o roster real da Ludos Pro (1.096 registros): todos os valores batem, exceto Cemab — a versão anterior tinha 143, o roster mostra 144. Corrigido.</div>
       <button class="dl-btn" onclick="baixarCard(this, '9_perfil_inscritos')">⬇ Baixar Imagem</button>
     </div>
   </div>
   <div class="grid wide">
     <div class="card">
       <h3>10 · Engajamento por turma</h3>
+      <p class="sub">Taxa de ativação nas 33 turmas do Semestre Atual, agrupadas por faixa de engajamento</p>
+      <div class="verified">✓ As 33 turmas e sua distribuição por escola conferem exatamente com o roster real da Ludos Pro — inclusive as letras de cada turma.</div>
+      <div class="note">⚠ Os <strong>percentuais de ativação individuais</strong> ainda não são rastreáveis: o roster só informa matrícula, não atividade. Precisa do arquivo "Performance_Progressao" para validar os números abaixo.</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0;">
+        <div style="background:#F7F8FC;border-radius:8px;padding:14px 10px;text-align:center;border-top:3px solid var(--cyan);">
+          <div style="font-size:26px;font-weight:600;color:var(--cyan);">13</div>
+          <div style="font-size:10.5px;color:var(--text-muted);font-weight:500;">ALTA ATIVAÇÃO (≥70%)</div>
+        </div>
+        <div style="background:#F7F8FC;border-radius:8px;padding:14px 10px;text-align:center;border-top:3px solid var(--orange);">
+          <div style="font-size:26px;font-weight:600;color:var(--orange);">7</div>
+          <div style="font-size:10.5px;color:var(--text-muted);font-weight:500;">MÉDIA (30–69%)</div>
+        </div>
+        <div style="background:#F7F8FC;border-radius:8px;padding:14px 10px;text-align:center;border-top:3px solid var(--magenta);">
+          <div style="font-size:26px;font-weight:600;color:var(--magenta);">13</div>
+          <div style="font-size:10.5px;color:var(--text-muted);font-weight:500;">BAIXA/NULA (&lt;30%)</div>
+        </div>
+      </div>
       <div class="chart-wrap" style="height:900px;"><canvas id="c10"></canvas></div>
+      <div class="legend">
+        <span><span class="dot" style="background:var(--cyan);"></span>Alta (≥70%)</span>
+        <span><span class="dot" style="background:var(--orange);"></span>Média (30–69%)</span>
+        <span><span class="dot" style="background:var(--magenta);"></span>Baixa/nula (&lt;30%)</span>
+      </div>
       <button class="dl-btn" onclick="baixarCard(this, '10_engajamento_turma')">⬇ Baixar Imagem</button>
     </div>
   </div>
@@ -233,14 +266,18 @@
 <!-- PÁGINA 4: VISITAS E BARREIRAS -->
 <section class="page" id="p6">
   <div class="kpis">
-    <div class="kpi b1"><div class="label">ESCOLAS VISITADAS</div><div class="value">8</div></div>
+    <div class="kpi b1"><div class="label">ESCOLAS VISITADAS</div><div class="value">7</div></div>
     <div class="kpi b4">
-      <div class="label">COM BARREIRAS <span style="font-size:10px;font-weight:500;color:var(--text-muted);">(75%)</span></div>
-      <div class="value">6</div>
+      <div class="label">COM BARREIRAS <span style="font-size:10px;font-weight:500;color:var(--text-muted);">(71,4%)</span></div>
+      <div class="value">5</div>
     </div>
     <div class="kpi b5">
-      <div class="label">ALTO ENGAJAMENTO <span style="font-size:10px;font-weight:500;color:var(--text-muted);">(25%)</span></div>
+      <div class="label">ALTO ENGAJAMENTO <span style="font-size:10px;font-weight:500;color:var(--text-muted);">(28,6%)</span></div>
       <div class="value">2</div>
+    </div>
+    <div class="kpi" style="border-top:3px solid #9CA3AF;">
+      <div class="label">SEM VISITA REALIZADA</div>
+      <div class="value">1</div>
     </div>
   </div>
 
@@ -248,21 +285,25 @@
     Saldo+ · <strong>Análise qualitativa das visitas escolares.</strong> Categorização das justificativas coletadas para entender por que parte dos alunos não engajou na trilha.
   </div>
 
+  <div class="note">
+    <strong>CEMI Taguatinga não entra nas 7 visitas:</strong> a escola não se posicionou nem atendeu às solicitações de agendamento — sem notícias até o momento. Como não houve visita, não há motivo de não engajamento a registrar para essa unidade.
+  </div>
+
   <div class="grid wide">
     <div class="card">
       <h3>Motivos citados nas visitas às escolas</h3>
-      <p class="sub">Frequência absoluta (barras) e % sobre as 8 escolas visitadas</p>
+      <p class="sub">Frequência absoluta (barras) e % sobre as 7 escolas visitadas</p>
       <div class="chart-wrap" style="height:260px;">
         <canvas id="cBarreiras"></canvas>
       </div>
-      <div class="insight"> A descontinuidade de professor(a) ou gestão afeta o engajamento em quase 40% das unidades visitadas, figurando como o maior ofensor do programa, seguido diretamente por problemas de infraestrutura de internet/equipamentos. Já o Incra 08 é um caso à parte: a metodologia já estava sendo aplicada em sala, só faltou cadastrar as turmas na plataforma — um ajuste operacional, não uma barreira pedagógica.</div>
+      <div class="insight"> Três motivos aparecem com a mesma frequência entre as 7 escolas visitadas — descontinuidade de professor(a)/gestão, infraestrutura e rotina escolar, cada um citado em 2 escolas (28,6%). Já o Incra 08 é um caso à parte: a metodologia já estava sendo aplicada em sala, só faltou usar a plataforma — um ajuste operacional, não uma barreira pedagógica.</div>
       <button class="dl-btn" onclick="baixarCard(this, 'motivos_citados')">⬇ Baixar Imagem</button>
     </div>
   </div>
 
   <div class="grid two-cols">
     <div class="card" style="border-top: 3px solid var(--magenta)">
-      <h3 style="color:var(--magenta)">Professor(a) ou gestão descontínua (3)</h3>
+      <h3 style="color:var(--magenta)">Professor(a) ou gestão descontínua (2)</h3>
       <div class="school-quote">
         <span style="font-size:11.5px;font-weight:600;color:var(--navy)">CED Pompílio Marques:</span>
         <span style="font-size:11px;color:var(--text-muted)">A professora responsável saiu da unidade; a coordenação não retornou os contatos e o substituto orientou a não continuar.</span>
@@ -270,10 +311,6 @@
       <div class="school-quote">
         <span style="font-size:11.5px;font-weight:600;color:var(--navy)">Cemab:</span>
         <span style="font-size:11px;color:var(--text-muted)">Um dos professores inscritos entrou em licença, impactando a execução.</span>
-      </div>
-      <div class="school-quote">
-        <span style="font-size:11.5px;font-weight:600;color:var(--navy)">CEMI Taguatinga:</span>
-        <span style="font-size:11px;color:var(--text-muted)">A escola não se posicionou nem atendeu às solicitações de agendamento.</span>
       </div>
       <button class="dl-btn" onclick="baixarCard(this, 'quote_gestao')">⬇ Baixar Imagem</button>
     </div>
@@ -305,13 +342,13 @@
     </div>
 
     <div class="card" style="border-top: 3px solid var(--orange)">
-      <h3 style="color:var(--orange)">Cadastro na plataforma pendente (1)</h3>
+      <h3 style="color:var(--orange)">Metodologia usada sem a plataforma (1)</h3>
       <div class="school-quote">
         <span style="font-size:11.5px;font-weight:600;color:var(--navy)">Incra 08:</span>
-        <span style="font-size:11px;color:var(--text-muted)">Duas turmas já vinham recebendo a aplicação da metodologia em sala, mas ainda não constavam cadastradas na plataforma — ou seja, usavam a metodologia sem usar a plataforma.</span>
+        <span style="font-size:11px;color:var(--text-muted)">Duas turmas já vinham recebendo a aplicação da metodologia em sala, mas ainda não constavam cadastradas na plataforma.</span>
       </div>
-      <div class="insight" style="margin-top:8px;">Caso à parte: aqui não há barreira pedagógica. A metodologia já estava sendo aplicada — faltou só o cadastro/uso da plataforma, um ajuste operacional simples.</div>
-      <button class="dl-btn" onclick="baixarCard(this, 'quote_cadastro_plataforma')">⬇ Baixar Imagem</button>
+      <div class="insight" style="margin-top:8px;">Caso à parte: aqui não há barreira pedagógica. A metodologia já estava sendo aplicada — faltou só usar/cadastrar a plataforma, um ajuste operacional simples.</div>
+      <button class="dl-btn" onclick="baixarCard(this, 'quote_metodologia_sem_plataforma')">⬇ Baixar Imagem</button>
     </div>
 
     <div class="card" style="border-top: 3px solid var(--gold)">
@@ -339,10 +376,6 @@
         <span class="tag" style="background:var(--navy)">Rotina/calendário escolar</span>
       </div>
       <div class="matriz-row">
-        <span class="matriz-school">CEMI Taguatinga</span>
-        <span class="tag" style="background:var(--magenta)">Gestão/Professor descontínuo</span>
-      </div>
-      <div class="matriz-row">
         <span class="matriz-school">CEM 03 Ceilândia</span>
         <span class="tag" style="background:var(--cyan)">Infraestrutura/conectividade</span>
       </div>
@@ -354,7 +387,7 @@
       </div>
       <div class="matriz-row">
         <span class="matriz-school">Incra 08</span>
-        <span class="tag" style="background:var(--orange)">Cadastro pendente na plataforma</span>
+        <span class="tag" style="background:var(--orange)">Metodologia usada sem a plataforma</span>
       </div>
       <div class="matriz-row">
         <span class="matriz-school">CED 01 Itapoã</span>
@@ -363,6 +396,10 @@
       <div class="matriz-row">
         <span class="matriz-school">CED 104 Recanto das Emas</span>
         <span class="tag" style="background:var(--green)">Sem barreira identificada</span>
+      </div>
+      <div class="matriz-row">
+        <span class="matriz-school">CEMI Taguatinga</span>
+        <span class="tag" style="background:#9CA3AF">Sem visita — sem retorno</span>
       </div>
       <button class="dl-btn" onclick="baixarCard(this, 'matriz_codificacao')">⬇ Baixar Imagem</button>
     </div>
@@ -464,7 +501,7 @@ new Chart(document.getElementById('c3'), {
   options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,scales:{x:{stacked:true},y:{stacked:true,grid:{display:false}}}}
 });
 new Chart(document.getElementById('c4'), {
-  type:'bar', data:{labels:['Ativação','Conclusão','Retenção'], datasets:[{data:[46.03,15.34,33.33],backgroundColor:[NAVY,ORANGE,MAGENTA],borderRadius:4}]},
+  type:'bar', data:{labels:['Ativação','Conclusão','Retenção'], datasets:[{data:[45.99,15.34,33.33],backgroundColor:[NAVY,ORANGE,MAGENTA],borderRadius:4}]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{datalabels:{display:true,anchor:'end',align:'end',color:NAVY,font:{weight:600},formatter:fmtPct1}},scales:{x:{grid:{display:false}},y:{grid:{color:'#E5E7EB'}}}}
 });
 new Chart(document.getElementById('c5'), {
@@ -472,7 +509,7 @@ new Chart(document.getElementById('c5'), {
   options:{responsive:true,maintainAspectRatio:false,plugins:{datalabels:{display:true,anchor:'end',align:'end',color:NAVY,font:{weight:600},formatter:fmtPct1}},scales:{x:{grid:{display:false}},y:{grid:{color:'#E5E7EB'}}}}
 });
 new Chart(document.getElementById('c6'), {
-  type:'bar', data:{labels:['Ativação','Conclusão','Retenção'], datasets:[{label:'Piloto',data:[26.43,8.71,32.95],backgroundColor:NAVY},{label:'Atual',data:[46.03,15.34,33.33],backgroundColor:ORANGE}]},
+  type:'bar', data:{labels:['Ativação','Conclusão','Retenção'], datasets:[{label:'Piloto',data:[26.43,8.71,32.95],backgroundColor:NAVY},{label:'Atual',data:[45.99,15.34,33.33],backgroundColor:ORANGE}]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{datalabels:{display:true,anchor:'end',align:'end',font:{weight:600},formatter:fmtPct1}},scales:{x:{grid:{display:false}},y:{grid:{color:'#E5E7EB'}}}}
 });
 new Chart(document.getElementById('c11'), {
@@ -523,12 +560,17 @@ new Chart(document.getElementById('c8'), {
   options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{datalabels:{display:true,anchor:'end',align:'end',color:NAVY,font:{weight:600},formatter:fmtPct1}},scales:{x:{min:0,max:100,grid:{color:'#E5E7EB'}},y:{grid:{display:false}}}}
 });
 new Chart(document.getElementById('c9'), {
-  type:'bar', data:{labels:['CED 01','CED 104','CEM 03','Cemab','CED Jardins','CEMI','Incra 08','Pompílio'], datasets:[{data:[270,189,151,143,116,102,76,48],backgroundColor:NAVY,borderRadius:4}]},
+  type:'bar', data:{labels:['CED 01','CED 104','CEM 03','Cemab','CED Jardins','CEMI','Incra 08','Pompílio'], datasets:[{data:[270,189,151,144,116,102,76,48],backgroundColor:NAVY,borderRadius:4}]},
   options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{datalabels:{display:true,anchor:'end',align:'end',color:NAVY,font:{weight:600}}},scales:{x:{grid:{color:'#E5E7EB'}},y:{grid:{display:false}}}}
 });
+const turmaLabels10 = ['CED 104 Recanto - C','CED 104 Recanto - B','CED 104 Recanto - A','CED 104 Recanto - H','CED 104 Recanto - G','ITAPOÃ - C','ITAPOÃ - D','Incra 08 - A','ITAPOÃ - E','CEMI Tag. - A','ITAPOÃ - A','CED 104 Recanto - I','ITAPOÃ - B','CEMI Tag. - C','CEMI Tag. - E','ITAPOÃ - G','Jardins Mang. - D','ITAPOÃ - F','Jardins Mang. - C','Jardins Mang. - B','Pompílio M.S. - A','Cemab - B','Pompílio M.S. - C','Incra 08 - B','Cemab - A','Incra 08 - Av','ITAPOÃ - K','CEM 03 Ceil. - C','CEM 03 Ceil. - D','CEM 03 Ceil. - E','CEM 03 Ceil. - F','Cemab - H','Cemab - I'];
+const turmaTaxas10 = [96.9,93.9,90.3,90.3,87.5,79.5,79.4,78.8,78.1,77.8,75.0,73.3,71.1,66.7,66.7,66.7,64.9,54.5,50.0,32.4,8.0,5.6,4.3,3.8,2.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+const turmaCores10 = turmaTaxas10.map(v => v >= 70 ? CYAN : v >= 30 ? ORANGE : MAGENTA);
 new Chart(document.getElementById('c10'), {
-  type:'bar', data:{labels:['T1','T2','T3','T4','T5','T6','T7','T8','T9','T10','T11','T12','T13','T14','T15','T16','T17','T18','T19','T20','T21','T22','T23','T24','T25','T26','T27','T28','T29','T30','T31','T32','T33'], datasets:[{data:[96.9,93.9,90.3,90.3,87.5,79.5,79.4,78.8,78.1,77.8,75.0,73.3,71.1,66.7,66.7,66.7,64.9,54.5,50.0,32.4,8.0,5.6,4.3,3.8,2.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],backgroundColor:CYAN,borderRadius:3}]},
-  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,scales:{x:{grid:{color:'#E5E7EB'}},y:{grid:{display:false},ticks:{display:false}}}}
+  type:'bar', data:{labels:turmaLabels10, datasets:[{data:turmaTaxas10,backgroundColor:turmaCores10,borderRadius:3}]},
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+    plugins:{datalabels:{display:true,anchor:'end',align:'end',color:NAVY,font:{size:9,weight:600},formatter:fmtPct1}},
+    scales:{x:{min:0,max:100,grid:{color:'#E5E7EB'}},y:{grid:{display:false},ticks:{color:NAVY,font:{size:9}}}}}
 });
 new Chart(document.getElementById('cFunil'), {
   type:'bar', data:{labels:['Inscritos','Iniciaram','Concluintes'], datasets:[{data:[1096,504,168],backgroundColor:[NAVY,CYAN,ORANGE],borderRadius:4}]},
@@ -544,8 +586,8 @@ new Chart(document.getElementById('cCruzamento'), {
 });
 
 // Gráfico: Barreiras de Engajamento
-const barreirasLabels = ['Gestão/Professor(a) descontínua(o)', 'Infraestrutura/conectividade', 'Rotina/calendário escolar', 'Cadastro pendente na plataforma', 'Sem atribuição de nota'];
-const barreirasData = [3, 2, 2, 1, 1];
+const barreirasLabels = ['Gestão/Professor(a) descontínua(o)', 'Infraestrutura/conectividade', 'Rotina/calendário escolar', 'Metodologia usada sem a plataforma', 'Sem atribuição de nota'];
+const barreirasData = [2, 2, 2, 1, 1];
 const barreirasColors = [MAGENTA, CYAN, NAVY, ORANGE, GOLD];
 
 new Chart(document.getElementById('cBarreiras'), {
@@ -567,11 +609,11 @@ new Chart(document.getElementById('cBarreiras'), {
       legend: { display: false },
       datalabels: {
         display: true, anchor: 'end', align: 'end', color: NAVY, font: { size: 12, weight: 600 },
-        formatter: (v) => v + ' (' + (v/8*100).toLocaleString('pt-BR',{maximumFractionDigits:1}) + '%)'
+        formatter: (v) => v + ' (' + (v/7*100).toLocaleString('pt-BR',{maximumFractionDigits:1}) + '%)'
       }
     },
     scales: {
-      x: { min: 0, max: 4, grid: { color: '#E5E7EB' }, ticks: { color: '#6B7280', font: { size: 10 }, stepSize: 1 } },
+      x: { min: 0, max: 3, grid: { color: '#E5E7EB' }, ticks: { color: '#6B7280', font: { size: 10 }, stepSize: 1 } },
       y: { grid: { display: false }, ticks: { color: NAVY, font: { size: 11, weight: 500 } } }
     }
   }
