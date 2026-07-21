@@ -250,7 +250,7 @@
       <div class="chart-wrap" style="height:260px;">
         <canvas id="cBarreiras"></canvas>
       </div>
-      <div class="insight"> A descontinuidade de professor(a) ou gestão afeta o engajamento em quase 40% das unidades visitadas, figurando como o maior ofensor do programa, seguido diretamente por problemas de infraestrutura de internet/equipamentos.</div>
+      <div class="insight"> A descontinuidade de professor(a) ou gestão afeta o engajamento em quase 40% das unidades visitadas, figurando como o maior ofensor do programa, seguido diretamente por problemas de infraestrutura de internet/equipamentos. Já o Incra 08 é um caso à parte: a metodologia já estava sendo aplicada em sala, só faltou cadastrar as turmas na plataforma — um ajuste operacional, não uma barreira pedagógica.</div>
       <button class="dl-btn" onclick="baixarCard(this, 'motivos_citados')">⬇ Baixar Imagem</button>
     </div>
   </div>
@@ -299,17 +299,23 @@
       <button class="dl-btn" onclick="baixarCard(this, 'quote_rotina')">⬇ Baixar Imagem</button>
     </div>
 
-    <div class="card" style="border-top: 3px solid var(--gold)">
-      <h3 style="color:var(--gold)">Outras Barreiras Citadas</h3>
+    <div class="card" style="border-top: 3px solid var(--orange)">
+      <h3 style="color:var(--orange)">Cadastro na plataforma pendente (1)</h3>
       <div class="school-quote">
         <span style="font-size:11.5px;font-weight:600;color:var(--navy)">Incra 08:</span>
-        <span style="font-size:11px;color:var(--text-muted)">Duas turmas já recebiam a metodologia, mas ainda não constavam cadastradas.</span>
+        <span style="font-size:11px;color:var(--text-muted)">Duas turmas já vinham recebendo a aplicação da metodologia em sala, mas ainda não constavam cadastradas na plataforma — ou seja, usavam a metodologia sem usar a plataforma.</span>
       </div>
+      <div class="insight" style="margin-top:8px;">Caso à parte: aqui não há barreira pedagógica. A metodologia já estava sendo aplicada — faltou só o cadastro/uso da plataforma, um ajuste operacional simples.</div>
+      <button class="dl-btn" onclick="baixarCard(this, 'quote_cadastro_plataforma')">⬇ Baixar Imagem</button>
+    </div>
+
+    <div class="card" style="border-top: 3px solid var(--gold)">
+      <h3 style="color:var(--gold)">Baixa prioridade curricular — sem nota (1)</h3>
       <div class="school-quote">
-        <span style="font-size:11.5px;font-weight:600;color:var(--navy)">CED Jardins Mangueiral (Sem nota):</span>
-        <span style="font-size:11px;color:var(--text-muted)">Unidade curricular sem atribuição de nota reduz o interesse em priorizar a trilha.</span>
+        <span style="font-size:11.5px;font-weight:600;color:var(--navy)">CED Jardins Mangueiral:</span>
+        <span style="font-size:11px;color:var(--text-muted)">Unidade curricular sem atribuição de nota reduz o interesse dos estudantes em priorizar a trilha.</span>
       </div>
-      <button class="dl-btn" onclick="baixarCard(this, 'quote_outros')">⬇ Baixar Imagem</button>
+      <button class="dl-btn" onclick="baixarCard(this, 'quote_sem_nota')">⬇ Baixar Imagem</button>
     </div>
   </div>
 
@@ -343,7 +349,7 @@
       </div>
       <div class="matriz-row">
         <span class="matriz-school">Incra 08</span>
-        <span class="tag" style="background:var(--orange)">Uso da metodologia sem a plataforma</span>
+        <span class="tag" style="background:var(--orange)">Cadastro pendente na plataforma</span>
       </div>
       <div class="matriz-row">
         <span class="matriz-school">CED 01 Itapoã</span>
@@ -505,7 +511,7 @@ new Chart(document.getElementById('cCruzamento'), {
 });
 
 // Gráfico: Barreiras de Engajamento
-const barreirasLabels = ['Gestão/Professor(a) descontínua(o)', 'Infraestrutura/conectividade', 'Rotina/calendário escolar', 'Uso da metodologia sem a plataforma', 'Sem atribuição de nota'];
+const barreirasLabels = ['Gestão/Professor(a) descontínua(o)', 'Infraestrutura/conectividade', 'Rotina/calendário escolar', 'Cadastro pendente na plataforma', 'Sem atribuição de nota'];
 const barreirasData = [3, 2, 2, 1, 1];
 const barreirasColors = [MAGENTA, CYAN, NAVY, ORANGE, GOLD];
 
