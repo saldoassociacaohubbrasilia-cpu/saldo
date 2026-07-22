@@ -20,6 +20,7 @@
     --bg:#EFEFEF; --card:#FFFFFF; --text-muted:#6B7280;
   }
   *{box-sizing:border-box;}
+  abbr[title]{text-decoration:underline dotted;text-decoration-color:currentColor;cursor:help;}
   .plus-strip{
     width:100%; height:30px;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='30'%3E%3Crect x='0' width='30' height='30' fill='%2300B4AA'/%3E%3Crect x='30' width='30' height='30' fill='%23FD0087'/%3E%3Crect x='60' width='30' height='30' fill='%23002364'/%3E%3Crect x='90' width='30' height='30' fill='%23F08203'/%3E%3Cg fill='%23fff'%3E%3Crect x='12' y='6' width='6' height='18'/%3E%3Crect x='6' y='12' width='18' height='6'/%3E%3Crect x='42' y='6' width='6' height='18'/%3E%3Crect x='36' y='12' width='18' height='6'/%3E%3Crect x='72' y='6' width='6' height='18'/%3E%3Crect x='66' y='12' width='18' height='6'/%3E%3Crect x='102' y='6' width='6' height='18'/%3E%3Crect x='96' y='12' width='18' height='6'/%3E%3C/g%3E%3C/svg%3E");
@@ -90,7 +91,7 @@
 
   table.comparativo{width:100%;border-collapse:collapse;font-size:12px;}
   table.comparativo th{text-align:left;font-size:10.5px;color:var(--text-muted);font-weight:600;padding:8px;border-bottom:2px solid #E4E9F2;}
-  table.comparativo th:not(:first-child），table.comparativo td:not(:first-child){text-align:right;}
+  table.comparativo th:not(:first-child),table.comparativo td:not(:first-child){text-align:right;}
   table.comparativo td{padding:8px;border-bottom:1px solid #F2F4F8;}
   table.comparativo td:first-child{font-weight:500;color:var(--navy);}
   table.comparativo tr:last-child td{border-bottom:none;}
@@ -125,7 +126,7 @@
 
 <header class="top">
   <h1>Saldo+</h1>
-  <p>Dashboard versão 3.4 · Primeiro Semestre de 2026 · consolidado em 22/07/2026</p>
+  <p>Dashboard versão 3.5 · Primeiro Semestre de 2026 · consolidado em 22/07/2026</p>
 </header>
 
 <nav class="tabs" role="tablist" aria-label="Seções do dashboard">
@@ -143,9 +144,9 @@
 <section class="page active" id="p1" role="tabpanel" aria-labelledby="tab-p1">
   <div class="kpis">
     <div class="kpi b1"><div class="label">INSCRITOS</div><div class="value">1.096</div></div>
-    <div class="kpi b2"><div class="label">ATIVAÇÃO</div><div class="value">46,0%</div></div>
+    <div class="kpi b2"><div class="label"><abbr title="Engajados ÷ Inscritos">ATIVAÇÃO</abbr></div><div class="value">46,0%</div></div>
     <div class="kpi b3"><div class="label">CONCLUSÃO</div><div class="value">15,3%</div></div>
-    <div class="kpi b4"><div class="label">RETENÇÃO</div><div class="value">33,3%</div></div>
+    <div class="kpi b4"><div class="label"><abbr title="Concluintes ÷ Engajados">RETENÇÃO</abbr></div><div class="value">33,3%</div></div>
   </div>
 
   <div class="grid">
@@ -199,7 +200,7 @@
 
     <div class="card">
       <h3>4 · Painel de taxas-chave</h3>
-      <p class="sub">Ativação (iniciou a trilha) · Conclusão (sobre inscritos) · Retenção (sobre quem iniciou)</p>
+      <p class="sub"><abbr title="Engajados ÷ Inscritos">Ativação</abbr> (iniciou a trilha) · Conclusão (sobre inscritos) · <abbr title="Concluintes ÷ Engajados">Retenção</abbr> (sobre quem iniciou)</p>
       <p class="calc">Cálculo: Ativação = Engajados ÷ Inscritos · Conclusão = Concluintes ÷ Inscritos · Retenção = Concluintes ÷ Engajados</p>
       <div class="chart-wrap" style="height:260px;">
         <canvas id="c4" role="img" aria-label="Colunas mostrando taxa de ativação 46 por cento, conclusão 15,3 por cento, retenção 33,3 por cento">Ativação: 46,0%. Conclusão: 15,3%. Retenção: 33,3%.</canvas>
@@ -212,7 +213,7 @@
   <div class="grid wide">
     <div class="card">
       <h3>5 · Duas visões de conclusão</h3>
-      <p class="sub">Conclusão geral = concluintes ÷ inscritos · Retenção = concluintes ÷ quem iniciou a trilha</p>
+      <p class="sub">Conclusão geral = concluintes ÷ inscritos · <abbr title="Concluintes ÷ Engajados">Retenção</abbr> = concluintes ÷ quem iniciou a trilha</p>
       <p class="calc">Cálculo: mesma base de concluintes (168), dois denominadores diferentes — 1.096 inscritos vs. 504 engajados</p>
       <div class="chart-wrap" style="height:260px;">
         <canvas id="c5" role="img" aria-label="Colunas comparando taxa de conclusão geral de 15,3 por cento com taxa de retenção de 33,3 por cento">Conclusão geral: 15,3%. Retenção: 33,3%.</canvas>
@@ -230,7 +231,7 @@
   <div class="grid">
     <div class="card">
       <h3>6 · Comparativo Piloto x Primeiro Semestre de 2026</h3>
-      <p class="sub">Ativação, conclusão e retenção lado a lado</p>
+      <p class="sub"><abbr title="Engajados ÷ Inscritos">Ativação</abbr>, conclusão e <abbr title="Concluintes ÷ Engajados">retenção</abbr> lado a lado</p>
       <p class="calc">Cálculo: mesmas fórmulas de ativação/conclusão/retenção, aplicadas separadamente a cada período</p>
       <div class="chart-wrap" style="height:280px;">
         <canvas id="c6" role="img" aria-label="Colunas agrupadas comparando Piloto e Primeiro Semestre de 2026 nas taxas de ativação, conclusão e retenção">Ativação: 26,4% Piloto vs 46,0% Primeiro Semestre de 2026. Conclusão: 8,7% vs 15,3%. Retenção: 32,9% vs 33,3%.</canvas>
@@ -306,7 +307,7 @@
           <tr><td>Engajamento Inicial (alunos)</td><td>88</td><td>504</td><td>+416</td><td>+472,7%</td></tr>
           <tr><td>Total de Concluintes</td><td>29</td><td>168</td><td>+139</td><td>+479,3%</td></tr>
           <tr><td>Taxa de Conclusão Geral (Concluintes ÷ Inscritos)</td><td class="na">Não disponível</td><td>15,3%</td><td class="na">—</td><td class="na">Não comparável</td></tr>
-          <tr><td>Taxa de Retenção (Concluintes ÷ Engajados)</td><td>33,0%¹</td><td>33,3%</td><td>+0,3 p.p.</td><td class="na">Estável¹</td></tr>
+          <tr><td><abbr title="Concluintes ÷ Engajados">Taxa de Retenção</abbr> (Concluintes ÷ Engajados)</td><td>33,0%¹</td><td>33,3%</td><td>+0,3 p.p.</td><td class="na">Estável¹</td></tr>
           <tr><td>Tempo Médio de Conclusão (dias)</td><td class="na">Não disponível</td><td>40,3</td><td class="na">—</td><td class="na">Não comparável</td></tr>
           <tr><td>Estudantes em Andamento</td><td class="na">Não disponível</td><td>336</td><td class="na">—</td><td class="na">Não comparável</td></tr>
           <tr><td>Taxa de Abandono (&gt;30 dias)</td><td class="na">Não disponível</td><td>43,0%²</td><td class="na">—</td><td class="na">Não comparável</td></tr>
@@ -328,7 +329,7 @@
     <div class="card">
       <h3>11 · Ranking das escolas por ativação</h3>
       <p class="sub">Percentual de alunos que iniciaram a trilha, por escola</p>
-      <p class="calc">Cálculo: Ativação por escola = Engajados da escola ÷ Inscritos da escola</p>
+      <p class="calc">Cálculo: <abbr title="Engajados ÷ Inscritos">Ativação</abbr> por escola = Engajados da escola ÷ Inscritos da escola</p>
       <div class="chart-wrap" style="height:320px;">
         <canvas id="c8" role="img" aria-label="Barras horizontais em ranking das 8 escolas por taxa de ativação, da maior para a menor">CED 104 Recanto das Emas 88,9%. CEMI Taguatinga 70,6%. CED 01 ITAPOÃ 64,4%. CED Jardins Mangueiral 49,1%. CED Incra 08 35,5%. CED Pompílio Marques de Souza 6,2%. Cemab 2,1%. CEM 03 Ceilândia 0%.</canvas>
       </div>
@@ -352,7 +353,7 @@
     <div class="card">
       <h3>13 · Engajamento por turma</h3>
       <p class="sub">Taxa de ativação nas 33 turmas do Primeiro Semestre de 2026, agrupadas por faixa</p>
-      <p class="calc">Cálculo: Ativação por turma = Engajados da turma ÷ Inscritos da turma</p>
+      <p class="calc">Cálculo: <abbr title="Engajados ÷ Inscritos">Ativação</abbr> por turma = Engajados da turma ÷ Inscritos da turma</p>
       <div class="verified">✓ As 33 turmas e sua distribuição por escola conferem exatamente com o roster real da Ludos Pro — inclusive as letras de cada turma.</div>
       <div class="note">⚠ Os <strong>percentuais de ativação individuais</strong> ainda não são rastreáveis: dependem do arquivo "Performance_Progressao", ainda não fornecido.</div>
       <div class="tiles-3">
@@ -460,18 +461,18 @@
 <section class="page" id="p5" role="tabpanel" aria-labelledby="tab-p5">
   <div class="kpis">
     <div class="kpi b1"><div class="label">ALUNOS INSCRITOS</div><div class="value">1.096</div></div>
-    <div class="kpi b2"><div class="label">TAXA DE ATIVAÇÃO</div><div class="value">46,0%</div></div>
-    <div class="kpi b3"><div class="label">ITF GERAL (T0 → T1)</div><div class="value">3,71 → 4,10</div></div>
+    <div class="kpi b2"><div class="label"><abbr title="Engajados ÷ Inscritos">TAXA DE ATIVAÇÃO</abbr></div><div class="value">46,0%</div></div>
+    <div class="kpi b3"><div class="label"><abbr title="Índice de Transformação Financeira">ITF</abbr> GERAL (<abbr title="Antes do programa">T0</abbr> → <abbr title="Depois do programa">T1</abbr>)</div><div class="value">3,71 → 4,10</div></div>
     <div class="kpi b4"><div class="label">PASSARAM A PLANEJAR GASTOS</div><div class="value">94,1%</div></div>
   </div>
 
-  <div class="note">Glossário: <strong>ITF</strong> = Índice de Transformação Financeira (média das notas de conhecimento, comportamento e planejamento, escala 1 a 5). <strong>T0</strong> = antes do programa · <strong>T1</strong> = depois do programa.</div>
+  <div class="note">Glossário: <abbr title="Índice de Transformação Financeira"><strong>ITF</strong></abbr> = Índice de Transformação Financeira (média das notas de conhecimento, comportamento e planejamento, escala 1 a 5). <abbr title="Antes do programa"><strong>T0</strong></abbr> = antes do programa · <abbr title="Depois do programa"><strong>T1</strong></abbr> = depois do programa.</div>
 
   <div class="grid">
     <div class="card">
       <h3>15 · Funil de engajamento</h3>
       <p class="sub">Inscritos → iniciaram a trilha → concluintes (Primeiro Semestre de 2026)</p>
-      <p class="calc">Cálculo: Ativação = Engajados ÷ Inscritos · Conclusão = Concluintes ÷ Inscritos</p>
+      <p class="calc">Cálculo: <abbr title="Engajados ÷ Inscritos">Ativação</abbr> = Engajados ÷ Inscritos · Conclusão = Concluintes ÷ Inscritos</p>
       <div class="chart-wrap" style="height:260px;">
         <canvas id="cFunil" role="img" aria-label="Colunas mostrando 1096 inscritos, 504 iniciaram e 168 concluintes">Inscritos: 1096. Iniciaram: 504. Concluintes: 168.</canvas>
       </div>
@@ -480,15 +481,15 @@
     </div>
 
     <div class="card">
-      <h3>16 · ITF por dimensão — T0 x T1</h3>
+      <h3>16 · <abbr title="Índice de Transformação Financeira">ITF</abbr> por dimensão — <abbr title="Antes do programa">T0</abbr> x <abbr title="Depois do programa">T1</abbr></h3>
       <p class="sub">Conhecimento, comportamento e planejamento (escala 1–5, grupo n=142/17)</p>
-      <p class="calc">Cálculo: ITF = média das notas de cada dimensão (escala 1–5), comparando T0 e T1</p>
+      <p class="calc">Cálculo: <abbr title="Índice de Transformação Financeira">ITF</abbr> = média das notas de cada dimensão (escala 1–5), comparando <abbr title="Antes do programa">T0</abbr> e <abbr title="Depois do programa">T1</abbr></p>
       <div class="chart-wrap" style="height:260px;">
         <canvas id="cRadar" role="img" aria-label="Gráfico radar comparando conhecimento, comportamento e planejamento financeiro antes e depois do programa">Conhecimento: 3,88 para 4,29. Comportamento: 3,67 para 3,97. Planejamento: 3,57 para 4,03.</canvas>
       </div>
       <div class="legend">
-        <span><span class="dot" style="background:var(--navy);"></span>T0</span>
-        <span><span class="dot" style="background:var(--orange);"></span>T1</span>
+        <span><span class="dot" style="background:var(--navy);"></span><abbr title="Antes do programa">T0</abbr></span>
+        <span><span class="dot" style="background:var(--orange);"></span><abbr title="Depois do programa">T1</abbr></span>
       </div>
       <div class="insight">As três dimensões do ITF avançam de T0 para T1, com Planejamento puxando o crescimento (3,57→4,03) — sinal de que o programa está formando hábito prático, não só conhecimento teórico.</div>
       <button class="dl-btn" onclick="baixarCard(this,'16_itf_radar')">⬇ Baixar Imagem</button>
@@ -497,15 +498,15 @@
 
   <div class="grid wide">
     <div class="card">
-      <h3>17 · ITF por dimensão — versão em barras (leitura exata)</h3>
+      <h3>17 · <abbr title="Índice de Transformação Financeira">ITF</abbr> por dimensão — versão em barras (leitura exata)</h3>
       <p class="sub">Mesmo dado do radar acima, em formato mais preciso para leitura de valor</p>
-      <p class="calc">Cálculo: ITF = média das notas de cada dimensão (escala 1–5), comparando T0 e T1</p>
+      <p class="calc">Cálculo: <abbr title="Índice de Transformação Financeira">ITF</abbr> = média das notas de cada dimensão (escala 1–5), comparando <abbr title="Antes do programa">T0</abbr> e <abbr title="Depois do programa">T1</abbr></p>
       <div class="chart-wrap" style="height:240px;">
         <canvas id="cRadarBar" role="img" aria-label="Barras agrupadas comparando conhecimento, comportamento e planejamento financeiro entre T0 e T1">Conhecimento: 3,88 para 4,29. Comportamento: 3,67 para 3,97. Planejamento: 3,57 para 4,03.</canvas>
       </div>
       <div class="legend">
-        <span><span class="dot" style="background:var(--navy);"></span>T0</span>
-        <span><span class="dot" style="background:var(--orange);"></span>T1</span>
+        <span><span class="dot" style="background:var(--navy);"></span><abbr title="Antes do programa">T0</abbr></span>
+        <span><span class="dot" style="background:var(--orange);"></span><abbr title="Depois do programa">T1</abbr></span>
       </div>
       <div class="insight">Em números exatos, Conhecimento chega a 4,29 — a maior nota entre as três dimensões — mostrando que o conteúdo da trilha está sendo bem absorvido pelos alunos.</div>
       <button class="dl-btn" onclick="baixarCard(this,'17_itf_barras')">⬇ Baixar Imagem</button>
@@ -516,7 +517,7 @@
     <div class="card">
       <h3>18 · Mudança de comportamento (concluintes, T1)</h3>
       <p class="sub">% que passou a adotar cada hábito após o programa (n=17)</p>
-      <p class="calc">Cálculo: % de concluintes (T1, n=17) que passaram a adotar cada hábito</p>
+      <p class="calc">Cálculo: % de concluintes (<abbr title="Depois do programa">T1</abbr>, n=17) que passaram a adotar cada hábito</p>
       <div class="chart-wrap" style="height:280px;">
         <canvas id="cComport" role="img" aria-label="Barras horizontais mostrando percentuais de mudança comportamental">Registrar gastos: 100%. Reduzir compras por impulso: 100%. Planejar gastos: 94,1%. Compartilhar conhecimento: 70,6%. Poupar dinheiro: 64,7%. Discutir com a família: 58,8%.</canvas>
       </div>
@@ -620,9 +621,9 @@
   <p>Saldo+ · Dashboard Integrado · Primeiro Semestre de 2026.</p>
   <p><strong>Definições metodológicas:</strong></p>
   <ul>
-    <li><strong>Ativação:</strong> Calculada como Engajados / Inscritos.</li>
-    <li><strong>Retenção:</strong> Calculada estritamente como Concluintes / Engajados.</li>
-    <li><strong>ITF (Índice de Transformação Financeira):</strong> mede a evolução de conhecimento e comportamento financeiro entre a aplicação do questionário T0 (antes do programa) e o questionário T1 (depois do programa).</li>
+    <li><strong><abbr title="Engajados ÷ Inscritos">Ativação</abbr>:</strong> Calculada como Engajados / Inscritos.</li>
+    <li><strong><abbr title="Concluintes ÷ Engajados">Retenção</abbr>:</strong> Calculada estritamente como Concluintes / Engajados.</li>
+    <li><strong><abbr title="Índice de Transformação Financeira">ITF</abbr> (Índice de Transformação Financeira):</strong> mede a evolução de conhecimento e comportamento financeiro entre a aplicação do questionário <abbr title="Antes do programa">T0</abbr> (antes do programa) e o questionário <abbr title="Depois do programa">T1</abbr> (depois do programa).</li>
   </ul>
   <p>Dados consolidados e extraídos da Planilha de Checagem e Controle Operacional.</p>
 </footer>
