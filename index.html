@@ -54,7 +54,8 @@
   .kpi .value{font-size:21px;font-weight:600;color:var(--navy);}
   .card{background:var(--card);border-radius:10px;padding:16px 18px;position:relative;}
   .card h3{font-size:14px;font-weight:600;color:var(--navy);margin:0 0 4px;}
-  .card .sub{font-size:12px;color:var(--text-muted);margin:0 0 12px;}
+  .card .sub{font-size:12px;color:var(--text-muted);margin:0 0 6px;}
+  .card .calc{font-size:11px;color:var(--text-muted);font-style:italic;margin:0 0 10px;}
   .chart-wrap{position:relative;width:100%;}
   #turmaChartWrap{height:900px;}
   .donut-wrap{position:relative;}
@@ -87,6 +88,14 @@
   table.matriz td{padding:8px;border-bottom:1px solid #F2F4F8;vertical-align:middle;}
   table.matriz td.escola{font-weight:600;color:var(--navy);white-space:nowrap;}
 
+  table.comparativo{width:100%;border-collapse:collapse;font-size:12px;}
+  table.comparativo th{text-align:left;font-size:10.5px;color:var(--text-muted);font-weight:600;padding:8px;border-bottom:2px solid #E4E9F2;}
+  table.comparativo th:not(:first-child），table.comparativo td:not(:first-child){text-align:right;}
+  table.comparativo td{padding:8px;border-bottom:1px solid #F2F4F8;}
+  table.comparativo td:first-child{font-weight:500;color:var(--navy);}
+  table.comparativo tr:last-child td{border-bottom:none;}
+  table.comparativo td.na{color:#9CA3AF;font-style:italic;}
+
   .tile{background:#F7F8FC;border-radius:8px;padding:18px 10px;text-align:center;}
   .tile .n{font-size:28px;font-weight:600;line-height:1.1;}
   .tile .l{font-size:10.5px;color:var(--text-muted);font-weight:500;letter-spacing:.02em;margin-top:4px;}
@@ -107,6 +116,7 @@
     #turmaChartWrap{height:480px;overflow-y:auto;}
     #mapaCalor{height:280px !important;}
     nav.tabs button{padding:10px 14px;}
+    table.comparativo{font-size:11px;}
   }
 </style>
 </head>
@@ -115,7 +125,7 @@
 
 <header class="top">
   <h1>Saldo+</h1>
-  <p>Dashboard versão 3.3 · Primeiro Semestre de 2026 · consolidado em 22/07/2026</p>
+  <p>Dashboard versão 3.4 · Primeiro Semestre de 2026 · consolidado em 22/07/2026</p>
 </header>
 
 <nav class="tabs" role="tablist" aria-label="Seções do dashboard">
@@ -129,7 +139,7 @@
 
 <main>
 
-<!-- PÁGINA 1 · VISÃO GERAL (só dados do Primeiro Semestre de 2026) -->
+<!-- PÁGINA 1 · VISÃO GERAL -->
 <section class="page active" id="p1" role="tabpanel" aria-labelledby="tab-p1">
   <div class="kpis">
     <div class="kpi b1"><div class="label">INSCRITOS</div><div class="value">1.096</div></div>
@@ -169,6 +179,7 @@
     <div class="card">
       <h3>3 · Meta de inscritos x realizado</h3>
       <p class="sub">Meta base: 500 inscritos · Realizado: 1.096 — Primeiro Semestre de 2026</p>
+      <p class="calc">Cálculo: % da meta = Realizado ÷ Meta × 100</p>
       <div class="donut-wrap">
         <div class="chart-wrap" style="height:220px;">
           <canvas id="c3" role="img" aria-label="Gráfico de rosca mostrando que a meta de 500 inscritos foi superada, atingindo 219,2 por cento do objetivo">Meta: 500. Realizado: 1096 (219,2% da meta).</canvas>
@@ -189,6 +200,7 @@
     <div class="card">
       <h3>4 · Painel de taxas-chave</h3>
       <p class="sub">Ativação (iniciou a trilha) · Conclusão (sobre inscritos) · Retenção (sobre quem iniciou)</p>
+      <p class="calc">Cálculo: Ativação = Engajados ÷ Inscritos · Conclusão = Concluintes ÷ Inscritos · Retenção = Concluintes ÷ Engajados</p>
       <div class="chart-wrap" style="height:260px;">
         <canvas id="c4" role="img" aria-label="Colunas mostrando taxa de ativação 46 por cento, conclusão 15,3 por cento, retenção 33,3 por cento">Ativação: 46,0%. Conclusão: 15,3%. Retenção: 33,3%.</canvas>
       </div>
@@ -201,6 +213,7 @@
     <div class="card">
       <h3>5 · Duas visões de conclusão</h3>
       <p class="sub">Conclusão geral = concluintes ÷ inscritos · Retenção = concluintes ÷ quem iniciou a trilha</p>
+      <p class="calc">Cálculo: mesma base de concluintes (168), dois denominadores diferentes — 1.096 inscritos vs. 504 engajados</p>
       <div class="chart-wrap" style="height:260px;">
         <canvas id="c5" role="img" aria-label="Colunas comparando taxa de conclusão geral de 15,3 por cento com taxa de retenção de 33,3 por cento">Conclusão geral: 15,3%. Retenção: 33,3%.</canvas>
       </div>
@@ -210,7 +223,7 @@
   </div>
 </section>
 
-<!-- PÁGINA 2 · COMPARATIVO COM O PILOTO (só cruzamentos Piloto x Atual) -->
+<!-- PÁGINA 2 · COMPARATIVO COM O PILOTO -->
 <section class="page" id="p2" role="tabpanel" aria-labelledby="tab-p2">
   <div class="note">Esta aba reúne exclusivamente os indicadores que comparam o Piloto com o Primeiro Semestre de 2026 — nenhum dado exclusivo de um único período aparece aqui.</div>
 
@@ -218,6 +231,7 @@
     <div class="card">
       <h3>6 · Comparativo Piloto x Primeiro Semestre de 2026</h3>
       <p class="sub">Ativação, conclusão e retenção lado a lado</p>
+      <p class="calc">Cálculo: mesmas fórmulas de ativação/conclusão/retenção, aplicadas separadamente a cada período</p>
       <div class="chart-wrap" style="height:280px;">
         <canvas id="c6" role="img" aria-label="Colunas agrupadas comparando Piloto e Primeiro Semestre de 2026 nas taxas de ativação, conclusão e retenção">Ativação: 26,4% Piloto vs 46,0% Primeiro Semestre de 2026. Conclusão: 8,7% vs 15,3%. Retenção: 32,9% vs 33,3%.</canvas>
       </div>
@@ -242,6 +256,7 @@
     <div class="card">
       <h3>8 · Atingimento da meta de inscritos</h3>
       <p class="sub">% da própria meta alcançada — Piloto: 333 de 100 · Primeiro Semestre de 2026: 1.096 de 500</p>
+      <p class="calc">Cálculo: % da meta = Realizado ÷ Meta × 100, para cada período</p>
       <div class="chart-wrap" style="height:260px;">
         <canvas id="c12" role="img" aria-label="Colunas comparando o percentual da meta de inscritos atingida no Piloto, 333 por cento, e no Primeiro Semestre de 2026, 219,2 por cento">Piloto: 333,0% da meta atingida. Primeiro Semestre de 2026: 219,2% da meta atingida.</canvas>
       </div>
@@ -252,6 +267,7 @@
     <div class="card">
       <h3>9 · Quanto o Primeiro Semestre de 2026 evoluiu (variação relativa)</h3>
       <p class="sub">Crescimento percentual do Primeiro Semestre de 2026 sobre o Piloto, em cada indicador</p>
+      <p class="calc">Cálculo: Variação % = (valor Atual − valor Piloto) ÷ valor Piloto × 100</p>
       <div class="chart-wrap" style="height:260px;">
         <canvas id="c13" role="img" aria-label="Colunas mostrando a variação relativa: atingimento da meta de inscritos menos 34,2 por cento, taxa de ativação mais 74 por cento, taxa de conclusão mais 76 por cento">Atingimento da meta de inscritos: -34,2%. Taxa de ativação: +74,0%. Taxa de conclusão geral: +76,0%.</canvas>
       </div>
@@ -264,6 +280,7 @@
     <div class="card">
       <h3>10 · Crescimento absoluto: Piloto → Primeiro Semestre de 2026</h3>
       <p class="sub">Cada barra vai do valor no Piloto até o valor no Primeiro Semestre de 2026 · número no centro é a variação percentual</p>
+      <p class="calc">Cálculo: Diferença = Atual − Piloto · Variação % = Diferença ÷ Piloto × 100</p>
       <div class="chart-wrap" style="height:220px;">
         <canvas id="c14" role="img" aria-label="Barras flutuantes mostrando o crescimento de cada indicador do Piloto para o Primeiro Semestre de 2026: inscritos de 333 para 1096, engajamento de 88 para 504, concluintes de 29 para 168">Inscritos: 333 para 1.096 (+229%). Engajamento: 88 para 504 (+473%). Concluintes: 29 para 168 (+479%).</canvas>
       </div>
@@ -273,6 +290,32 @@
       </div>
       <div class="insight">O crescimento proporcional dos concluintes (+479%) supera até o dos inscritos (+229%): a base cresceu, e a eficácia cresceu ainda mais rápido.</div>
       <button class="dl-btn" onclick="baixarCard(this,'10_crescimento_absoluto')">⬇ Baixar Imagem</button>
+    </div>
+  </div>
+
+  <div class="grid wide">
+    <div class="card">
+      <h3>Tabela comparativa completa — todos os indicadores</h3>
+      <p class="sub">Piloto x Primeiro Semestre de 2026, com diferença absoluta e variação percentual</p>
+      <p class="calc">Cálculo: Diferença = Atual − Piloto · Variação % = Diferença ÷ Piloto × 100 · "Não comparável" onde o Piloto não tem dado registrado na planilha de origem</p>
+      <table class="comparativo">
+        <thead><tr><th scope="col">Indicador</th><th scope="col">Piloto</th><th scope="col">Primeiro Semestre de 2026</th><th scope="col">Diferença</th><th scope="col">Variação %</th></tr></thead>
+        <tbody>
+          <tr><td>Total de Estudantes Inscritos</td><td>333</td><td>1.096</td><td>+763</td><td>+229,1%</td></tr>
+          <tr><td>Quantidade de Turmas</td><td class="na">Não disponível</td><td>33</td><td class="na">—</td><td class="na">Não comparável</td></tr>
+          <tr><td>Engajamento Inicial (alunos)</td><td>88</td><td>504</td><td>+416</td><td>+472,7%</td></tr>
+          <tr><td>Total de Concluintes</td><td>29</td><td>168</td><td>+139</td><td>+479,3%</td></tr>
+          <tr><td>Taxa de Conclusão Geral (Concluintes ÷ Inscritos)</td><td class="na">Não disponível</td><td>15,3%</td><td class="na">—</td><td class="na">Não comparável</td></tr>
+          <tr><td>Taxa de Retenção (Concluintes ÷ Engajados)</td><td>33,0%¹</td><td>33,3%</td><td>+0,3 p.p.</td><td class="na">Estável¹</td></tr>
+          <tr><td>Tempo Médio de Conclusão (dias)</td><td class="na">Não disponível</td><td>40,3</td><td class="na">—</td><td class="na">Não comparável</td></tr>
+          <tr><td>Estudantes em Andamento</td><td class="na">Não disponível</td><td>336</td><td class="na">—</td><td class="na">Não comparável</td></tr>
+          <tr><td>Taxa de Abandono (&gt;30 dias)</td><td class="na">Não disponível</td><td>43,0%²</td><td class="na">—</td><td class="na">Não comparável</td></tr>
+          <tr><td>Nota Média Geral (%)</td><td class="na">Não disponível</td><td>90,0%</td><td class="na">—</td><td class="na">Não comparável</td></tr>
+        </tbody>
+      </table>
+      <div class="note">¹ Retenção do Piloto calculada diretamente da base (29 concluintes ÷ 88 engajados) — essa célula estava incompleta na planilha de origem. ² A planilha traz dois valores diferentes para esta taxa no Primeiro Semestre de 2026 (43,0% na aba Página1, 3,92% na aba Página2) — mantive 43,0% por ser o mais recente que você enviou, mas recomendo confirmar qual é o oficial antes de publicar.</div>
+      <div class="insight">O Piloto foi um projeto bem menor (333 inscritos, 2 escolas) — por isso metade dos indicadores não tem base de comparação. Nos que têm (inscritos, engajamento, concluintes), o crescimento passa de 200% em todos os três, com os concluintes subindo ainda mais que a própria base de inscritos.</div>
+      <button class="dl-btn" onclick="baixarCard(this,'tabela_comparativa_completa')">⬇ Baixar Imagem</button>
     </div>
   </div>
 </section>
@@ -285,6 +328,7 @@
     <div class="card">
       <h3>11 · Ranking das escolas por ativação</h3>
       <p class="sub">Percentual de alunos que iniciaram a trilha, por escola</p>
+      <p class="calc">Cálculo: Ativação por escola = Engajados da escola ÷ Inscritos da escola</p>
       <div class="chart-wrap" style="height:320px;">
         <canvas id="c8" role="img" aria-label="Barras horizontais em ranking das 8 escolas por taxa de ativação, da maior para a menor">CED 104 Recanto das Emas 88,9%. CEMI Taguatinga 70,6%. CED 01 ITAPOÃ 64,4%. CED Jardins Mangueiral 49,1%. CED Incra 08 35,5%. CED Pompílio Marques de Souza 6,2%. Cemab 2,1%. CEM 03 Ceilândia 0%.</canvas>
       </div>
@@ -308,6 +352,7 @@
     <div class="card">
       <h3>13 · Engajamento por turma</h3>
       <p class="sub">Taxa de ativação nas 33 turmas do Primeiro Semestre de 2026, agrupadas por faixa</p>
+      <p class="calc">Cálculo: Ativação por turma = Engajados da turma ÷ Inscritos da turma</p>
       <div class="verified">✓ As 33 turmas e sua distribuição por escola conferem exatamente com o roster real da Ludos Pro — inclusive as letras de cada turma.</div>
       <div class="note">⚠ Os <strong>percentuais de ativação individuais</strong> ainda não são rastreáveis: dependem do arquivo "Performance_Progressao", ainda não fornecido.</div>
       <div class="tiles-3">
@@ -345,6 +390,7 @@
     <div class="card">
       <h3>14 · Limitações citadas nas visitas às escolas</h3>
       <p class="sub">Frequência absoluta (barras) e % sobre as 7 escolas visitadas</p>
+      <p class="calc">Cálculo: % = nº de escolas que citaram o motivo ÷ 7 escolas visitadas</p>
       <div class="chart-wrap" style="height:260px;">
         <canvas id="cLimitacoes" role="img" aria-label="Barras horizontais mostrando a frequência de cada limitação citada nas visitas: gestão ou professor descontínuo, infraestrutura, rotina escolar, metodologia sem plataforma, sem atribuição de nota">Gestão/Professor descontínuo: 2 (28,6%). Infraestrutura/conectividade: 2 (28,6%). Rotina/calendário escolar: 2 (28,6%). Metodologia usada sem a plataforma: 1 (14,3%). Sem atribuição de nota: 1 (14,3%).</canvas>
       </div>
@@ -425,6 +471,7 @@
     <div class="card">
       <h3>15 · Funil de engajamento</h3>
       <p class="sub">Inscritos → iniciaram a trilha → concluintes (Primeiro Semestre de 2026)</p>
+      <p class="calc">Cálculo: Ativação = Engajados ÷ Inscritos · Conclusão = Concluintes ÷ Inscritos</p>
       <div class="chart-wrap" style="height:260px;">
         <canvas id="cFunil" role="img" aria-label="Colunas mostrando 1096 inscritos, 504 iniciaram e 168 concluintes">Inscritos: 1096. Iniciaram: 504. Concluintes: 168.</canvas>
       </div>
@@ -435,6 +482,7 @@
     <div class="card">
       <h3>16 · ITF por dimensão — T0 x T1</h3>
       <p class="sub">Conhecimento, comportamento e planejamento (escala 1–5, grupo n=142/17)</p>
+      <p class="calc">Cálculo: ITF = média das notas de cada dimensão (escala 1–5), comparando T0 e T1</p>
       <div class="chart-wrap" style="height:260px;">
         <canvas id="cRadar" role="img" aria-label="Gráfico radar comparando conhecimento, comportamento e planejamento financeiro antes e depois do programa">Conhecimento: 3,88 para 4,29. Comportamento: 3,67 para 3,97. Planejamento: 3,57 para 4,03.</canvas>
       </div>
@@ -451,6 +499,7 @@
     <div class="card">
       <h3>17 · ITF por dimensão — versão em barras (leitura exata)</h3>
       <p class="sub">Mesmo dado do radar acima, em formato mais preciso para leitura de valor</p>
+      <p class="calc">Cálculo: ITF = média das notas de cada dimensão (escala 1–5), comparando T0 e T1</p>
       <div class="chart-wrap" style="height:240px;">
         <canvas id="cRadarBar" role="img" aria-label="Barras agrupadas comparando conhecimento, comportamento e planejamento financeiro entre T0 e T1">Conhecimento: 3,88 para 4,29. Comportamento: 3,67 para 3,97. Planejamento: 3,57 para 4,03.</canvas>
       </div>
@@ -467,6 +516,7 @@
     <div class="card">
       <h3>18 · Mudança de comportamento (concluintes, T1)</h3>
       <p class="sub">% que passou a adotar cada hábito após o programa (n=17)</p>
+      <p class="calc">Cálculo: % de concluintes (T1, n=17) que passaram a adotar cada hábito</p>
       <div class="chart-wrap" style="height:280px;">
         <canvas id="cComport" role="img" aria-label="Barras horizontais mostrando percentuais de mudança comportamental">Registrar gastos: 100%. Reduzir compras por impulso: 100%. Planejar gastos: 94,1%. Compartilhar conhecimento: 70,6%. Poupar dinheiro: 64,7%. Discutir com a família: 58,8%.</canvas>
       </div>
@@ -477,6 +527,7 @@
     <div class="card">
       <h3>19 · Intenção de uso do Pé-de-Meia</h3>
       <p class="sub">Entre quem conhece o programa (n=128)</p>
+      <p class="calc">Cálculo: % de respostas por categoria, entre quem conhece o programa</p>
       <div class="chart-wrap" style="height:280px;">
         <canvas id="cPeDeMeia" role="img" aria-label="Barras horizontais mostrando a intenção de uso do benefício Pé-de-Meia">Guardar o dinheiro: 39,1%. Ainda não sei: 30,5%. Gastar no dia a dia: 12,5%. Ajudar a família: 9,4%. Investir em estudos: 8,6%.</canvas>
       </div>
@@ -490,6 +541,7 @@
       <span class="badge">Cruzamento sugerido</span>
       <h3>20 · Intenção do Pé-de-Meia × Taxa de conclusão da trilha</h3>
       <p class="sub">Querer guardar o benefício não prediz engajamento com o curso — é o oposto</p>
+      <p class="calc">Cálculo: Taxa de conclusão do subgrupo = concluintes do subgrupo ÷ total do subgrupo</p>
       <div class="chart-wrap" style="height:260px;">
         <canvas id="cCruzamento" role="img" aria-label="Barras mostrando taxa de conclusão da trilha por grupo de intenção de uso do Pé-de-Meia">Guardar o dinheiro: 2,0% concluem a trilha. Ainda não sei: 15,4%. Investir em estudos: 18,2%.</canvas>
       </div>
@@ -505,6 +557,7 @@
   <div class="grid wide">
     <div class="card">
       <h3>21 · Funil de volume e conversão</h3>
+      <p class="calc">Cálculo: % do total = valor da etapa ÷ 1.096 inscritos</p>
       <div class="chart-wrap" style="height:330px;">
         <svg viewBox="0 0 760 330" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;" role="img" aria-label="Diagrama de funil mostrando 1096 inscritos, 504 engajados (46%) e 168 concluintes (15,3%)">
           <rect x="40" y="24" width="520" height="64" style="fill:var(--navy);"/>
@@ -531,6 +584,7 @@
     <div class="card">
       <h3>22 · Volume x taxa de conversão (eixo duplo)</h3>
       <p class="sub">Nº de alunos (eixo esquerdo) e % do total de inscritos (eixo direito), por etapa</p>
+      <p class="calc">Cálculo: % do total = valor da etapa ÷ 1.096 inscritos</p>
       <div class="chart-wrap" style="height:320px;">
         <canvas id="c7" role="img" aria-label="Gráfico de barras com eixo duplo comparando número de alunos e percentual do total, por etapa do funil">Inscritos: 1096 alunos (100%). Engajados: 504 alunos (46%). Concluintes: 168 alunos (15,3%).</canvas>
       </div>
@@ -622,7 +676,6 @@ function groupedBar(id, labels, series, o={}){
 
 simpleBar('c1', ['Inscritos','Engajados','Concluintes'], [1096,504,168], [NAVY,CYAN,ORANGE]);
 
-// ---- 3 · meta x realizado (doughnut com % no centro) ----
 new Chart(document.getElementById('c3'), {
   type:'doughnut',
   data:{labels:['Meta (500)','Excedente (+596)'],
