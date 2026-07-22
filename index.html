@@ -126,7 +126,7 @@
 
 <header class="top">
   <h1>Saldo+</h1>
-  <p>Dashboard versão 3.6 · Primeiro Semestre de 2026 · consolidado em 22/07/2026</p>
+  <p>Dashboard · Primeiro Semestre de 2026 · consolidado em 22/07/2026</p>
 </header>
 
 <nav class="tabs" role="tablist" aria-label="Seções do dashboard">
@@ -135,7 +135,7 @@
   <button class="tab-btn" data-page="p3" role="tab" aria-selected="false" aria-controls="p3" id="tab-p3">3 · Escolas e Turmas</button>
   <button class="tab-btn" data-page="p6" role="tab" aria-selected="false" aria-controls="p6" id="tab-p6">4 · Visitas e Limitações</button>
   <button class="tab-btn" data-page="p5" role="tab" aria-selected="false" aria-controls="p5" id="tab-p5">5 · Impacto Social</button>
-  <button class="tab-btn" data-page="p4" role="tab" aria-selected="false" aria-controls="p4" id="tab-p4">6 · Avançado</button>
+ 
 </nav>
 
 <main>
@@ -565,67 +565,6 @@
   </div>
 </section>
 
-<!-- PÁGINA 6 · AVANÇADO -->
-<section class="page" id="p4" role="tabpanel" aria-labelledby="tab-p4">
-  <div class="grid wide">
-    <div class="card">
-      <h3>21 · Funil de volume e conversão</h3>
-      <p class="calc">Cálculo: % do total = valor da etapa ÷ 1.096 inscritos</p>
-      <div class="chart-wrap" style="height:330px;">
-        <svg viewBox="0 0 760 330" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;" role="img" aria-label="Diagrama de funil mostrando 1096 inscritos, 504 engajados (46%) e 168 concluintes (15,3%)">
-          <rect x="40" y="24" width="520" height="64" style="fill:var(--navy);"/>
-          <polygon points="40,88 560,88 420,132 180,132" style="fill:var(--cyan);"/>
-          <rect x="180" y="132" width="240" height="64" style="fill:var(--cyan);"/>
-          <polygon points="180,196 420,196 340,240 260,240" style="fill:var(--orange);"/>
-          <rect x="260" y="240" width="80" height="64" style="fill:var(--orange);"/>
-          <text x="580" y="50" style="font:600 14px 'Poppins',sans-serif; fill:var(--navy);">Inscritos</text>
-          <text x="580" y="73" style="font:700 20px 'Poppins',sans-serif; fill:var(--navy);">1.096</text>
-          <text x="645" y="73" style="font:500 12px 'Poppins',sans-serif; fill:#6B7280;">(100%)</text>
-          <text x="580" y="115" style="font:600 12px 'Poppins',sans-serif; fill:#6B7280;">↓ 46,0%</text>
-          <text x="580" y="158" style="font:600 14px 'Poppins',sans-serif; fill:var(--navy);">Engajados</text>
-          <text x="580" y="181" style="font:700 20px 'Poppins',sans-serif; fill:var(--navy);">504</text>
-          <text x="625" y="181" style="font:500 12px 'Poppins',sans-serif; fill:#6B7280;">(46,0%)</text>
-          <text x="580" y="223" style="font:600 12px 'Poppins',sans-serif; fill:#6B7280;">↓ 33,3%</text>
-          <text x="580" y="266" style="font:600 14px 'Poppins',sans-serif; fill:var(--navy);">Concluintes</text>
-          <text x="580" y="289" style="font:700 20px 'Poppins',sans-serif; fill:var(--navy);">168</text>
-          <text x="625" y="289" style="font:500 12px 'Poppins',sans-serif; fill:#6B7280;">(15,3%)</text>
-        </svg>
-      </div>
-      <button class="dl-btn" onclick="baixarCard(this,'21_funil_svg')">⬇ Baixar Imagem</button>
-    </div>
-
-    <div class="card">
-      <h3>22 · Volume x taxa de conversão (eixo duplo)</h3>
-      <p class="sub">Nº de alunos (eixo esquerdo) e % do total de inscritos (eixo direito), por etapa</p>
-      <p class="calc">Cálculo: % do total = valor da etapa ÷ 1.096 inscritos</p>
-      <div class="chart-wrap" style="height:320px;">
-        <canvas id="c7" role="img" aria-label="Gráfico de barras com eixo duplo comparando número de alunos e percentual do total, por etapa do funil">Inscritos: 1096 alunos (100%). Engajados: 504 alunos (46%). Concluintes: 168 alunos (15,3%).</canvas>
-      </div>
-      <div class="legend">
-        <span><span class="dot" style="background:var(--navy);"></span>Nº de alunos (eixo esquerdo)</span>
-        <span><span class="dot" style="background:var(--orange);"></span>% do total (eixo direito)</span>
-      </div>
-      <div class="insight">Em uma única leitura: volume e percentual caminham juntos em cada etapa — a base de 1.096 alunos sustenta um funil consistente até os 168 concluintes finais.</div>
-      <button class="dl-btn" onclick="baixarCard(this,'22_volume_taxa_conversao')">⬇ Baixar Imagem</button>
-    </div>
-
-    <div class="card">
-      <h3>23 · Mapa de calor de engajamento por escola</h3>
-      <div id="mapaCalor" style="width:100%;height:420px;border-radius:8px;overflow:hidden;background:#f5f5f5;"></div>
-      <button class="dl-btn" onclick="baixarCard(this,'23_mapa_calor')">⬇ Baixar Imagem</button>
-    </div>
-  </div>
-</section>
-
-<section id="metodologia">
-  <h2>Metodologia</h2>
-  <ul>
-    <li><strong>Fonte primária:</strong> extração via pipeline Python (ETL) a partir da API Ludos Pro, consolidada e validada na Planilha de Checagem e Controle Operacional.</li>
-    <li><strong>Layout aplicado:</strong> estrutura de storytelling em abas de nível único (padrão inspirado no Looker Studio), com uma aba dedicada exclusivamente ao comparativo Piloto x Primeiro Semestre de 2026, identidade visual em Poppins e paleta navy/cyan/orange/magenta.</li>
-    <li><strong>Dados qualitativos</strong> (aba "Visitas e Limitações"): codificados a partir dos relatórios de visita às 7 escolas efetivamente visitadas, organizados em matriz temática por escola.</li>
-    <li><strong>Limitação conhecida do próprio dashboard:</strong> os percentuais de ativação por escola e por turma (gráficos 11 e 13) ainda dependem de validação cruzada com o arquivo "Performance_Progressao" (log de atividade por aluno), pendente de disponibilização.</li>
-  </ul>
-</section>
 
 </main>
 
