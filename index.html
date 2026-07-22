@@ -26,25 +26,46 @@
     background-repeat:repeat-x; background-size:120px 30px; background-position:left top;
   }
   body{margin:0;font-family:'Poppins',sans-serif;background:var(--bg);color:var(--navy);}
-  header.top{background:var(--navy);padding:20px 28px;border-bottom:4px solid var(--cyan);}
+  header.top{background:var(--navy);padding:20px 28px 0;border-bottom:4px solid var(--cyan);}
   header.top h1{color:#fff;font-size:clamp(17px,4vw,20px);font-weight:600;margin:0;}
-  header.top p{color:var(--navy-light);font-size:13px;margin:4px 0 0;}
-  nav.tabs{display:flex;gap:8px;padding:14px 28px 0;background:var(--bg);flex-wrap:wrap;}
-  nav.tabs button{
+  header.top p{color:var(--navy-light);font-size:13px;margin:4px 0 16px;}
+
+  nav.primary-tabs{display:flex;gap:26px;padding:0;}
+  nav.primary-tabs button{
+    background:none;border:none;color:var(--navy-light);font-family:'Poppins',sans-serif;
+    font-size:14px;font-weight:600;padding:0 0 12px;cursor:pointer;border-bottom:3px solid transparent;
+  }
+  nav.primary-tabs button.active{color:#fff;border-bottom-color:var(--cyan);}
+  nav.primary-tabs button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;}
+
+  nav.sub-tabs{display:flex;gap:8px;padding:14px 0 0;background:var(--bg);flex-wrap:wrap;}
+  nav.sub-tabs button{
     font-family:'Poppins',sans-serif;font-size:13px;font-weight:500;padding:9px 16px;
     border:none;border-radius:8px 8px 0 0;background:#E4E9F2;color:var(--navy);cursor:pointer;
   }
-  nav.tabs button.active{background:var(--card);box-shadow:0 -2px 0 var(--cyan) inset;}
-  nav.tabs button:focus-visible,.dl-btn:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;}
+  nav.sub-tabs button.active{background:var(--card);box-shadow:0 -2px 0 var(--cyan) inset;}
+  nav.sub-tabs button:focus-visible,.dl-btn:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;}
 
-  .hero-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;max-width:1100px;margin:18px auto 0;padding:0 28px;}
-  .hero-card{border-radius:12px;padding:18px 20px;color:#fff;box-shadow:0 4px 14px rgba(0,0,0,.14);}
-  .hero-eyebrow{font-size:10px;font-weight:700;letter-spacing:.08em;opacity:.8;display:block;}
-  .hero-label{font-size:13.5px;font-weight:600;margin-top:5px;}
-  .hero-value{font-size:36px;font-weight:700;line-height:1.1;margin-top:2px;}
-  .hero-sub{font-size:11px;opacity:.9;margin-top:5px;line-height:1.4;}
+  .primary-page{display:none;}
+  .primary-page.active{display:block;}
 
-  main{max-width:1100px;margin:0 auto;padding:24px 28px 40px;}
+  .hero-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:20px 0;}
+  .hero-card{background:#fff;border:1px solid #E4E9F2;border-radius:10px;padding:16px 18px 16px 20px;position:relative;box-shadow:0 1px 3px rgba(16,24,40,.05);}
+  .hero-card::before{content:'';position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:2px;}
+  .hero-card.accent-navy::before{background:var(--navy);}
+  .hero-card.accent-orange::before{background:var(--orange);}
+  .hero-card.accent-magenta::before{background:var(--magenta);}
+  .hero-top{display:flex;align-items:center;gap:6px;}
+  .hero-icon{font-size:14px;}
+  .hero-eyebrow{font-size:10px;font-weight:700;letter-spacing:.07em;color:var(--text-muted);text-transform:uppercase;}
+  .hero-label{font-size:13px;font-weight:600;color:var(--navy);margin-top:6px;}
+  .hero-value{font-size:32px;font-weight:700;line-height:1.15;margin-top:2px;}
+  .hero-value.t-navy{color:var(--navy);}
+  .hero-value.t-orange{color:var(--orange);}
+  .hero-value.t-magenta{color:var(--magenta);}
+  .hero-sub{font-size:11px;color:var(--text-muted);margin-top:4px;line-height:1.4;}
+
+  main{max-width:1100px;margin:0 auto;padding:0 28px 40px;}
   section.page{display:none;}
   section.page.active{display:block;}
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-bottom:16px;}
@@ -109,8 +130,9 @@
     .grid.two-cols{grid-template-columns:1fr;}
     #turmaChartWrap{height:480px;overflow-y:auto;}
     #mapaCalor{height:280px !important;}
-    nav.tabs button{padding:10px 14px;}
-    .hero-value{font-size:30px;}
+    nav.sub-tabs button{padding:10px 14px;}
+    nav.primary-tabs{gap:16px;}
+    .hero-value{font-size:28px;}
   }
 </style>
 </head>
@@ -119,117 +141,402 @@
 
 <header class="top">
   <h1>Saldo+</h1>
-  <p>Dashboard versão 3.1 · Primeiro Semestre de 2026 · consolidado em 21/07/2026</p>
+  <p>Dashboard versão 4.0 · consolidado em 21/07/2026</p>
+  <nav class="primary-tabs" role="tablist" aria-label="Navegação principal">
+    <button class="active" data-primary="atual" role="tab" aria-selected="true" aria-controls="primary-atual" id="ptab-atual">Primeiro Semestre de 2026</button>
+    <button data-primary="comparativo" role="tab" aria-selected="false" aria-controls="primary-comparativo" id="ptab-comparativo">Comparativo: Piloto vs. Atual</button>
+  </nav>
 </header>
-
-<nav class="tabs" role="tablist" aria-label="Seções do dashboard">
-  <button class="tab-btn active" data-page="p1" role="tab" aria-selected="true" aria-controls="p1" id="tab-p1">1 · Visão Geral</button>
-  <button class="tab-btn" data-page="p2" role="tab" aria-selected="false" aria-controls="p2" id="tab-p2">2 · Taxas e Comparativos</button>
-  <button class="tab-btn" data-page="p3" role="tab" aria-selected="false" aria-controls="p3" id="tab-p3">3 · Escolas e Turmas</button>
-  <button class="tab-btn" data-page="p6" role="tab" aria-selected="false" aria-controls="p6" id="tab-p6">4 · Visitas e Limitações</button>
-  <button class="tab-btn" data-page="p5" role="tab" aria-selected="false" aria-controls="p5" id="tab-p5">5 · Impacto Social</button>
-  <button class="tab-btn" data-page="p4" role="tab" aria-selected="false" aria-controls="p4" id="tab-p4">6 · Avançado</button>
-</nav>
-
-<section class="hero-metrics" aria-label="Métricas prioritárias do programa">
-  <div class="hero-card" style="background:var(--navy);">
-    <span class="hero-eyebrow">MÉTRICA PRIORITÁRIA</span>
-    <div class="hero-label">Engajamento</div>
-    <div class="hero-value">504</div>
-    <div class="hero-sub">alunos ativos na trilha · 46,0% dos inscritos</div>
-  </div>
-  <div class="hero-card" style="background:var(--orange);">
-    <span class="hero-eyebrow">MÉTRICA PRIORITÁRIA</span>
-    <div class="hero-label">Variação %</div>
-    <div class="hero-value">+76,0%</div>
-    <div class="hero-sub">crescimento da taxa de conclusão · Piloto → Primeiro Semestre de 2026</div>
-  </div>
-  <div class="hero-card" style="background:var(--magenta);">
-    <span class="hero-eyebrow">MÉTRICA PRIORITÁRIA</span>
-    <div class="hero-label">Total de Concluintes</div>
-    <div class="hero-value">168</div>
-    <div class="hero-sub">15,3% dos inscritos concluíram a trilha</div>
-  </div>
-</section>
 
 <main>
 
-<!-- PÁGINA 1 · VISÃO GERAL -->
-<section class="page active" id="p1" role="tabpanel" aria-labelledby="tab-p1">
-  <div class="kpis">
-    <div class="kpi b1"><div class="label">INSCRITOS</div><div class="value">1.096</div></div>
-    <div class="kpi b2"><div class="label">ATIVAÇÃO</div><div class="value">46,0%</div></div>
-    <div class="kpi b3"><div class="label">CONCLUSÃO</div><div class="value">15,3%</div></div>
-    <div class="kpi b4"><div class="label">RETENÇÃO</div><div class="value">33,3%</div></div>
+<!-- ==================== ABA 1 · PRIMEIRO SEMESTRE DE 2026 ==================== -->
+<div class="primary-page active" id="primary-atual" role="tabpanel" aria-labelledby="ptab-atual">
+
+  <div class="hero-metrics">
+    <div class="hero-card accent-navy">
+      <div class="hero-top"><span class="hero-icon">👥</span><span class="hero-eyebrow">Métrica prioritária</span></div>
+      <div class="hero-label">Engajamento</div>
+      <div class="hero-value t-navy">504</div>
+      <div class="hero-sub">alunos ativos na trilha · 46,0% dos inscritos</div>
+    </div>
+    <div class="hero-card accent-magenta">
+      <div class="hero-top"><span class="hero-icon">🎓</span><span class="hero-eyebrow">Métrica prioritária</span></div>
+      <div class="hero-label">Total de Concluintes</div>
+      <div class="hero-value t-magenta">168</div>
+      <div class="hero-sub">15,3% dos inscritos concluíram a trilha</div>
+    </div>
+  </div>
+
+  <nav class="sub-tabs" role="tablist" aria-label="Seções do Primeiro Semestre de 2026">
+    <button class="tab-btn active" data-page="p1" role="tab" aria-selected="true" aria-controls="p1" id="tab-p1">Visão Geral</button>
+    <button class="tab-btn" data-page="p3" role="tab" aria-selected="false" aria-controls="p3" id="tab-p3">Escolas e Turmas</button>
+    <button class="tab-btn" data-page="p6" role="tab" aria-selected="false" aria-controls="p6" id="tab-p6">Visitas e Limitações</button>
+    <button class="tab-btn" data-page="p5" role="tab" aria-selected="false" aria-controls="p5" id="tab-p5">Impacto Social</button>
+    <button class="tab-btn" data-page="p4" role="tab" aria-selected="false" aria-controls="p4" id="tab-p4">Avançado</button>
+  </nav>
+
+  <!-- VISÃO GERAL -->
+  <section class="page active" id="p1" role="tabpanel" aria-labelledby="tab-p1">
+    <div class="kpis" style="margin-top:16px;">
+      <div class="kpi b1"><div class="label">INSCRITOS</div><div class="value">1.096</div></div>
+      <div class="kpi b2"><div class="label">ATIVAÇÃO</div><div class="value">46,0%</div></div>
+      <div class="kpi b3"><div class="label">CONCLUSÃO</div><div class="value">15,3%</div></div>
+      <div class="kpi b4"><div class="label">RETENÇÃO</div><div class="value">33,3%</div></div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>1 · Volume de alunos por etapa</h3>
+        <p class="sub">Inscritos, engajados e concluintes — Primeiro Semestre de 2026</p>
+        <div class="chart-wrap" style="height:260px;">
+          <canvas id="c1" role="img" aria-label="Colunas mostrando 1096 inscritos, 504 engajados e 168 concluintes">Inscritos: 1096. Engajados: 504. Concluintes: 168.</canvas>
+        </div>
+        <div class="insight">O Primeiro Semestre de 2026 já reúne mais de 3x o volume do Piloto (333 inscritos) — e mantém 504 alunos engajados e 168 concluintes, prova de que a estrutura aguenta crescer.</div>
+        <button class="dl-btn" onclick="baixarCard(this,'1_volume_alunos')">⬇ Baixar Imagem</button>
+      </div>
+
+      <div class="card">
+        <h3>2 · Estrutura institucional</h3>
+        <p class="sub">Regionais de ensino, escolas, turmas, alunos engajados, nota média e tempo médio de conclusão</p>
+        <div class="tiles-6">
+          <div class="tile"><div class="n" style="color:var(--navy);">7</div><div class="l">REGIONAIS DE ENSINO</div></div>
+          <div class="tile"><div class="n" style="color:var(--cyan);">8</div><div class="l">ESCOLAS</div></div>
+          <div class="tile"><div class="n" style="color:var(--orange);">33</div><div class="l">TURMAS</div></div>
+          <div class="tile"><div class="n" style="color:var(--magenta);">504</div><div class="l">ALUNOS ENGAJADOS</div></div>
+          <div class="tile"><div class="n" style="color:#8DC63F;">90%</div><div class="l">NOTA MÉDIA GERAL</div></div>
+          <div class="tile"><div class="n" style="color:var(--navy-light);">40,34</div><div class="l">DIAS · TEMPO MÉDIO DE CONCLUSÃO</div></div>
+        </div>
+        <div class="insight">O Primeiro Semestre de 2026 já cobre 7 regionais, 8 escolas e 33 turmas — uma expansão grande frente ao Piloto (2 escolas). Mesmo com esse salto operacional, a nota média dos concluintes segue alta (90%).</div>
+        <button class="dl-btn" onclick="baixarCard(this,'2_estrutura_institucional')">⬇ Baixar Imagem</button>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>3 · Meta de inscritos x realizado</h3>
+        <p class="sub">Meta base: 500 inscritos · Realizado: 1.096 (219,2% da meta)</p>
+        <div class="chart-wrap" style="height:140px;">
+          <canvas id="c3" role="img" aria-label="Barra horizontal mostrando 1096 inscritos frente a uma meta de 500, ou 219,2 por cento da meta">Meta: 500. Realizado: 1096 (219,2% da meta).</canvas>
+        </div>
+        <div class="legend">
+          <span><span class="dot" style="background:var(--navy);"></span>Até a meta (500)</span>
+          <span><span class="dot" style="background:var(--cyan);"></span>Acima da meta (+596)</span>
+        </div>
+        <div class="insight">Com a meta base recalibrada para 500 inscritos, o Primeiro Semestre de 2026 superou o objetivo em mais de 2x (219,2% da meta).</div>
+        <button class="dl-btn" onclick="baixarCard(this,'3_meta_inscritos')">⬇ Baixar Imagem</button>
+      </div>
+
+      <div class="card">
+        <h3>4 · Painel de taxas-chave</h3>
+        <p class="sub">Ativação (iniciou a trilha) · Conclusão (sobre inscritos) · Retenção (sobre quem iniciou)</p>
+        <div class="chart-wrap" style="height:260px;">
+          <canvas id="c4" role="img" aria-label="Colunas mostrando taxa de ativação 46 por cento, conclusão 15,3 por cento, retenção 33,3 por cento">Ativação: 46,0%. Conclusão: 15,3%. Retenção: 33,3%.</canvas>
+        </div>
+        <div class="insight">Quase 1 em cada 2 inscritos dá o primeiro passo na trilha e, de quem começa, 1 em cada 3 vai até o fim — um funil saudável nas duas pontas.</div>
+        <button class="dl-btn" onclick="baixarCard(this,'4_taxas_chave')">⬇ Baixar Imagem</button>
+      </div>
+    </div>
+
+    <div class="grid wide">
+      <div class="card">
+        <h3>5 · Duas visões de conclusão</h3>
+        <p class="sub">Conclusão geral = concluintes ÷ inscritos · Retenção = concluintes ÷ quem iniciou a trilha</p>
+        <div class="chart-wrap" style="height:260px;">
+          <canvas id="c5" role="img" aria-label="Colunas comparando taxa de conclusão geral de 15,3 por cento com taxa de retenção de 33,3 por cento">Conclusão geral: 15,3%. Retenção: 33,3%.</canvas>
+        </div>
+        <div class="insight">Olhar pela retenção (33,3%) revela o que a conclusão geral sozinha não mostra: entre quem de fato entrou na trilha, a permanência até o fim é bem mais forte do que os 15,3% sugerem à primeira vista.</div>
+        <button class="dl-btn" onclick="baixarCard(this,'5_visoes_conclusao')">⬇ Baixar Imagem</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESCOLAS E TURMAS -->
+  <section class="page" id="p3" role="tabpanel" aria-labelledby="tab-p3">
+    <div class="note" style="margin-top:16px;">Legenda das siglas: <strong>CED</strong> = Centro Educacional · <strong>CEM</strong> = Centro de Ensino Médio · <strong>CEMI</strong> = Centro de Ensino Médio Integrado.</div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>11 · Ranking das escolas por ativação</h3>
+        <p class="sub">Percentual de alunos que iniciaram a trilha, por escola</p>
+        <div class="chart-wrap" style="height:320px;">
+          <canvas id="c8" role="img" aria-label="Barras horizontais em ranking das 8 escolas por taxa de ativação, da maior para a menor">CED 104 Recanto das Emas 88,9%. CEMI Taguatinga 70,6%. CED 01 ITAPOÃ 64,4%. CED Jardins Mangueiral 49,1%. CED Incra 08 35,5%. CED Pompílio Marques de Souza 6,2%. Cemab 2,1%. CEM 03 Ceilândia 0%.</canvas>
+        </div>
+        <div class="note">Nomes das 8 escolas conferidos contra o roster real da Ludos Pro. Os <strong>percentuais de ativação por escola ainda não são rastreáveis</strong> — dependem do arquivo "Performance_Progressao" (log de atividade por aluno), ainda não fornecido.</div>
+        <div class="insight">CED 104 Recanto das Emas lidera com 88,9% de ativação, e as 4 primeiras escolas do ranking passam dos 49%.</div>
+        <button class="dl-btn" onclick="baixarCard(this,'11_ranking_ativacao')">⬇ Baixar Imagem</button>
+      </div>
+
+      <div class="card">
+        <h3>12 · Perfil das escolas (inscritos)</h3>
+        <p class="sub">Volume de alunos inscritos por escola</p>
+        <div class="chart-wrap" style="height:320px;">
+          <canvas id="c9" role="img" aria-label="Barras horizontais mostrando número de alunos inscritos por escola">CED 01 ITAPOÃ 270. CED 104 Recanto das Emas 189. CEM 03 Ceilândia 151. Cemab 144. CED Jardins Mangueiral 116. CEMI Taguatinga 102. CED Incra 08 76. CED Pompílio Marques de Souza 48.</canvas>
+        </div>
+        <div class="insight">Uma base ampla e bem distribuída entre as 8 escolas: CED 01 ITAPOÃ lidera com 270 inscritos, mas nenhuma escola fica isolada.</div>
+        <button class="dl-btn" onclick="baixarCard(this,'12_perfil_inscritos')">⬇ Baixar Imagem</button>
+      </div>
+    </div>
+
+    <div class="grid wide">
+      <div class="card">
+        <h3>13 · Engajamento por turma</h3>
+        <p class="sub">Taxa de ativação nas 33 turmas, agrupadas por faixa</p>
+        <div class="verified">✓ As 33 turmas e sua distribuição por escola conferem exatamente com o roster real da Ludos Pro.</div>
+        <div class="note">⚠ Os <strong>percentuais de ativação individuais</strong> ainda não são rastreáveis: dependem do arquivo "Performance_Progressao", ainda não fornecido.</div>
+        <div class="tiles-3">
+          <div class="tile" style="border-top:3px solid var(--cyan);"><div class="n" style="color:var(--cyan);">13</div><div class="l">ALTA ATIVAÇÃO (≥70%)</div></div>
+          <div class="tile" style="border-top:3px solid var(--orange);"><div class="n" style="color:var(--orange);">7</div><div class="l">MÉDIA (30–69%)</div></div>
+          <div class="tile" style="border-top:3px solid var(--magenta);"><div class="n" style="color:var(--magenta);">13</div><div class="l">BAIXA/NULA (&lt;30%)</div></div>
+        </div>
+        <div class="chart-wrap" id="turmaChartWrap">
+          <canvas id="c10" role="img" aria-label="Barras horizontais mostrando a taxa de ativação em cada uma das 33 turmas, ordenadas da maior para a menor">Turmas variam de 96,9% de ativação até 0% de ativação.</canvas>
+        </div>
+        <div class="legend">
+          <span><span class="dot" style="background:var(--cyan);"></span>Alta (≥70%)</span>
+          <span><span class="dot" style="background:var(--orange);"></span>Média (30–69%)</span>
+          <span><span class="dot" style="background:var(--magenta);"></span>Baixa/nula (&lt;30%)</span>
+        </div>
+        <div class="insight">As turmas líderes do CED 104 Recanto das Emas passam de 90% de ativação (dado preliminar, ver nota acima).</div>
+        <button class="dl-btn" onclick="baixarCard(this,'13_engajamento_turma')">⬇ Baixar Imagem</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISITAS E LIMITAÇÕES -->
+  <section class="page" id="p6" role="tabpanel" aria-labelledby="tab-p6">
+    <div class="kpis" style="margin-top:16px;">
+      <div class="kpi b1"><div class="label">ESCOLAS VISITADAS</div><div class="value">7</div></div>
+      <div class="kpi b4"><div class="label">COM LIMITAÇÕES <span style="font-size:10px;font-weight:500;color:var(--text-muted);">(71,4%)</span></div><div class="value">5</div></div>
+      <div class="kpi b5"><div class="label">ALTO ENGAJAMENTO <span style="font-size:10px;font-weight:500;color:var(--text-muted);">(28,6%)</span></div><div class="value">2</div></div>
+      <div class="kpi" style="border-top:3px solid #9CA3AF;"><div class="label">SEM VISITA REALIZADA</div><div class="value">1</div></div>
+    </div>
+
+    <div class="note">Saldo+ · <strong>Análise qualitativa das visitas escolares.</strong> Categorização das limitações operacionais, de gestão e de infraestrutura relatadas nas escolas, para entender por que parte dos alunos não engajou na trilha.</div>
+    <div class="note"><strong>CEMI Taguatinga não entra nas 7 visitas:</strong> a escola não se posicionou nem atendeu às solicitações de agendamento. Como não houve visita, não há limitação a registrar para essa unidade.</div>
+
+    <div class="grid wide">
+      <div class="card">
+        <h3>14 · Limitações citadas nas visitas às escolas</h3>
+        <p class="sub">Frequência absoluta (barras) e % sobre as 7 escolas visitadas</p>
+        <div class="chart-wrap" style="height:260px;">
+          <canvas id="cLimitacoes" role="img" aria-label="Barras horizontais mostrando a frequência de cada limitação citada nas visitas">Gestão/Professor descontínuo: 2 (28,6%). Infraestrutura/conectividade: 2 (28,6%). Rotina/calendário escolar: 2 (28,6%). Metodologia usada sem a plataforma: 1 (14,3%). Sem atribuição de nota: 1 (14,3%).</canvas>
+        </div>
+        <div class="insight">Três limitações aparecem com a mesma frequência entre as 7 escolas visitadas. Já o Incra 08 é um caso à parte: a metodologia já estava sendo aplicada em sala, só faltou usar a plataforma.</div>
+        <button class="dl-btn" onclick="baixarCard(this,'14_limitacoes_citadas')">⬇ Baixar Imagem</button>
+      </div>
+    </div>
+
+    <div class="grid two-cols">
+      <div class="card" style="border-top:3px solid var(--magenta);">
+        <h3 style="color:var(--magenta);">Professor(a) ou gestão descontínua (2)</h3>
+        <blockquote class="school-quote">CED Pompílio Marques<p>A professora responsável saiu da unidade; a coordenação não retornou os contatos.</p></blockquote>
+        <blockquote class="school-quote">Cemab<p>Um dos professores inscritos entrou em licença, impactando a execução.</p></blockquote>
+        <button class="dl-btn" onclick="baixarCard(this,'quote_gestao')">⬇ Baixar Imagem</button>
+      </div>
+      <div class="card" style="border-top:3px solid var(--cyan);">
+        <h3 style="color:var(--cyan);">Infraestrutura e conectividade (2)</h3>
+        <blockquote class="school-quote">CEM 03 Ceilândia<p>Falta de acesso à internet dificultou o avanço.</p></blockquote>
+        <blockquote class="school-quote">CED Jardins Mangueiral<p>A escola dispõe de apenas 20 computadores, exigindo divisão das turmas.</p></blockquote>
+        <button class="dl-btn" onclick="baixarCard(this,'quote_infra')">⬇ Baixar Imagem</button>
+      </div>
+      <div class="card" style="border-top:3px solid var(--navy);">
+        <h3 style="color:var(--navy);">Rotina e calendário escolar (2)</h3>
+        <blockquote class="school-quote">CED Jardins Mangueiral<p>Diversas quintas-feiras sem aula afetaram o ritmo da trilha.</p></blockquote>
+        <blockquote class="school-quote">Cemab<p>O planejamento do professor já estava definido antes da adesão.</p></blockquote>
+        <button class="dl-btn" onclick="baixarCard(this,'quote_rotina')">⬇ Baixar Imagem</button>
+      </div>
+      <div class="card" style="border-top:3px solid var(--orange);">
+        <h3 style="color:var(--orange);">Metodologia usada sem a plataforma (1)</h3>
+        <blockquote class="school-quote">Incra 08<p>Duas turmas já vinham recebendo a metodologia em sala, mas não constavam cadastradas na plataforma.</p></blockquote>
+        <button class="dl-btn" onclick="baixarCard(this,'quote_metodologia')">⬇ Baixar Imagem</button>
+      </div>
+      <div class="card" style="border-top:3px solid var(--gold);">
+        <h3 style="color:var(--gold);">Baixa prioridade curricular — sem nota (1)</h3>
+        <blockquote class="school-quote">CED Jardins Mangueiral<p>Unidade curricular sem atribuição de nota reduz o interesse dos estudantes.</p></blockquote>
+        <button class="dl-btn" onclick="baixarCard(this,'quote_sem_nota')">⬇ Baixar Imagem</button>
+      </div>
+    </div>
+
+    <div class="grid wide">
+      <div class="card">
+        <h3>Matriz de codificação (Escola → Limitação)</h3>
+        <p class="sub">Quais limitações foram identificadas em cada unidade escolar nas visitas qualitativas</p>
+        <table class="matriz">
+          <thead><tr><th scope="col">Escola</th><th scope="col">Limitação(ões) identificada(s)</th></tr></thead>
+          <tbody>
+            <tr><td class="escola">CED Pompílio Marques</td><td><span class="tag" style="background:var(--magenta);">Gestão/Professor descontínuo</span></td></tr>
+            <tr><td class="escola">Cemab</td><td><span class="tag" style="background:var(--magenta);">Gestão/Professor descontínuo</span><span class="tag" style="background:var(--navy);">Rotina/calendário escolar</span></td></tr>
+            <tr><td class="escola">CEM 03 Ceilândia</td><td><span class="tag" style="background:var(--cyan);">Infraestrutura/conectividade</span></td></tr>
+            <tr><td class="escola">CED Jardins Mangueiral</td><td><span class="tag" style="background:var(--cyan);">Infraestrutura/conectividade</span><span class="tag" style="background:var(--navy);">Rotina/calendário escolar</span><span class="tag" style="background:var(--gold);">Sem atribuição de nota</span></td></tr>
+            <tr><td class="escola">Incra 08</td><td><span class="tag" style="background:var(--orange);">Metodologia usada sem a plataforma</span></td></tr>
+            <tr><td class="escola">CED 01 Itapoã</td><td><span class="tag" style="background:var(--green);">Sem limitação identificada</span></td></tr>
+            <tr><td class="escola">CED 104 Recanto das Emas</td><td><span class="tag" style="background:var(--green);">Sem limitação identificada</span></td></tr>
+            <tr><td class="escola">CEMI Taguatinga</td><td><span class="tag" style="background:#9CA3AF;">Sem visita — sem retorno</span></td></tr>
+          </tbody>
+        </table>
+        <button class="dl-btn" onclick="baixarCard(this,'matriz_codificacao')">⬇ Baixar Imagem</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACTO SOCIAL -->
+  <section class="page" id="p5" role="tabpanel" aria-labelledby="tab-p5">
+    <div class="kpis" style="margin-top:16px;">
+      <div class="kpi b1"><div class="label">ALUNOS INSCRITOS</div><div class="value">1.096</div></div>
+      <div class="kpi b2"><div class="label">TAXA DE ATIVAÇÃO</div><div class="value">46,0%</div></div>
+      <div class="kpi b3"><div class="label">ITF GERAL (T0 → T1)</div><div class="value">3,71 → 4,10</div></div>
+      <div class="kpi b4"><div class="label">PASSARAM A PLANEJAR GASTOS</div><div class="value">94,1%</div></div>
+    </div>
+
+    <div class="note">Glossário: <strong>ITF</strong> = Índice de Transformação Financeira (média das notas de conhecimento, comportamento e planejamento, escala 1 a 5). <strong>T0</strong> = antes do programa · <strong>T1</strong> = depois do programa.</div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>15 · Funil de engajamento</h3>
+        <p class="sub">Inscritos → iniciaram a trilha → concluintes</p>
+        <div class="chart-wrap" style="height:260px;">
+          <canvas id="cFunil" role="img" aria-label="Colunas mostrando 1096 inscritos, 504 iniciaram e 168 concluintes">Inscritos: 1096. Iniciaram: 504. Concluintes: 168.</canvas>
+        </div>
+        <div class="insight">O funil fecha dentro da faixa saudável de mercado para MOOCs abertos (5%–15% de conclusão é o benchmark do setor): com 15,3%, o Saldo+ está no topo dessa referência.</div>
+        <button class="dl-btn" onclick="baixarCard(this,'15_funil_engajamento')">⬇ Baixar Imagem</button>
+      </div>
+
+      <div class="card">
+        <h3>16 · ITF por dimensão — T0 x T1</h3>
+        <p class="sub">Conhecimento, comportamento e planejamento (escala 1–5, grupo n=142/17)</p>
+        <div class="chart-wrap" style="height:260px;">
+          <canvas id="cRadar" role="img" aria-label="Gráfico radar comparando conhecimento, comportamento e planejamento financeiro antes e depois do programa">Conhecimento: 3,88 para 4,29. Comportamento: 3,67 para 3,97. Planejamento: 3,57 para 4,03.</canvas>
+        </div>
+        <div class="legend">
+          <span><span class="dot" style="background:var(--navy);"></span>T0</span>
+          <span><span class="dot" style="background:var(--orange);"></span>T1</span>
+        </div>
+        <div class="insight">As três dimensões do ITF avançam de T0 para T1, com Planejamento puxando o crescimento (3,57→4,03).</div>
+        <button class="dl-btn" onclick="baixarCard(this,'16_itf_radar')">⬇ Baixar Imagem</button>
+      </div>
+    </div>
+
+    <div class="grid wide">
+      <div class="card">
+        <h3>17 · ITF por dimensão — versão em barras (leitura exata)</h3>
+        <p class="sub">Mesmo dado do radar acima, em formato mais preciso para leitura de valor</p>
+        <div class="chart-wrap" style="height:240px;">
+          <canvas id="cRadarBar" role="img" aria-label="Barras agrupadas comparando conhecimento, comportamento e planejamento financeiro entre T0 e T1">Conhecimento: 3,88 para 4,29. Comportamento: 3,67 para 3,97. Planejamento: 3,57 para 4,03.</canvas>
+        </div>
+        <div class="legend">
+          <span><span class="dot" style="background:var(--navy);"></span>T0</span>
+          <span><span class="dot" style="background:var(--orange);"></span>T1</span>
+        </div>
+        <div class="insight">Em números exatos, Conhecimento chega a 4,29 — a maior nota entre as três dimensões.</div>
+        <button class="dl-btn" onclick="baixarCard(this,'17_itf_barras')">⬇ Baixar Imagem</button>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>18 · Mudança de comportamento (concluintes, T1)</h3>
+        <p class="sub">% que passou a adotar cada hábito após o programa (n=17)</p>
+        <div class="chart-wrap" style="height:280px;">
+          <canvas id="cComport" role="img" aria-label="Barras horizontais mostrando percentuais de mudança comportamental">Registrar gastos: 100%. Reduzir compras por impulso: 100%. Planejar gastos: 94,1%. Compartilhar conhecimento: 70,6%. Poupar dinheiro: 64,7%. Discutir com a família: 58,8%.</canvas>
+        </div>
+        <div class="insight">100% dos concluintes passaram a registrar gastos e a reduzir compras por impulso.</div>
+        <button class="dl-btn" onclick="baixarCard(this,'18_mudanca_comportamento')">⬇ Baixar Imagem</button>
+      </div>
+
+      <div class="card">
+        <h3>19 · Intenção de uso do Pé-de-Meia</h3>
+        <p class="sub">Entre quem conhece o programa (n=128)</p>
+        <div class="chart-wrap" style="height:280px;">
+          <canvas id="cPeDeMeia" role="img" aria-label="Barras horizontais mostrando a intenção de uso do benefício Pé-de-Meia">Guardar o dinheiro: 39,1%. Ainda não sei: 30,5%. Gastar no dia a dia: 12,5%. Ajudar a família: 9,4%. Investir em estudos: 8,6%.</canvas>
+        </div>
+        <div class="insight">39,1% já pretendem guardar o benefício, e 90,1% já conhecem o Pé-de-Meia.</div>
+        <button class="dl-btn" onclick="baixarCard(this,'19_pe_de_meia')">⬇ Baixar Imagem</button>
+      </div>
+    </div>
+
+    <div class="grid wide">
+      <div class="card">
+        <span class="badge">Cruzamento sugerido</span>
+        <h3>20 · Intenção do Pé-de-Meia × Taxa de conclusão da trilha</h3>
+        <p class="sub">Querer guardar o benefício não prediz engajamento com o curso — é o oposto</p>
+        <div class="chart-wrap" style="height:260px;">
+          <canvas id="cCruzamento" role="img" aria-label="Barras mostrando taxa de conclusão da trilha por grupo de intenção de uso do Pé-de-Meia">Guardar o dinheiro: 2,0% concluem a trilha. Ainda não sei: 15,4%. Investir em estudos: 18,2%.</canvas>
+        </div>
+        <div class="note">Atenção: subgrupos pequenos (1–2 concluintes em cada) — ler como indício a explorar.</div>
+        <div class="insight">O grupo que mais precisa do curso — quem ainda não guarda dinheiro — é justamente quem mais conclui a trilha.</div>
+        <button class="dl-btn" onclick="baixarCard(this,'20_cruzamento_pe_de_meia')">⬇ Baixar Imagem</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVANÇADO -->
+  <section class="page" id="p4" role="tabpanel" aria-labelledby="tab-p4">
+    <div class="grid wide" style="margin-top:16px;">
+      <div class="card">
+        <h3>21 · Funil de volume e conversão</h3>
+        <div class="chart-wrap" style="height:330px;">
+          <svg viewBox="0 0 760 330" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;" role="img" aria-label="Diagrama de funil mostrando 1096 inscritos, 504 engajados (46%) e 168 concluintes (15,3%)">
+            <rect x="40" y="24" width="520" height="64" style="fill:var(--navy);"/>
+            <polygon points="40,88 560,88 420,132 180,132" style="fill:var(--cyan);"/>
+            <rect x="180" y="132" width="240" height="64" style="fill:var(--cyan);"/>
+            <polygon points="180,196 420,196 340,240 260,240" style="fill:var(--orange);"/>
+            <rect x="260" y="240" width="80" height="64" style="fill:var(--orange);"/>
+            <text x="580" y="50" style="font:600 14px 'Poppins',sans-serif; fill:var(--navy);">Inscritos</text>
+            <text x="580" y="73" style="font:700 20px 'Poppins',sans-serif; fill:var(--navy);">1.096</text>
+            <text x="645" y="73" style="font:500 12px 'Poppins',sans-serif; fill:#6B7280;">(100%)</text>
+            <text x="580" y="115" style="font:600 12px 'Poppins',sans-serif; fill:#6B7280;">↓ 46,0%</text>
+            <text x="580" y="158" style="font:600 14px 'Poppins',sans-serif; fill:var(--navy);">Engajados</text>
+            <text x="580" y="181" style="font:700 20px 'Poppins',sans-serif; fill:var(--navy);">504</text>
+            <text x="625" y="181" style="font:500 12px 'Poppins',sans-serif; fill:#6B7280;">(46,0%)</text>
+            <text x="580" y="223" style="font:600 12px 'Poppins',sans-serif; fill:#6B7280;">↓ 33,3%</text>
+            <text x="580" y="266" style="font:600 14px 'Poppins',sans-serif; fill:var(--navy);">Concluintes</text>
+            <text x="580" y="289" style="font:700 20px 'Poppins',sans-serif; fill:var(--navy);">168</text>
+            <text x="625" y="289" style="font:500 12px 'Poppins',sans-serif; fill:#6B7280;">(15,3%)</text>
+          </svg>
+        </div>
+        <button class="dl-btn" onclick="baixarCard(this,'21_funil_svg')">⬇ Baixar Imagem</button>
+      </div>
+
+      <div class="card">
+        <h3>22 · Volume x taxa de conversão (eixo duplo)</h3>
+        <p class="sub">Nº de alunos (eixo esquerdo) e % do total de inscritos (eixo direito), por etapa</p>
+        <div class="chart-wrap" style="height:320px;">
+          <canvas id="c7" role="img" aria-label="Gráfico de barras com eixo duplo comparando número de alunos e percentual do total, por etapa do funil">Inscritos: 1096 alunos (100%). Engajados: 504 alunos (46%). Concluintes: 168 alunos (15,3%).</canvas>
+        </div>
+        <div class="legend">
+          <span><span class="dot" style="background:var(--navy);"></span>Nº de alunos (eixo esquerdo)</span>
+          <span><span class="dot" style="background:var(--orange);"></span>% do total (eixo direito)</span>
+        </div>
+        <div class="insight">Em uma única leitura: volume e percentual caminham juntos em cada etapa.</div>
+        <button class="dl-btn" onclick="baixarCard(this,'22_volume_taxa_conversao')">⬇ Baixar Imagem</button>
+      </div>
+
+      <div class="card">
+        <h3>23 · Mapa de calor de engajamento por escola</h3>
+        <div id="mapaCalor" style="width:100%;height:420px;border-radius:8px;overflow:hidden;background:#f5f5f5;"></div>
+        <button class="dl-btn" onclick="baixarCard(this,'23_mapa_calor')">⬇ Baixar Imagem</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ==================== ABA 2 · COMPARATIVO: PILOTO VS. ATUAL ==================== -->
+<div class="primary-page" id="primary-comparativo" role="tabpanel" aria-labelledby="ptab-comparativo">
+
+  <div class="note" style="margin-top:16px;">Esta aba reúne exclusivamente os indicadores que comparam o Piloto com o Primeiro Semestre de 2026 — nenhum dado aqui é exclusivo de um único período.</div>
+
+  <div class="hero-metrics" style="max-width:420px;">
+    <div class="hero-card accent-orange">
+      <div class="hero-top"><span class="hero-icon">📈</span><span class="hero-eyebrow">Métrica prioritária</span></div>
+      <div class="hero-label">Variação %</div>
+      <div class="hero-value t-orange">+76,0%</div>
+      <div class="hero-sub">crescimento da taxa de conclusão · Piloto → Primeiro Semestre de 2026</div>
+    </div>
   </div>
 
   <div class="grid">
-    <div class="card">
-      <h3>1 · Volume de alunos por etapa</h3>
-      <p class="sub">Inscritos, engajados e concluintes — Primeiro Semestre de 2026</p>
-      <div class="chart-wrap" style="height:260px;">
-        <canvas id="c1" role="img" aria-label="Colunas mostrando 1096 inscritos, 504 engajados e 168 concluintes">Inscritos: 1096. Engajados: 504. Concluintes: 168.</canvas>
-      </div>
-      <div class="insight">O Primeiro Semestre de 2026 já reúne mais de 3x o volume do Piloto (333 inscritos) — e mantém 504 alunos engajados e 168 concluintes, prova de que a estrutura aguenta crescer.</div>
-      <button class="dl-btn" onclick="baixarCard(this,'1_volume_alunos')">⬇ Baixar Imagem</button>
-    </div>
-
-    <div class="card">
-      <h3>2 · Estrutura institucional</h3>
-      <p class="sub">Regionais de ensino, escolas, turmas, alunos engajados, nota média e tempo médio de conclusão</p>
-      <div class="tiles-6">
-        <div class="tile"><div class="n" style="color:var(--navy);">7</div><div class="l">REGIONAIS DE ENSINO</div></div>
-        <div class="tile"><div class="n" style="color:var(--cyan);">8</div><div class="l">ESCOLAS</div></div>
-        <div class="tile"><div class="n" style="color:var(--orange);">33</div><div class="l">TURMAS</div></div>
-        <div class="tile"><div class="n" style="color:var(--magenta);">504</div><div class="l">ALUNOS ENGAJADOS</div></div>
-        <div class="tile"><div class="n" style="color:#8DC63F;">90%</div><div class="l">NOTA MÉDIA GERAL</div></div>
-        <div class="tile"><div class="n" style="color:var(--navy-light);">40,34</div><div class="l">DIAS · TEMPO MÉDIO DE CONCLUSÃO</div></div>
-      </div>
-      <div class="insight">O Primeiro Semestre de 2026 já cobre 7 regionais, 8 escolas e 33 turmas — uma expansão grande frente ao Piloto (2 escolas). Mesmo com esse salto operacional, a nota média dos concluintes segue alta (90%), sinal de que ampliar o alcance não reduziu a qualidade do aprendizado.</div>
-      <button class="dl-btn" onclick="baixarCard(this,'2_estrutura_institucional')">⬇ Baixar Imagem</button>
-    </div>
-  </div>
-
-  <div class="grid wide">
-    <div class="card">
-      <h3>3 · Meta de inscritos x realizado</h3>
-      <p class="sub">Meta base: 500 inscritos · Realizado: 1.096 (219,2% da meta) — Primeiro Semestre de 2026</p>
-      <div class="chart-wrap" style="height:140px;">
-        <canvas id="c3" role="img" aria-label="Barra horizontal mostrando 1096 inscritos frente a uma meta de 500, ou 219,2 por cento da meta">Meta: 500. Realizado: 1096 (219,2% da meta).</canvas>
-      </div>
-      <div class="legend">
-        <span><span class="dot" style="background:var(--navy);"></span>Até a meta (500)</span>
-        <span><span class="dot" style="background:var(--cyan);"></span>Acima da meta (+596)</span>
-      </div>
-      <div class="insight">Com a meta base recalibrada para 500 inscritos, o Primeiro Semestre de 2026 não só bateu como superou o objetivo em mais de 2x (219,2% da meta) — o melhor volume absoluto das duas fases do programa.</div>
-      <button class="dl-btn" onclick="baixarCard(this,'3_meta_inscritos')">⬇ Baixar Imagem</button>
-    </div>
-  </div>
-</section>
-
-<!-- PÁGINA 2 · TAXAS E COMPARATIVOS -->
-<section class="page" id="p2" role="tabpanel" aria-labelledby="tab-p2">
-  <div class="grid">
-    <div class="card">
-      <h3>4 · Painel de taxas-chave</h3>
-      <p class="sub">Ativação (iniciou a trilha) · Conclusão (sobre o total de inscritos) · Retenção (sobre quem iniciou) — Primeiro Semestre de 2026</p>
-      <div class="chart-wrap" style="height:260px;">
-        <canvas id="c4" role="img" aria-label="Colunas mostrando taxa de ativação 46 por cento, conclusão 15,3 por cento, retenção 33,3 por cento">Ativação: 46,0%. Conclusão: 15,3%. Retenção: 33,3%.</canvas>
-      </div>
-      <div class="insight">Quase 1 em cada 2 inscritos dá o primeiro passo na trilha (46% de ativação) e, de quem começa, 1 em cada 3 vai até o fim (33,3% de retenção) — um funil saudável nas duas pontas.</div>
-      <button class="dl-btn" onclick="baixarCard(this,'4_taxas_chave')">⬇ Baixar Imagem</button>
-    </div>
-
-    <div class="card">
-      <h3>5 · Duas visões de conclusão</h3>
-      <p class="sub">Conclusão geral = concluintes ÷ inscritos · Retenção = concluintes ÷ quem iniciou a trilha</p>
-      <div class="chart-wrap" style="height:260px;">
-        <canvas id="c5" role="img" aria-label="Colunas comparando taxa de conclusão geral de 15,3 por cento com taxa de retenção de 33,3 por cento">Conclusão geral: 15,3%. Retenção: 33,3%.</canvas>
-      </div>
-      <div class="insight">Olhar pela retenção (33,3%) revela o que a conclusão geral sozinha não mostra: entre quem de fato entrou na trilha, a permanência até o fim é bem mais forte do que os 15,3% sugerem à primeira vista.</div>
-      <button class="dl-btn" onclick="baixarCard(this,'5_visoes_conclusao')">⬇ Baixar Imagem</button>
-    </div>
-
     <div class="card">
       <h3>6 · Comparativo Piloto x Primeiro Semestre de 2026</h3>
       <p class="sub">Ativação, conclusão e retenção lado a lado</p>
@@ -240,7 +547,7 @@
         <span><span class="dot" style="background:var(--navy);"></span>Piloto</span>
         <span><span class="dot" style="background:var(--orange);"></span>Primeiro Semestre de 2026</span>
       </div>
-      <div class="insight">As três taxas melhoraram do Piloto para o Primeiro Semestre de 2026 — com destaque para ativação (+74% relativo) e conclusão, que quase dobrou, mesmo com a base de inscritos crescendo cerca de 3x.</div>
+      <div class="insight">As três taxas melhoraram do Piloto para o Primeiro Semestre de 2026 — com destaque para ativação (+74% relativo) e conclusão, que quase dobrou.</div>
       <button class="dl-btn" onclick="baixarCard(this,'6_comparativo_piloto')">⬇ Baixar Imagem</button>
     </div>
 
@@ -250,7 +557,7 @@
       <div class="chart-wrap" style="height:280px;">
         <canvas id="c11" role="img" aria-label="Colunas mostrando 88 alunos engajados no Piloto e 504 no Primeiro Semestre de 2026">Piloto: 88 engajados. Primeiro Semestre de 2026: 504 engajados.</canvas>
       </div>
-      <div class="insight">De 88 para 504 alunos engajados — quase 6x mais jovens dando o primeiro passo na trilha, sinal de que a expansão para 8 escolas converteu em engajamento real, não só em matrículas.</div>
+      <div class="insight">De 88 para 504 alunos engajados — quase 6x mais jovens dando o primeiro passo na trilha.</div>
       <button class="dl-btn" onclick="baixarCard(this,'7_engajamento_semestres')">⬇ Baixar Imagem</button>
     </div>
 
@@ -260,27 +567,27 @@
       <div class="chart-wrap" style="height:260px;">
         <canvas id="c12" role="img" aria-label="Colunas comparando o percentual da meta de inscritos atingida no Piloto, 333 por cento, e no Primeiro Semestre de 2026, 219,2 por cento">Piloto: 333,0% da meta atingida. Primeiro Semestre de 2026: 219,2% da meta atingida.</canvas>
       </div>
-      <div class="insight">Com metas recalibradas, as duas fases superaram largamente seus objetivos. O Piloto superou a própria meta (100) em mais de 3x — um patamar proporcional acima do Primeiro Semestre de 2026 (219% da meta de 500), reflexo de uma meta inicial mais conservadora, não de queda de desempenho.</div>
+      <div class="insight">Com metas recalibradas, as duas fases superaram largamente seus objetivos. O Piloto superou a própria meta (100) em mais de 3x — proporcionalmente acima do Primeiro Semestre de 2026 (219% da meta de 500), reflexo de uma meta inicial mais conservadora.</div>
       <button class="dl-btn" onclick="baixarCard(this,'8_atingimento_meta')">⬇ Baixar Imagem</button>
     </div>
+  </div>
 
+  <div class="grid wide">
     <div class="card">
       <h3>9 · Quanto o Primeiro Semestre de 2026 evoluiu (variação relativa)</h3>
       <p class="sub">Crescimento percentual do Primeiro Semestre de 2026 sobre o Piloto, em cada indicador</p>
       <div class="chart-wrap" style="height:260px;">
         <canvas id="c13" role="img" aria-label="Colunas mostrando a variação relativa: atingimento da meta de inscritos menos 34,2 por cento, taxa de ativação mais 74 por cento, taxa de conclusão mais 76 por cento">Atingimento da meta de inscritos: -34,2%. Taxa de ativação: +74,0%. Taxa de conclusão geral: +76,0%.</canvas>
       </div>
-      <div class="insight">Ativação (+74%) e conclusão (+76%) seguem crescendo com força. Já o indicador de "meta batida" caiu em termos relativos (-34,2%) — não porque o desempenho piorou, mas porque a meta do Piloto (100) ficou proporcionalmente mais baixa que a do Primeiro Semestre de 2026 (500).</div>
+      <div class="insight">Ativação (+74%) e conclusão (+76%) seguem crescendo com força. Já o indicador de "meta batida" caiu em termos relativos (-34,2%) — reflexo da meta do Piloto (100) ter ficado proporcionalmente mais baixa que a do Primeiro Semestre de 2026 (500), não de queda de desempenho.</div>
       <button class="dl-btn" onclick="baixarCard(this,'9_evolucao_relativa')">⬇ Baixar Imagem</button>
     </div>
-  </div>
 
-  <div class="grid wide">
     <div class="card">
       <h3>10 · Crescimento absoluto: Piloto → Primeiro Semestre de 2026</h3>
       <p class="sub">Cada barra vai do valor no Piloto até o valor no Primeiro Semestre de 2026 · número no centro é a variação percentual</p>
       <div class="chart-wrap" style="height:220px;">
-        <canvas id="c14" role="img" aria-label="Barras flutuantes mostrando o crescimento de cada indicador do Piloto para o Primeiro Semestre de 2026: inscritos de 333 para 1096, engajamento de 88 para 504, concluintes de 29 para 168">Inscritos: 333 para 1.096 (+229%). Engajamento: 88 para 504 (+473%). Concluintes: 29 para 168 (+479%).</canvas>
+        <canvas id="c14" role="img" aria-label="Barras flutuantes mostrando o crescimento de cada indicador do Piloto para o Primeiro Semestre de 2026">Inscritos: 333 para 1.096 (+229%). Engajamento: 88 para 504 (+473%). Concluintes: 29 para 168 (+479%).</canvas>
       </div>
       <div class="legend">
         <span><span class="dot" style="background:var(--navy);"></span>Valor no Piloto</span>
@@ -290,286 +597,13 @@
       <button class="dl-btn" onclick="baixarCard(this,'10_crescimento_absoluto')">⬇ Baixar Imagem</button>
     </div>
   </div>
-</section>
-
-<!-- PÁGINA 3 · ESCOLAS E TURMAS -->
-<section class="page" id="p3" role="tabpanel" aria-labelledby="tab-p3">
-  <div class="note">Legenda das siglas: <strong>CED</strong> = Centro Educacional · <strong>CEM</strong> = Centro de Ensino Médio · <strong>CEMI</strong> = Centro de Ensino Médio Integrado.</div>
-
-  <div class="grid">
-    <div class="card">
-      <h3>11 · Ranking das escolas por ativação</h3>
-      <p class="sub">Percentual de alunos que iniciaram a trilha, por escola</p>
-      <div class="chart-wrap" style="height:320px;">
-        <canvas id="c8" role="img" aria-label="Barras horizontais em ranking das 8 escolas por taxa de ativação, da maior para a menor">CED 104 Recanto das Emas 88,9%. CEMI Taguatinga 70,6%. CED 01 ITAPOÃ 64,4%. CED Jardins Mangueiral 49,1%. CED Incra 08 35,5%. CED Pompílio Marques de Souza 6,2%. Cemab 2,1%. CEM 03 Ceilândia 0%.</canvas>
-      </div>
-      <div class="note">Nomes das 8 escolas conferidos contra o roster real da Ludos Pro. Os <strong>percentuais de ativação por escola ainda não são rastreáveis</strong> — dependem do arquivo "Performance_Progressao" (log de atividade por aluno), ainda não fornecido.</div>
-      <div class="insight">CED 104 Recanto das Emas lidera com 88,9% de ativação, e as 4 primeiras escolas do ranking passam dos 49% — evidência de que o modelo funciona muito bem onde a mobilização escolar acontece com força.</div>
-      <button class="dl-btn" onclick="baixarCard(this,'11_ranking_ativacao')">⬇ Baixar Imagem</button>
-    </div>
-
-    <div class="card">
-      <h3>12 · Perfil das escolas (inscritos)</h3>
-      <p class="sub">Volume de alunos inscritos por escola</p>
-      <div class="chart-wrap" style="height:320px;">
-        <canvas id="c9" role="img" aria-label="Barras horizontais mostrando número de alunos inscritos por escola">CED 01 ITAPOÃ 270. CED 104 Recanto das Emas 189. CEM 03 Ceilândia 151. Cemab 144. CED Jardins Mangueiral 116. CEMI Taguatinga 102. CED Incra 08 76. CED Pompílio Marques de Souza 48.</canvas>
-      </div>
-      <div class="insight">Uma base ampla e bem distribuída entre as 8 escolas: CED 01 ITAPOÃ lidera com 270 inscritos, mas nenhuma escola fica isolada — todas contribuem para o total de 1.096 alunos.</div>
-      <button class="dl-btn" onclick="baixarCard(this,'12_perfil_inscritos')">⬇ Baixar Imagem</button>
-    </div>
-  </div>
-
-  <div class="grid wide">
-    <div class="card">
-      <h3>13 · Engajamento por turma</h3>
-      <p class="sub">Taxa de ativação nas 33 turmas do Primeiro Semestre de 2026, agrupadas por faixa</p>
-      <div class="verified">✓ As 33 turmas e sua distribuição por escola conferem exatamente com o roster real da Ludos Pro — inclusive as letras de cada turma.</div>
-      <div class="note">⚠ Os <strong>percentuais de ativação individuais</strong> ainda não são rastreáveis: dependem do arquivo "Performance_Progressao", ainda não fornecido.</div>
-      <div class="tiles-3">
-        <div class="tile" style="border-top:3px solid var(--cyan);"><div class="n" style="color:var(--cyan);">13</div><div class="l">ALTA ATIVAÇÃO (≥70%)</div></div>
-        <div class="tile" style="border-top:3px solid var(--orange);"><div class="n" style="color:var(--orange);">7</div><div class="l">MÉDIA (30–69%)</div></div>
-        <div class="tile" style="border-top:3px solid var(--magenta);"><div class="n" style="color:var(--magenta);">13</div><div class="l">BAIXA/NULA (&lt;30%)</div></div>
-      </div>
-      <div class="chart-wrap" id="turmaChartWrap">
-        <canvas id="c10" role="img" aria-label="Barras horizontais mostrando a taxa de ativação em cada uma das 33 turmas, ordenadas da maior para a menor">Turmas variam de 96,9% de ativação até 0% de ativação, evidenciando forte disparidade entre turmas.</canvas>
-      </div>
-      <div class="legend">
-        <span><span class="dot" style="background:var(--cyan);"></span>Alta (≥70%)</span>
-        <span><span class="dot" style="background:var(--orange);"></span>Média (30–69%)</span>
-        <span><span class="dot" style="background:var(--magenta);"></span>Baixa/nula (&lt;30%)</span>
-      </div>
-      <div class="insight">As turmas líderes do CED 104 Recanto das Emas passam de 90% de ativação (dado preliminar, ver nota acima) — um teto de desempenho que mostra o potencial máximo do programa quando a turma "compra a ideia" desde o início.</div>
-      <button class="dl-btn" onclick="baixarCard(this,'13_engajamento_turma')">⬇ Baixar Imagem</button>
-    </div>
-  </div>
-</section>
-
-<!-- PÁGINA 4 · VISITAS E LIMITAÇÕES -->
-<section class="page" id="p6" role="tabpanel" aria-labelledby="tab-p6">
-  <div class="kpis">
-    <div class="kpi b1"><div class="label">ESCOLAS VISITADAS</div><div class="value">7</div></div>
-    <div class="kpi b4"><div class="label">COM LIMITAÇÕES <span style="font-size:10px;font-weight:500;color:var(--text-muted);">(71,4%)</span></div><div class="value">5</div></div>
-    <div class="kpi b5"><div class="label">ALTO ENGAJAMENTO <span style="font-size:10px;font-weight:500;color:var(--text-muted);">(28,6%)</span></div><div class="value">2</div></div>
-    <div class="kpi" style="border-top:3px solid #9CA3AF;"><div class="label">SEM VISITA REALIZADA</div><div class="value">1</div></div>
-  </div>
-
-  <div class="note">Saldo+ · <strong>Análise qualitativa das visitas escolares.</strong> Categorização das limitações operacionais, de gestão e de infraestrutura relatadas nas escolas, para entender por que parte dos alunos não engajou na trilha.</div>
-  <div class="note"><strong>CEMI Taguatinga não entra nas 7 visitas:</strong> a escola não se posicionou nem atendeu às solicitações de agendamento — sem notícias até o momento. Como não houve visita, não há limitação a registrar para essa unidade.</div>
-
-  <div class="grid wide">
-    <div class="card">
-      <h3>14 · Limitações citadas nas visitas às escolas</h3>
-      <p class="sub">Frequência absoluta (barras) e % sobre as 7 escolas visitadas</p>
-      <div class="chart-wrap" style="height:260px;">
-        <canvas id="cLimitacoes" role="img" aria-label="Barras horizontais mostrando a frequência de cada limitação citada nas visitas: gestão ou professor descontínuo, infraestrutura, rotina escolar, metodologia sem plataforma, sem atribuição de nota">Gestão/Professor descontínuo: 2 (28,6%). Infraestrutura/conectividade: 2 (28,6%). Rotina/calendário escolar: 2 (28,6%). Metodologia usada sem a plataforma: 1 (14,3%). Sem atribuição de nota: 1 (14,3%).</canvas>
-      </div>
-      <div class="insight">Três limitações aparecem com a mesma frequência entre as 7 escolas visitadas — descontinuidade de professor(a)/gestão, infraestrutura e rotina escolar, cada uma citada em 2 escolas. Já o Incra 08 é um caso à parte: a metodologia já estava sendo aplicada em sala, só faltou usar a plataforma — um ajuste operacional, não uma limitação pedagógica.</div>
-      <button class="dl-btn" onclick="baixarCard(this,'14_limitacoes_citadas')">⬇ Baixar Imagem</button>
-    </div>
-  </div>
-
-  <div class="grid two-cols">
-    <div class="card" style="border-top:3px solid var(--magenta);">
-      <h3 style="color:var(--magenta);">Professor(a) ou gestão descontínua (2)</h3>
-      <blockquote class="school-quote">CED Pompílio Marques<p>A professora responsável saiu da unidade; a coordenação não retornou os contatos e o substituto orientou a não continuar.</p></blockquote>
-      <blockquote class="school-quote">Cemab<p>Um dos professores inscritos entrou em licença, impactando a execução.</p></blockquote>
-      <button class="dl-btn" onclick="baixarCard(this,'quote_gestao')">⬇ Baixar Imagem</button>
-    </div>
-
-    <div class="card" style="border-top:3px solid var(--cyan);">
-      <h3 style="color:var(--cyan);">Infraestrutura e conectividade (2)</h3>
-      <blockquote class="school-quote">CEM 03 Ceilândia<p>Falta de acesso à internet dificultou o avanço, apesar de um 1º acesso feito.</p></blockquote>
-      <blockquote class="school-quote">CED Jardins Mangueiral<p>A escola dispõe de apenas 20 computadores, exigindo divisão das turmas.</p></blockquote>
-      <button class="dl-btn" onclick="baixarCard(this,'quote_infra')">⬇ Baixar Imagem</button>
-    </div>
-
-    <div class="card" style="border-top:3px solid var(--navy);">
-      <h3 style="color:var(--navy);">Rotina e calendário escolar (2)</h3>
-      <blockquote class="school-quote">CED Jardins Mangueiral<p>Diversas quintas-feiras sem aula afetaram o ritmo da trilha.</p></blockquote>
-      <blockquote class="school-quote">Cemab<p>O planejamento do professor já estava definido antes da adesão, impedindo a aplicação em sala.</p></blockquote>
-      <button class="dl-btn" onclick="baixarCard(this,'quote_rotina')">⬇ Baixar Imagem</button>
-    </div>
-
-    <div class="card" style="border-top:3px solid var(--orange);">
-      <h3 style="color:var(--orange);">Metodologia usada sem a plataforma (1)</h3>
-      <blockquote class="school-quote">Incra 08<p>Duas turmas já vinham recebendo a aplicação da metodologia em sala, mas ainda não constavam cadastradas na plataforma.</p></blockquote>
-      <button class="dl-btn" onclick="baixarCard(this,'quote_metodologia')">⬇ Baixar Imagem</button>
-    </div>
-
-    <div class="card" style="border-top:3px solid var(--gold);">
-      <h3 style="color:var(--gold);">Baixa prioridade curricular — sem nota (1)</h3>
-      <blockquote class="school-quote">CED Jardins Mangueiral<p>Unidade curricular sem atribuição de nota reduz o interesse dos estudantes em priorizar a trilha.</p></blockquote>
-      <button class="dl-btn" onclick="baixarCard(this,'quote_sem_nota')">⬇ Baixar Imagem</button>
-    </div>
-  </div>
-
-  <div class="grid wide">
-    <div class="card">
-      <h3>Matriz de codificação (Escola → Limitação)</h3>
-      <p class="sub">Quais limitações foram identificadas em cada unidade escolar nas visitas qualitativas</p>
-      <table class="matriz">
-        <thead><tr><th scope="col">Escola</th><th scope="col">Limitação(ões) identificada(s)</th></tr></thead>
-        <tbody>
-          <tr><td class="escola">CED Pompílio Marques</td><td><span class="tag" style="background:var(--magenta);">Gestão/Professor descontínuo</span></td></tr>
-          <tr><td class="escola">Cemab</td><td><span class="tag" style="background:var(--magenta);">Gestão/Professor descontínuo</span><span class="tag" style="background:var(--navy);">Rotina/calendário escolar</span></td></tr>
-          <tr><td class="escola">CEM 03 Ceilândia</td><td><span class="tag" style="background:var(--cyan);">Infraestrutura/conectividade</span></td></tr>
-          <tr><td class="escola">CED Jardins Mangueiral</td><td><span class="tag" style="background:var(--cyan);">Infraestrutura/conectividade</span><span class="tag" style="background:var(--navy);">Rotina/calendário escolar</span><span class="tag" style="background:var(--gold);">Sem atribuição de nota</span></td></tr>
-          <tr><td class="escola">Incra 08</td><td><span class="tag" style="background:var(--orange);">Metodologia usada sem a plataforma</span></td></tr>
-          <tr><td class="escola">CED 01 Itapoã</td><td><span class="tag" style="background:var(--green);">Sem limitação identificada</span></td></tr>
-          <tr><td class="escola">CED 104 Recanto das Emas</td><td><span class="tag" style="background:var(--green);">Sem limitação identificada</span></td></tr>
-          <tr><td class="escola">CEMI Taguatinga</td><td><span class="tag" style="background:#9CA3AF;">Sem visita — sem retorno</span></td></tr>
-        </tbody>
-      </table>
-      <button class="dl-btn" onclick="baixarCard(this,'matriz_codificacao')">⬇ Baixar Imagem</button>
-    </div>
-  </div>
-</section>
-
-<!-- PÁGINA 5 · IMPACTO SOCIAL -->
-<section class="page" id="p5" role="tabpanel" aria-labelledby="tab-p5">
-  <div class="kpis">
-    <div class="kpi b1"><div class="label">ALUNOS INSCRITOS</div><div class="value">1.096</div></div>
-    <div class="kpi b2"><div class="label">TAXA DE ATIVAÇÃO</div><div class="value">46,0%</div></div>
-    <div class="kpi b3"><div class="label">ITF GERAL (T0 → T1)</div><div class="value">3,71 → 4,10</div></div>
-    <div class="kpi b4"><div class="label">PASSARAM A PLANEJAR GASTOS</div><div class="value">94,1%</div></div>
-  </div>
-
-  <div class="note">Glossário: <strong>ITF</strong> = Índice de Transformação Financeira (média das notas de conhecimento, comportamento e planejamento, escala 1 a 5). <strong>T0</strong> = antes do programa · <strong>T1</strong> = depois do programa.</div>
-
-  <div class="grid">
-    <div class="card">
-      <h3>15 · Funil de engajamento</h3>
-      <p class="sub">Inscritos → iniciaram a trilha → concluintes (Primeiro Semestre de 2026)</p>
-      <div class="chart-wrap" style="height:260px;">
-        <canvas id="cFunil" role="img" aria-label="Colunas mostrando 1096 inscritos, 504 iniciaram e 168 concluintes">Inscritos: 1096. Iniciaram: 504. Concluintes: 168.</canvas>
-      </div>
-      <div class="insight">O funil fecha dentro da faixa saudável de mercado para MOOCs abertos (cursos on-line abertos e de grande escala — 5%–15% de conclusão é o benchmark do setor): com 15,3%, o Saldo+ está no topo dessa referência.</div>
-      <button class="dl-btn" onclick="baixarCard(this,'15_funil_engajamento')">⬇ Baixar Imagem</button>
-    </div>
-
-    <div class="card">
-      <h3>16 · ITF por dimensão — T0 x T1</h3>
-      <p class="sub">Conhecimento, comportamento e planejamento (escala 1–5, grupo n=142/17)</p>
-      <div class="chart-wrap" style="height:260px;">
-        <canvas id="cRadar" role="img" aria-label="Gráfico radar comparando conhecimento, comportamento e planejamento financeiro antes e depois do programa">Conhecimento: 3,88 para 4,29. Comportamento: 3,67 para 3,97. Planejamento: 3,57 para 4,03.</canvas>
-      </div>
-      <div class="legend">
-        <span><span class="dot" style="background:var(--navy);"></span>T0</span>
-        <span><span class="dot" style="background:var(--orange);"></span>T1</span>
-      </div>
-      <div class="insight">As três dimensões do ITF avançam de T0 para T1, com Planejamento puxando o crescimento (3,57→4,03) — sinal de que o programa está formando hábito prático, não só conhecimento teórico.</div>
-      <button class="dl-btn" onclick="baixarCard(this,'16_itf_radar')">⬇ Baixar Imagem</button>
-    </div>
-  </div>
-
-  <div class="grid wide">
-    <div class="card">
-      <h3>17 · ITF por dimensão — versão em barras (leitura exata)</h3>
-      <p class="sub">Mesmo dado do radar acima, em formato mais preciso para leitura de valor</p>
-      <div class="chart-wrap" style="height:240px;">
-        <canvas id="cRadarBar" role="img" aria-label="Barras agrupadas comparando conhecimento, comportamento e planejamento financeiro entre T0 e T1">Conhecimento: 3,88 para 4,29. Comportamento: 3,67 para 3,97. Planejamento: 3,57 para 4,03.</canvas>
-      </div>
-      <div class="legend">
-        <span><span class="dot" style="background:var(--navy);"></span>T0</span>
-        <span><span class="dot" style="background:var(--orange);"></span>T1</span>
-      </div>
-      <div class="insight">Em números exatos, Conhecimento chega a 4,29 — a maior nota entre as três dimensões — mostrando que o conteúdo da trilha está sendo bem absorvido pelos alunos.</div>
-      <button class="dl-btn" onclick="baixarCard(this,'17_itf_barras')">⬇ Baixar Imagem</button>
-    </div>
-  </div>
-
-  <div class="grid">
-    <div class="card">
-      <h3>18 · Mudança de comportamento (concluintes, T1)</h3>
-      <p class="sub">% que passou a adotar cada hábito após o programa (n=17)</p>
-      <div class="chart-wrap" style="height:280px;">
-        <canvas id="cComport" role="img" aria-label="Barras horizontais mostrando percentuais de mudança comportamental">Registrar gastos: 100%. Reduzir compras por impulso: 100%. Planejar gastos: 94,1%. Compartilhar conhecimento: 70,6%. Poupar dinheiro: 64,7%. Discutir com a família: 58,8%.</canvas>
-      </div>
-      <div class="insight">100% dos concluintes passaram a registrar gastos e a reduzir compras por impulso — dois hábitos centrais de educação financeira totalmente consolidados nesse grupo, com mais 94,1% planejando gastos.</div>
-      <button class="dl-btn" onclick="baixarCard(this,'18_mudanca_comportamento')">⬇ Baixar Imagem</button>
-    </div>
-
-    <div class="card">
-      <h3>19 · Intenção de uso do Pé-de-Meia</h3>
-      <p class="sub">Entre quem conhece o programa (n=128)</p>
-      <div class="chart-wrap" style="height:280px;">
-        <canvas id="cPeDeMeia" role="img" aria-label="Barras horizontais mostrando a intenção de uso do benefício Pé-de-Meia">Guardar o dinheiro: 39,1%. Ainda não sei: 30,5%. Gastar no dia a dia: 12,5%. Ajudar a família: 9,4%. Investir em estudos: 8,6%.</canvas>
-      </div>
-      <div class="insight">39,1% já pretendem guardar o benefício, e a altíssima penetração espontânea do programa (90,1% já conhecem o Pé-de-Meia) mostra terreno fértil para a trilha reforçar esse hábito de poupança.</div>
-      <button class="dl-btn" onclick="baixarCard(this,'19_pe_de_meia')">⬇ Baixar Imagem</button>
-    </div>
-  </div>
-
-  <div class="grid wide">
-    <div class="card">
-      <span class="badge">Cruzamento sugerido</span>
-      <h3>20 · Intenção do Pé-de-Meia × Taxa de conclusão da trilha</h3>
-      <p class="sub">Querer guardar o benefício não prediz engajamento com o curso — é o oposto</p>
-      <div class="chart-wrap" style="height:260px;">
-        <canvas id="cCruzamento" role="img" aria-label="Barras mostrando taxa de conclusão da trilha por grupo de intenção de uso do Pé-de-Meia">Guardar o dinheiro: 2,0% concluem a trilha. Ainda não sei: 15,4%. Investir em estudos: 18,2%.</canvas>
-      </div>
-      <div class="note">Atenção: subgrupos pequenos (1–2 concluintes em cada) — ler como indício a explorar, não como conclusão estatística fechada.</div>
-      <div class="insight">O achado mais valioso da base: o grupo que mais precisa do curso — quem ainda não guarda dinheiro — é justamente quem mais conclui a trilha. O programa está alcançando exatamente quem mais se beneficia dele.</div>
-      <button class="dl-btn" onclick="baixarCard(this,'20_cruzamento_pe_de_meia')">⬇ Baixar Imagem</button>
-    </div>
-  </div>
-</section>
-
-<!-- PÁGINA 6 · AVANÇADO -->
-<section class="page" id="p4" role="tabpanel" aria-labelledby="tab-p4">
-  <div class="grid wide">
-    <div class="card">
-      <h3>21 · Funil de volume e conversão</h3>
-      <div class="chart-wrap" style="height:330px;">
-        <svg viewBox="0 0 760 330" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;" role="img" aria-label="Diagrama de funil mostrando 1096 inscritos, 504 engajados (46%) e 168 concluintes (15,3%)">
-          <rect x="40" y="24" width="520" height="64" style="fill:var(--navy);"/>
-          <polygon points="40,88 560,88 420,132 180,132" style="fill:var(--cyan);"/>
-          <rect x="180" y="132" width="240" height="64" style="fill:var(--cyan);"/>
-          <polygon points="180,196 420,196 340,240 260,240" style="fill:var(--orange);"/>
-          <rect x="260" y="240" width="80" height="64" style="fill:var(--orange);"/>
-          <text x="580" y="50" style="font:600 14px 'Poppins',sans-serif; fill:var(--navy);">Inscritos</text>
-          <text x="580" y="73" style="font:700 20px 'Poppins',sans-serif; fill:var(--navy);">1.096</text>
-          <text x="645" y="73" style="font:500 12px 'Poppins',sans-serif; fill:#6B7280;">(100%)</text>
-          <text x="580" y="115" style="font:600 12px 'Poppins',sans-serif; fill:#6B7280;">↓ 46,0%</text>
-          <text x="580" y="158" style="font:600 14px 'Poppins',sans-serif; fill:var(--navy);">Engajados</text>
-          <text x="580" y="181" style="font:700 20px 'Poppins',sans-serif; fill:var(--navy);">504</text>
-          <text x="625" y="181" style="font:500 12px 'Poppins',sans-serif; fill:#6B7280;">(46,0%)</text>
-          <text x="580" y="223" style="font:600 12px 'Poppins',sans-serif; fill:#6B7280;">↓ 33,3%</text>
-          <text x="580" y="266" style="font:600 14px 'Poppins',sans-serif; fill:var(--navy);">Concluintes</text>
-          <text x="580" y="289" style="font:700 20px 'Poppins',sans-serif; fill:var(--navy);">168</text>
-          <text x="625" y="289" style="font:500 12px 'Poppins',sans-serif; fill:#6B7280;">(15,3%)</text>
-        </svg>
-      </div>
-      <button class="dl-btn" onclick="baixarCard(this,'21_funil_svg')">⬇ Baixar Imagem</button>
-    </div>
-
-    <div class="card">
-      <h3>22 · Volume x taxa de conversão (eixo duplo)</h3>
-      <p class="sub">Nº de alunos (eixo esquerdo) e % do total de inscritos (eixo direito), por etapa</p>
-      <div class="chart-wrap" style="height:320px;">
-        <canvas id="c7" role="img" aria-label="Gráfico de barras com eixo duplo comparando número de alunos e percentual do total, por etapa do funil">Inscritos: 1096 alunos (100%). Engajados: 504 alunos (46%). Concluintes: 168 alunos (15,3%).</canvas>
-      </div>
-      <div class="legend">
-        <span><span class="dot" style="background:var(--navy);"></span>Nº de alunos (eixo esquerdo)</span>
-        <span><span class="dot" style="background:var(--orange);"></span>% do total (eixo direito)</span>
-      </div>
-      <div class="insight">Em uma única leitura: volume e percentual caminham juntos em cada etapa — a base de 1.096 alunos sustenta um funil consistente até os 168 concluintes finais.</div>
-      <button class="dl-btn" onclick="baixarCard(this,'22_volume_taxa_conversao')">⬇ Baixar Imagem</button>
-    </div>
-
-    <div class="card">
-      <h3>23 · Mapa de calor de engajamento por escola</h3>
-      <div id="mapaCalor" style="width:100%;height:420px;border-radius:8px;overflow:hidden;background:#f5f5f5;"></div>
-      <button class="dl-btn" onclick="baixarCard(this,'23_mapa_calor')">⬇ Baixar Imagem</button>
-    </div>
-  </div>
-</section>
+</div>
 
 <section id="metodologia">
   <h2>Metodologia</h2>
   <ul>
     <li><strong>Fonte primária:</strong> extração via pipeline Python (ETL) a partir da API Ludos Pro, consolidada e validada na Planilha de Checagem e Controle Operacional.</li>
-    <li><strong>Layout aplicado:</strong> estrutura de storytelling em abas (padrão de 4–6 abas inspirado no Looker Studio), com identidade visual em Poppins e paleta navy/cyan/orange/magenta.</li>
+    <li><strong>Layout aplicado:</strong> navegação em dois níveis — abas principais separando dados do período atual de dados comparativos com o Piloto, e sub-abas temáticas dentro do período atual, com identidade visual em Poppins e paleta navy/cyan/orange/magenta.</li>
     <li><strong>Dados qualitativos</strong> (aba "Visitas e Limitações"): codificados a partir dos relatórios de visita às 7 escolas efetivamente visitadas, organizados em matriz temática por escola.</li>
     <li><strong>Limitação conhecida do próprio dashboard:</strong> os percentuais de ativação por escola e por turma (gráficos 11 e 13) ainda dependem de validação cruzada com o arquivo "Performance_Progressao" (log de atividade por aluno), pendente de disponibilização.</li>
   </ul>
@@ -603,7 +637,6 @@ const fmtInt  = v => v.toLocaleString('pt-BR');
 const fmtDec2 = v => v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
 const fmtSignedPct = v => (v>0?'+':'') + fmtPct1(v);
 
-// ---- helpers para reduzir repetição ----
 function simpleBar(id, labels, data, colors, o={}){
   const h = !!o.horizontal;
   return new Chart(document.getElementById(id), {
@@ -636,10 +669,8 @@ function groupedBar(id, labels, series, o={}){
   });
 }
 
-// ---- 1 · volume por etapa ----
 simpleBar('c1', ['Inscritos','Engajados','Concluintes'], [1096,504,168], [NAVY,CYAN,ORANGE]);
 
-// ---- 3 · meta x realizado (stacked) ----
 new Chart(document.getElementById('c3'), {
   type:'bar',
   data:{labels:['Primeiro Semestre de 2026'],
@@ -655,29 +686,23 @@ new Chart(document.getElementById('c3'), {
       y:{stacked:true,grid:{display:false},ticks:{color:NAVY,font:{size:11}}}}}
 });
 
-// ---- 4 / 5 · taxas ----
 simpleBar('c4', ['Ativação','Conclusão','Retenção'], [45.99,15.34,33.33], [NAVY,ORANGE,MAGENTA], {formatter:fmtPct1, max:60});
 simpleBar('c5', ['Conclusão geral','Retenção'], [15.34,33.33], [ORANGE,MAGENTA], {formatter:fmtPct1, max:40});
 
-// ---- 6 · comparativo piloto x 2026.1 (agrupado) ----
 groupedBar('c6', ['Ativação','Conclusão','Retenção'],
   [{label:'Piloto', data:[26.43,8.71,32.95], color:NAVY},
    {label:'Primeiro Semestre de 2026', data:[45.99,15.34,33.33], color:ORANGE}],
   {max:55, formatter:fmtPct1});
 
-// ---- 7 · engajamento entre semestres ----
 simpleBar('c11', ['Piloto',['Primeiro Semestre','de 2026']], [88,504], [NAVY,ORANGE]);
 
-// ---- 8 · atingimento da meta (metas: 100 e 500) ----
 simpleBar('c12', ['Piloto (meta: 100)',['Primeiro Semestre de 2026','(meta: 500)']], [333.0,219.2], [NAVY,ORANGE], {formatter:fmtPct1, max:360});
 
-// ---- 9 · variação relativa (aceita valor negativo) ----
 simpleBar('c13',
   [['Meta de inscritos','atingida'], ['Taxa de','ativação'], ['Taxa de conclusão','geral']],
   [-34.17, 74.01, 76.01], [NAVY,CYAN,ORANGE],
   {formatter:fmtSignedPct, min:-40, max:85});
 
-// ---- 10 · crescimento absoluto (dumbbell) ----
 const dumbbellLabels = ['Total de Estudantes Inscritos','Engajamento Inicial','Total de Concluintes'];
 const dumbbellRanges = [[333,1096],[88,504],[29,168]];
 const dumbbellGrowth = [229,473,479];
@@ -695,7 +720,6 @@ new Chart(document.getElementById('c14'), {
     scales:{x:{min:0,max:1250,grid:{color:'#E5E7EB'},ticks:{color:'#6B7280',font:{size:10}}}, y:{grid:{display:false},ticks:{color:NAVY,font:{size:11}}}}}
 });
 
-// ---- 11 / 12 · escolas ----
 simpleBar('c8',
   ['CED 104 Recanto das Emas','CEMI Taguatinga','CED 01 ITAPOÃ','CED Jardins Mangueiral','CED Incra 08','CED Pompílio Marques de Souza','Cemab','CEM 03 Ceilândia'],
   [88.9,70.6,64.4,49.1,35.5,6.2,2.1,0.0], CYAN,
@@ -706,23 +730,19 @@ simpleBar('c9',
   [270,189,151,144,116,102,76,48], NAVY,
   {horizontal:true, formatter:fmtInt, tickSize:10});
 
-// ---- 13 · engajamento por turma (colorido por faixa) ----
 const turmaLabels = ['CED 104 Recanto - C','CED 104 Recanto - B','CED 104 Recanto - A','CED 104 Recanto - H','CED 104 Recanto - G','ITAPOÃ - C','ITAPOÃ - D','Incra 08 - A','ITAPOÃ - E','CEMI Tag. - A','ITAPOÃ - A','CED 104 Recanto - I','ITAPOÃ - B','CEMI Tag. - C','CEMI Tag. - E','ITAPOÃ - G','Jardins Mang. - D','ITAPOÃ - F','Jardins Mang. - C','Jardins Mang. - B','Pompílio M.S. - A','Cemab - B','Pompílio M.S. - C','Incra 08 - B','Cemab - A','Incra 08 - Av','ITAPOÃ - K','CEM 03 Ceil. - C','CEM 03 Ceil. - D','CEM 03 Ceil. - E','CEM 03 Ceil. - F','Cemab - H','Cemab - I'];
 const turmaTaxas  = [96.9,93.9,90.3,90.3,87.5,79.5,79.4,78.8,78.1,77.8,75.0,73.3,71.1,66.7,66.7,66.7,64.9,54.5,50.0,32.4,8.0,5.6,4.3,3.8,2.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
 const turmaCores  = turmaTaxas.map(v => v>=70 ? CYAN : v>=30 ? ORANGE : MAGENTA);
 simpleBar('c10', turmaLabels, turmaTaxas, turmaCores, {horizontal:true, formatter:fmtPct1, min:0, max:100, labelSize:9, tickSize:9});
 
-// ---- 14 · limitações (visitas) ----
 const limitacoesLabels = ['Gestão/Professor(a) descontínua(o)','Infraestrutura/conectividade','Rotina/calendário escolar','Metodologia usada sem a plataforma','Sem atribuição de nota'];
 const limitacoesData   = [2,2,2,1,1];
 simpleBar('cLimitacoes', limitacoesLabels, limitacoesData, [MAGENTA,CYAN,NAVY,ORANGE,GOLD],
   {horizontal:true, min:0, max:3, labelSize:12, tickSize:11,
    formatter:v => v + ' (' + (v/7*100).toLocaleString('pt-BR',{maximumFractionDigits:1}) + '%)'});
 
-// ---- 15 · funil impacto social ----
 simpleBar('cFunil', ['Inscritos','Iniciaram','Concluintes'], [1096,504,168], [NAVY,CYAN,ORANGE]);
 
-// ---- 16 · ITF radar ----
 new Chart(document.getElementById('cRadar'), {
   type:'radar',
   data:{labels:['Conhecimento','Comportamento','Planejamento'],
@@ -737,13 +757,11 @@ new Chart(document.getElementById('cRadar'), {
     scales:{r:{min:0,max:5,ticks:{color:'#6B7280',font:{size:9}},grid:{color:'#E5E7EB'},pointLabels:{color:NAVY,font:{size:11}}}}}
 });
 
-// ---- 17 · ITF barras ----
 groupedBar('cRadarBar', ['Conhecimento','Comportamento','Planejamento'],
   [{label:'T0', data:[3.88,3.67,3.57], color:NAVY},
    {label:'T1', data:[4.29,3.97,4.03], color:ORANGE}],
   {max:5, formatter:fmtDec2});
 
-// ---- 18 / 19 · comportamento e Pé-de-Meia ----
 simpleBar('cComport',
   ['Registrar gastos','Reduzir compras por impulso','Planejar gastos','Compartilhar conhecimento','Poupar dinheiro','Discutir com a família'],
   [100,100,94.1,70.6,64.7,58.8], CYAN,
@@ -754,10 +772,8 @@ simpleBar('cPeDeMeia',
   [39.1,30.5,12.5,9.4,8.6], MAGENTA,
   {horizontal:true, formatter:fmtPct1, min:0, max:45, tickSize:10});
 
-// ---- 20 · cruzamento ----
 simpleBar('cCruzamento', ['Guardar o dinheiro','Ainda não sei','Investir em estudos'], [2.0,15.4,18.2], [MAGENTA,ORANGE,CYAN], {formatter:fmtPct1, max:22});
 
-// ---- 22 · volume x taxa de conversão (eixo duplo) ----
 new Chart(document.getElementById('c7'), {
   type:'bar',
   data:{labels:['Inscritos','Engajados','Concluintes'],
@@ -777,7 +793,6 @@ new Chart(document.getElementById('c7'), {
   }
 });
 
-// ---- 23 · mapa de calor ----
 let mapaCalorInstance = null;
 function initMapaCalor(){
   if (mapaCalorInstance) { setTimeout(()=>mapaCalorInstance.invalidateSize(), 50); return; }
@@ -802,18 +817,27 @@ function initMapaCalor(){
   L.heatLayer(heatData, {radius:45, blur:30, maxZoom:12, max:1, gradient:{0:'#00B4AA', 0.55:'#F08203', 0.8:'#FD0087', 1:'#B3001B'}}).addTo(mapaCalorInstance);
 }
 
-// ---- navegação das abas ----
-document.querySelectorAll('.tab-btn').forEach(btn=>{
+// navegação principal (2 abas)
+document.querySelectorAll('nav.primary-tabs button').forEach(btn=>{
   btn.addEventListener('click', ()=>{
-    document.querySelectorAll('.tab-btn').forEach(b=>{ b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
-    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.querySelectorAll('nav.primary-tabs button').forEach(b=>{ b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+    document.querySelectorAll('.primary-page').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active'); btn.setAttribute('aria-selected','true');
+    document.getElementById(btn.dataset.primary === 'atual' ? 'primary-atual' : 'primary-comparativo').classList.add('active');
+  });
+});
+
+// navegação das sub-abas (dentro de "Primeiro Semestre de 2026")
+document.querySelectorAll('nav.sub-tabs button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('nav.sub-tabs button').forEach(b=>{ b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+    document.querySelectorAll('#primary-atual .page').forEach(p=>p.classList.remove('active'));
     btn.classList.add('active'); btn.setAttribute('aria-selected','true');
     document.getElementById(btn.dataset.page).classList.add('active');
     if (btn.dataset.page === 'p4') initMapaCalor();
   });
 });
 
-// ---- download de cada card (html2canvas) ----
 function baixarCard(buttonElement, filename){
   buttonElement.style.display = 'none';
   const cardElement = buttonElement.closest('.card');
