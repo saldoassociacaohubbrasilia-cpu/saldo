@@ -37,22 +37,6 @@
   nav.tabs button.active{background:var(--card);box-shadow:0 -2px 0 var(--cyan) inset;}
   nav.tabs button:focus-visible,.dl-btn:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;}
 
-  .hero-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;max-width:1100px;margin:18px auto 0;padding:0 28px;}
-  .hero-card{background:#fff;border:1px solid #E4E9F2;border-radius:10px;padding:16px 18px 16px 20px;position:relative;box-shadow:0 1px 3px rgba(16,24,40,.05);}
-  .hero-card::before{content:'';position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:2px;}
-  .hero-card.accent-navy::before{background:var(--navy);}
-  .hero-card.accent-orange::before{background:var(--orange);}
-  .hero-card.accent-magenta::before{background:var(--magenta);}
-  .hero-top{display:flex;align-items:center;gap:6px;}
-  .hero-icon{font-size:14px;}
-  .hero-eyebrow{font-size:10px;font-weight:700;letter-spacing:.07em;color:var(--text-muted);text-transform:uppercase;}
-  .hero-label{font-size:13px;font-weight:600;color:var(--navy);margin-top:6px;}
-  .hero-value{font-size:32px;font-weight:700;line-height:1.15;margin-top:2px;}
-  .hero-value.t-navy{color:var(--navy);}
-  .hero-value.t-orange{color:var(--orange);}
-  .hero-value.t-magenta{color:var(--magenta);}
-  .hero-sub{font-size:11px;color:var(--text-muted);margin-top:4px;line-height:1.4;}
-
   main{max-width:1100px;margin:0 auto;padding:24px 28px 40px;}
   section.page{display:none;}
   section.page.active{display:block;}
@@ -73,6 +57,10 @@
   .card .sub{font-size:12px;color:var(--text-muted);margin:0 0 12px;}
   .chart-wrap{position:relative;width:100%;}
   #turmaChartWrap{height:900px;}
+  .donut-wrap{position:relative;}
+  .donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;}
+  .donut-value{font-size:26px;font-weight:700;color:var(--navy);line-height:1.1;}
+  .donut-label{font-size:10.5px;color:var(--text-muted);margin-top:2px;}
   .dl-btn{
     display:inline-flex;align-items:center;gap:6px;margin-top:14px;
     font-family:'Poppins',sans-serif;font-size:11.5px;font-weight:600;color:var(--navy);
@@ -119,7 +107,6 @@
     #turmaChartWrap{height:480px;overflow-y:auto;}
     #mapaCalor{height:280px !important;}
     nav.tabs button{padding:10px 14px;}
-    .hero-value{font-size:28px;}
   }
 </style>
 </head>
@@ -128,7 +115,7 @@
 
 <header class="top">
   <h1>Saldo+</h1>
-  <p>Dashboard versão 3.2 · Primeiro Semestre de 2026 · consolidado em 21/07/2026</p>
+  <p>Dashboard versão 3.3 · Primeiro Semestre de 2026 · consolidado em 22/07/2026</p>
 </header>
 
 <nav class="tabs" role="tablist" aria-label="Seções do dashboard">
@@ -139,27 +126,6 @@
   <button class="tab-btn" data-page="p5" role="tab" aria-selected="false" aria-controls="p5" id="tab-p5">5 · Impacto Social</button>
   <button class="tab-btn" data-page="p4" role="tab" aria-selected="false" aria-controls="p4" id="tab-p4">6 · Avançado</button>
 </nav>
-
-<section class="hero-metrics" aria-label="Métricas prioritárias do programa">
-  <div class="hero-card accent-navy">
-    <div class="hero-top"><span class="hero-icon">👥</span><span class="hero-eyebrow">Métrica prioritária</span></div>
-    <div class="hero-label">Engajamento</div>
-    <div class="hero-value t-navy">504</div>
-    <div class="hero-sub">alunos ativos na trilha · 46,0% dos inscritos</div>
-  </div>
-  <div class="hero-card accent-orange">
-    <div class="hero-top"><span class="hero-icon">📈</span><span class="hero-eyebrow">Métrica prioritária</span></div>
-    <div class="hero-label">Variação %</div>
-    <div class="hero-value t-orange">+76,0%</div>
-    <div class="hero-sub">crescimento da taxa de conclusão · Piloto → Primeiro Semestre de 2026</div>
-  </div>
-  <div class="hero-card accent-magenta">
-    <div class="hero-top"><span class="hero-icon">🎓</span><span class="hero-eyebrow">Métrica prioritária</span></div>
-    <div class="hero-label">Total de Concluintes</div>
-    <div class="hero-value t-magenta">168</div>
-    <div class="hero-sub">15,3% dos inscritos concluíram a trilha</div>
-  </div>
-</section>
 
 <main>
 
@@ -202,15 +168,21 @@
   <div class="grid">
     <div class="card">
       <h3>3 · Meta de inscritos x realizado</h3>
-      <p class="sub">Meta base: 500 inscritos · Realizado: 1.096 (219,2% da meta)</p>
-      <div class="chart-wrap" style="height:140px;">
-        <canvas id="c3" role="img" aria-label="Barra horizontal mostrando 1096 inscritos frente a uma meta de 500, ou 219,2 por cento da meta">Meta: 500. Realizado: 1096 (219,2% da meta).</canvas>
+      <p class="sub">Meta base: 500 inscritos · Realizado: 1.096 — Primeiro Semestre de 2026</p>
+      <div class="donut-wrap">
+        <div class="chart-wrap" style="height:220px;">
+          <canvas id="c3" role="img" aria-label="Gráfico de rosca mostrando que a meta de 500 inscritos foi superada, atingindo 219,2 por cento do objetivo">Meta: 500. Realizado: 1096 (219,2% da meta).</canvas>
+        </div>
+        <div class="donut-center">
+          <div class="donut-value">219,2%</div>
+          <div class="donut-label">da meta atingida</div>
+        </div>
       </div>
       <div class="legend">
-        <span><span class="dot" style="background:var(--navy);"></span>Até a meta (500)</span>
-        <span><span class="dot" style="background:var(--cyan);"></span>Acima da meta (+596)</span>
+        <span><span class="dot" style="background:var(--navy);"></span>Meta (500)</span>
+        <span><span class="dot" style="background:var(--cyan);"></span>Excedente (+596)</span>
       </div>
-      <div class="insight">Com a meta base recalibrada para 500 inscritos, o Primeiro Semestre de 2026 superou o objetivo em mais de 2x (219,2% da meta).</div>
+      <div class="insight">Com a meta base recalibrada para 500 inscritos, o Primeiro Semestre de 2026 mais que dobrou o objetivo (219,2% da meta) — os 596 inscritos excedentes já superam o próprio Piloto inteiro (333).</div>
       <button class="dl-btn" onclick="baixarCard(this,'3_meta_inscritos')">⬇ Baixar Imagem</button>
     </div>
 
@@ -650,19 +622,15 @@ function groupedBar(id, labels, series, o={}){
 
 simpleBar('c1', ['Inscritos','Engajados','Concluintes'], [1096,504,168], [NAVY,CYAN,ORANGE]);
 
+// ---- 3 · meta x realizado (doughnut com % no centro) ----
 new Chart(document.getElementById('c3'), {
-  type:'bar',
-  data:{labels:['Primeiro Semestre de 2026'],
-    datasets:[
-      {label:'Até a meta', data:[500], backgroundColor:NAVY,
-        datalabels:{color:'#fff',anchor:'center',align:'center',font:{size:11,weight:600},formatter:v=>fmtInt(v)}},
-      {label:'Acima da meta', data:[596], backgroundColor:CYAN,
-        datalabels:{color:'#fff',anchor:'center',align:'center',font:{size:11,weight:600},formatter:v=>'+'+fmtInt(v)}}
-    ]},
-  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{display:false},datalabels:{display:true}},
-    scales:{x:{stacked:true,min:0,max:1200,grid:{color:'#E5E7EB'},ticks:{color:'#6B7280',font:{size:10}}},
-      y:{stacked:true,grid:{display:false},ticks:{color:NAVY,font:{size:11}}}}}
+  type:'doughnut',
+  data:{labels:['Meta (500)','Excedente (+596)'],
+    datasets:[{data:[500,596], backgroundColor:[NAVY,CYAN], borderWidth:0}]},
+  options:{
+    responsive:true, maintainAspectRatio:false, cutout:'72%',
+    plugins:{legend:{display:false}, datalabels:{display:false}, tooltip:{enabled:true}}
+  }
 });
 
 simpleBar('c4', ['Ativação','Conclusão','Retenção'], [45.99,15.34,33.33], [NAVY,ORANGE,MAGENTA], {formatter:fmtPct1, max:60});
