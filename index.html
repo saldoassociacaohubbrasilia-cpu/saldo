@@ -284,6 +284,7 @@
       <div class="chart-wrap" style="height:260px;">
         <canvas id="c13" role="img" aria-label="Colunas mostrando a variação relativa: atingimento da meta de inscritos menos 34,2 por cento, taxa de ativação mais 74 por cento, taxa de conclusão mais 76 por cento">Atingimento da meta de inscritos: -34,2%. Taxa de ativação: +74,0%. Taxa de conclusão geral: +76,0%.</canvas>
       </div>
+      <div class="note"><strong>Por que essa barra aparece negativa:</strong> não é queda de desempenho. No Piloto, a meta inicial de inscritos foi definida bem abaixo do que de fato foi alcançado, então esse indicador partiu de um patamar artificialmente alto. No Primeiro Semestre de 2026 a meta foi recalibrada para um valor mais realista — por isso, mesmo com o número de alunos crescendo muito (+229%, ver gráfico 10), esse indicador específico aparece menor do que no Piloto. As outras duas barras (ativação e conclusão) mostram o quadro real: os dois indicadores de desempenho seguem subindo com força.</div>
       <div class="insight">Ativação (+74%) e conclusão (+76%) seguem crescendo com força. Já o indicador de "meta batida" caiu em termos relativos (-34,2%) — não porque o desempenho piorou, mas porque a meta do Piloto (100) ficou proporcionalmente mais baixa que a do Primeiro Semestre de 2026 (500).</div>
       <button class="dl-btn" onclick="baixarCard(this,'9_evolucao_relativa')">⬇ Baixar Imagem</button>
     </div>
@@ -396,6 +397,7 @@
   <div class="grid two-cols">
     <div class="card" style="border-top:3px solid var(--magenta);">
       <h3 style="color:var(--magenta);">Professor(a) ou gestão descontínua (2)</h3>
+      <p class="sub">A pessoa responsável pela turma (professor ou coordenação) saiu da escola, mudou de função ou entrou em licença no meio do processo, interrompendo o acompanhamento da trilha.</p>
       <blockquote class="school-quote">CED Pompílio Marques<p>A professora responsável saiu da unidade; a coordenação não retornou os contatos e o substituto orientou a não continuar.</p></blockquote>
       <blockquote class="school-quote">Cemab<p>Um dos professores inscritos entrou em licença, impactando a execução.</p></blockquote>
       <button class="dl-btn" onclick="baixarCard(this,'quote_gestao')">⬇ Baixar Imagem</button>
@@ -403,6 +405,7 @@
 
     <div class="card" style="border-top:3px solid var(--cyan);">
       <h3 style="color:var(--cyan);">Infraestrutura e conectividade (2)</h3>
+      <p class="sub">Limitação física da escola — internet instável ou poucos computadores disponíveis — que impede o acesso regular dos alunos à plataforma.</p>
       <blockquote class="school-quote">CEM 03 Ceilândia<p>Falta de acesso à internet dificultou o avanço, apesar de um 1º acesso feito.</p></blockquote>
       <blockquote class="school-quote">CED Jardins Mangueiral<p>A escola dispõe de apenas 20 computadores, exigindo divisão das turmas.</p></blockquote>
       <button class="dl-btn" onclick="baixarCard(this,'quote_infra')">⬇ Baixar Imagem</button>
@@ -410,6 +413,7 @@
 
     <div class="card" style="border-top:3px solid var(--navy);">
       <h3 style="color:var(--navy);">Rotina e calendário escolar (2)</h3>
+      <p class="sub">Dias letivos perdidos ou planejamento pedagógico já fechado antes da adesão ao programa, sem espaço regular na rotina da escola para a trilha.</p>
       <blockquote class="school-quote">CED Jardins Mangueiral<p>Diversas quintas-feiras sem aula afetaram o ritmo da trilha.</p></blockquote>
       <blockquote class="school-quote">Cemab<p>O planejamento do professor já estava definido antes da adesão, impedindo a aplicação em sala.</p></blockquote>
       <button class="dl-btn" onclick="baixarCard(this,'quote_rotina')">⬇ Baixar Imagem</button>
@@ -417,12 +421,14 @@
 
     <div class="card" style="border-top:3px solid var(--orange);">
       <h3 style="color:var(--orange);">Metodologia usada sem a plataforma (1)</h3>
+      <p class="sub">A escola já aplica o conteúdo da metodologia em sala de aula, mas os alunos ainda não estão formalmente cadastrados no ambiente digital da Ludos Pro.</p>
       <blockquote class="school-quote">Incra 08<p>Duas turmas já vinham recebendo a aplicação da metodologia em sala, mas ainda não constavam cadastradas na plataforma.</p></blockquote>
       <button class="dl-btn" onclick="baixarCard(this,'quote_metodologia')">⬇ Baixar Imagem</button>
     </div>
 
     <div class="card" style="border-top:3px solid var(--gold);">
       <h3 style="color:var(--gold);">Baixa prioridade curricular — sem nota (1)</h3>
+      <p class="sub">A trilha não compõe a nota oficial do aluno na disciplina, o que reduz a motivação para priorizá-la frente às demais atividades escolares.</p>
       <blockquote class="school-quote">CED Jardins Mangueiral<p>Unidade curricular sem atribuição de nota reduz o interesse dos estudantes em priorizar a trilha.</p></blockquote>
       <button class="dl-btn" onclick="baixarCard(this,'quote_sem_nota')">⬇ Baixar Imagem</button>
     </div>
@@ -446,6 +452,18 @@
         </tbody>
       </table>
       <button class="dl-btn" onclick="baixarCard(this,'matriz_codificacao')">⬇ Baixar Imagem</button>
+    </div>
+  </div>
+
+  <div class="grid wide">
+    <div class="card">
+      <h3>Legenda das limitações</h3>
+      <p class="sub">O que cada categoria significa na prática</p>
+      <p class="sub"><strong style="color:var(--magenta);">Professor(a) ou gestão descontínua:</strong> a pessoa responsável pela turma (professor ou coordenação) saiu da escola, mudou de função ou entrou em licença no meio do processo, interrompendo o acompanhamento da trilha.</p>
+      <p class="sub"><strong style="color:var(--cyan);">Infraestrutura e conectividade:</strong> limitação física da escola — internet instável ou poucos computadores disponíveis — que impede o acesso regular dos alunos à plataforma.</p>
+      <p class="sub"><strong style="color:var(--navy);">Rotina e calendário escolar:</strong> dias letivos perdidos ou planejamento pedagógico já fechado antes da adesão ao programa, sem espaço regular na rotina da escola para a trilha.</p>
+      <p class="sub"><strong style="color:var(--orange);">Metodologia usada sem a plataforma:</strong> a escola já aplica o conteúdo da metodologia em sala de aula, mas os alunos ainda não estão formalmente cadastrados no ambiente digital da Ludos Pro.</p>
+      <p class="sub"><strong style="color:var(--gold);">Baixa prioridade curricular — sem nota:</strong> a trilha não compõe a nota oficial do aluno na disciplina, o que reduz a motivação para priorizá-la frente às demais atividades escolares.</p>
     </div>
   </div>
 </section>
@@ -709,25 +727,6 @@ simpleBar('cPeDeMeia',
   {horizontal:true, formatter:fmtPct1, min:0, max:45, tickSize:10});
 
 simpleBar('cCruzamento', ['Guardar o dinheiro','Ainda não sei','Investir em estudos'], [2.0,15.4,18.2], [MAGENTA,ORANGE,CYAN], {formatter:fmtPct1, max:22});
-
-new Chart(document.getElementById('c7'), {
-  type:'bar',
-  data:{labels:['Inscritos','Engajados','Concluintes'],
-    datasets:[
-      {label:'Nº de alunos', data:[1096,504,168], backgroundColor:NAVY, yAxisID:'yVol',
-        datalabels:{color:NAVY,anchor:'end',align:'end',font:{size:10,weight:600},formatter:fmtInt}},
-      {label:'% do total', data:[100,46.03,15.34], backgroundColor:ORANGE, yAxisID:'yPct',
-        datalabels:{color:GOLD,anchor:'end',align:'start',font:{size:10,weight:600},formatter:fmtPct1}}
-    ]},
-  options:{responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{display:false},datalabels:{display:true}},
-    scales:{
-      x:{grid:{display:false},ticks:{color:NAVY,font:{size:11}}},
-      yVol:{position:'left',min:0,max:1200,grid:{color:'#E5E7EB'},ticks:{color:'#6B7280',font:{size:10}}},
-      yPct:{position:'right',min:0,max:110,grid:{display:false},ticks:{color:'#6B7280',font:{size:10}}}
-    }
-  }
-});
 
 let mapaCalorInstance = null;
 function initMapaCalor(){
