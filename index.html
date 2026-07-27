@@ -279,13 +279,12 @@
 
     <div class="card">
       <h3>9 · Quanto o Primeiro Semestre de 2026 evoluiu (variação relativa)</h3>
-      <p class="sub">Crescimento percentual do Primeiro Semestre de 2026 sobre o Piloto, em cada indicador</p>
+      <p class="sub">Crescimento percentual do Primeiro Semestre de 2026 sobre o Piloto, em cada indicador de desempenho</p>
       <p class="calc">Cálculo: Variação % = (valor Atual − valor Piloto) ÷ valor Piloto × 100</p>
       <div class="chart-wrap" style="height:260px;">
-        <canvas id="c13" role="img" aria-label="Colunas mostrando a variação relativa: atingimento da meta de inscritos menos 34,2 por cento, taxa de ativação mais 74 por cento, taxa de conclusão mais 76 por cento">Atingimento da meta de inscritos: -34,2%. Taxa de ativação: +74,0%. Taxa de conclusão geral: +76,0%.</canvas>
+        <canvas id="c13" role="img" aria-label="Colunas mostrando a variação relativa: taxa de ativação mais 74 por cento, taxa de conclusão mais 76 por cento">Taxa de ativação: +74,0%. Taxa de conclusão geral: +76,0%.</canvas>
       </div>
-      <div class="note"><strong>Por que essa barra aparece negativa:</strong> não é queda de desempenho. No Piloto, a meta inicial de inscritos foi definida bem abaixo do que de fato foi alcançado, então esse indicador partiu de um patamar artificialmente alto. No Primeiro Semestre de 2026 a meta foi recalibrada para um valor mais realista — por isso, mesmo com o número de alunos crescendo muito (+229%, ver gráfico 10), esse indicador específico aparece menor do que no Piloto. As outras duas barras (ativação e conclusão) mostram o quadro real: os dois indicadores de desempenho seguem subindo com força.</div>
-      <div class="insight">Ativação (+74%) e conclusão (+76%) seguem crescendo com força. Já o indicador de "meta batida" caiu em termos relativos (-34,2%) — não porque o desempenho piorou, mas porque a meta do Piloto (100) ficou proporcionalmente mais baixa que a do Primeiro Semestre de 2026 (500).</div>
+      <div class="insight">Ativação (+74%) e conclusão (+76%) seguem crescendo com força do Piloto para o Primeiro Semestre de 2026 — sinal de que o programa não só cresceu em volume, como ficou mais eficaz por aluno.</div>
       <button class="dl-btn" onclick="baixarCard(this,'9_evolucao_relativa')">⬇ Baixar Imagem</button>
     </div>
   </div>
@@ -653,9 +652,9 @@ simpleBar('c12', ['Piloto (meta: 100)',['Primeiro Semestre de 2026','(meta: 500)
 simpleBar('cMetaRealPct', ['Piloto',['Primeiro Semestre','de 2026']], [30.03,45.62], [NAVY,ORANGE], {formatter:fmtPct1, max:55});
 
 simpleBar('c13',
-  [['Meta de inscritos','atingida'], ['Taxa de','ativação'], ['Taxa de conclusão','geral']],
-  [-34.17, 74.01, 76.01], [NAVY,CYAN,ORANGE],
-  {formatter:fmtSignedPct, min:-40, max:85});
+  [['Taxa de','ativação'], ['Taxa de conclusão','geral']],
+  [74.01, 76.01], [CYAN,ORANGE],
+  {formatter:fmtSignedPct, min:0, max:85});
 
 const dumbbellLabels = ['Total de Estudantes Inscritos','Engajamento Inicial','Total de Concluintes'];
 const dumbbellRanges = [[333,1096],[88,504],[29,168]];
