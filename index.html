@@ -371,34 +371,32 @@
 <!-- PÁGINA 4 · VISITAS E LIMITAÇÕES -->
 <section class="page" id="p6" role="tabpanel" aria-labelledby="tab-p6">
   <div class="kpis">
-    <div class="kpi b1"><div class="label">ESCOLAS VISITADAS</div><div class="value">7</div></div>
-    <div class="kpi b4"><div class="label">COM LIMITAÇÕES <span style="font-size:10px;font-weight:500;color:var(--text-muted);">(71,4%)</span></div><div class="value">5</div></div>
-    <div class="kpi b5"><div class="label">ALTO ENGAJAMENTO <span style="font-size:10px;font-weight:500;color:var(--text-muted);">(28,6%)</span></div><div class="value">2</div></div>
-    <div class="kpi" style="border-top:3px solid #9CA3AF;"><div class="label">SEM VISITA REALIZADA</div><div class="value">1</div></div>
+    <div class="kpi b1"><div class="label">ESCOLAS VISITADAS</div><div class="value">8</div></div>
+    <div class="kpi b4"><div class="label">COM LIMITAÇÕES <span style="font-size:10px;font-weight:500;color:var(--text-muted);">(75,0%)</span></div><div class="value">6</div></div>
+    <div class="kpi b5"><div class="label">ALTO ENGAJAMENTO <span style="font-size:10px;font-weight:500;color:var(--text-muted);">(25,0%)</span></div><div class="value">2</div></div>
   </div>
 
   <div class="note">Saldo+ · <strong>Análise qualitativa das visitas escolares.</strong> Categorização das limitações operacionais, de gestão e de infraestrutura relatadas nas escolas, para entender por que parte dos alunos não engajou na trilha.</div>
-  <div class="note"><strong>CEMI Taguatinga não entra nas 7 visitas:</strong> a escola não se posicionou nem atendeu às solicitações de agendamento — sem notícias até o momento. Como não houve visita, não há limitação a registrar para essa unidade.</div>
-
   <div class="grid wide">
     <div class="card">
       <h3>14 · Limitações citadas nas visitas às escolas</h3>
-      <p class="sub">Frequência absoluta (barras) e % sobre as 7 escolas visitadas</p>
-      <p class="calc">Cálculo: % = nº de escolas que citaram o motivo ÷ 7 escolas visitadas</p>
+      <p class="sub">Frequência absoluta (barras) e % sobre as 8 escolas visitadas</p>
+      <p class="calc">Cálculo: % = nº de escolas que citaram o motivo ÷ 8 escolas visitadas</p>
       <div class="chart-wrap" style="height:260px;">
-        <canvas id="cLimitacoes" role="img" aria-label="Barras horizontais mostrando a frequência de cada limitação citada nas visitas: gestão ou professor descontínuo, infraestrutura, rotina escolar, metodologia sem plataforma, sem atribuição de nota">Gestão/Professor descontínuo: 2 (28,6%). Infraestrutura/conectividade: 2 (28,6%). Rotina/calendário escolar: 2 (28,6%). Metodologia usada sem a plataforma: 1 (14,3%). Sem atribuição de nota: 1 (14,3%).</canvas>
+        <canvas id="cLimitacoes" role="img" aria-label="Barras horizontais mostrando a frequência de cada limitação citada nas visitas: gestão ou professor descontínuo, infraestrutura, rotina escolar, metodologia sem plataforma, sem atribuição de nota">Gestão/Professor descontínuo: 3 (37,5%). Infraestrutura/conectividade: 2 (25,0%). Rotina/calendário escolar: 2 (25,0%). Metodologia usada sem a plataforma: 1 (12,5%). Sem atribuição de nota: 1 (12,5%).</canvas>
       </div>
-      <div class="insight">Três limitações aparecem com a mesma frequência entre as 7 escolas visitadas — descontinuidade de professor(a)/gestão, infraestrutura e rotina escolar, cada uma citada em 2 escolas. Já o Incra 08 é um caso à parte: a metodologia já estava sendo aplicada em sala, só faltou usar a plataforma — um ajuste operacional, não uma limitação pedagógica.</div>
+      <div class="insight">Gestão/Professor descontínuo é a limitação mais citada entre as 8 escolas visitadas (3 casos), seguida por infraestrutura e rotina escolar, cada uma citada em 2 escolas. Já o Incra 08 é um caso à parte: a metodologia já estava sendo aplicada em sala, só faltou usar a plataforma — um ajuste operacional, não uma limitação pedagógica.</div>
       <button class="dl-btn" onclick="baixarCard(this,'14_limitacoes_citadas')">⬇ Baixar Imagem</button>
     </div>
   </div>
 
   <div class="grid two-cols">
     <div class="card" style="border-top:3px solid var(--magenta);">
-      <h3 style="color:var(--magenta);">Professor(a) ou gestão descontínua (2)</h3>
+      <h3 style="color:var(--magenta);">Professor(a) ou gestão descontínua (3)</h3>
       <p class="sub">A pessoa responsável pela turma (professor ou coordenação) saiu da escola, mudou de função ou entrou em licença no meio do processo, interrompendo o acompanhamento da trilha.</p>
       <blockquote class="school-quote">CED Pompílio Marques<p>A professora responsável saiu da unidade; a coordenação não retornou os contatos e o substituto orientou a não continuar.</p></blockquote>
       <blockquote class="school-quote">Cemab<p>Um dos professores inscritos entrou em licença, impactando a execução.</p></blockquote>
+      <blockquote class="school-quote">CEMI Taguatinga<p>Na visita à unidade, o retorno obtido foi do professor Paulo, referência de contato na turma, que informou estar em licença desde 15/05, com retorno às atividades previsto para outubro. A tentativa de contato com o diretor Genivaldo não obteve resposta até o encerramento deste relatório, o que justifica a ausência de informações complementares por parte da gestão do CEMI.</p></blockquote>
       <button class="dl-btn" onclick="baixarCard(this,'quote_gestao')">⬇ Baixar Imagem</button>
     </div>
 
@@ -447,7 +445,7 @@
           <tr><td class="escola">Incra 08</td><td><span class="tag" style="background:var(--orange);">Metodologia usada sem a plataforma</span></td></tr>
           <tr><td class="escola">CED 01 Itapoã</td><td><span class="tag" style="background:var(--green);">Sem limitação identificada</span></td></tr>
           <tr><td class="escola">CED 104 Recanto das Emas</td><td><span class="tag" style="background:var(--green);">Sem limitação identificada</span></td></tr>
-          <tr><td class="escola">CEMI Taguatinga</td><td><span class="tag" style="background:#9CA3AF;">Sem visita — sem retorno</span></td></tr>
+          <tr><td class="escola">CEMI Taguatinga</td><td><span class="tag" style="background:var(--magenta);">Gestão/Professor descontínuo</span></td></tr>
         </tbody>
       </table>
       <button class="dl-btn" onclick="baixarCard(this,'matriz_codificacao')">⬇ Baixar Imagem</button>
@@ -689,10 +687,10 @@ const turmaCores  = turmaTaxas.map(v => v>=70 ? CYAN : v>=30 ? ORANGE : MAGENTA)
 simpleBar('c10', turmaLabels, turmaTaxas, turmaCores, {horizontal:true, formatter:fmtPct1, min:0, max:100, labelSize:9, tickSize:9});
 
 const limitacoesLabels = ['Gestão/Professor(a) descontínua(o)','Infraestrutura/conectividade','Rotina/calendário escolar','Metodologia usada sem a plataforma','Sem atribuição de nota'];
-const limitacoesData   = [2,2,2,1,1];
+const limitacoesData   = [3,2,2,1,1];
 simpleBar('cLimitacoes', limitacoesLabels, limitacoesData, [MAGENTA,CYAN,NAVY,ORANGE,GOLD],
-  {horizontal:true, min:0, max:3, labelSize:12, tickSize:11,
-   formatter:v => v + ' (' + (v/7*100).toLocaleString('pt-BR',{maximumFractionDigits:1}) + '%)'});
+  {horizontal:true, min:0, max:4, labelSize:12, tickSize:11,
+   formatter:v => v + ' (' + (v/8*100).toLocaleString('pt-BR',{maximumFractionDigits:1}) + '%)'});
 
 simpleBar('cFunil', ['Inscritos','Iniciaram','Concluintes'], [1096,504,168], [NAVY,CYAN,ORANGE]);
 
