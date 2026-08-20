@@ -571,11 +571,11 @@
     <div class="card">
       <h3>22 · O que melhor descreve a mudança</h3>
       <p class="sub">Pergunta de múltipla escolha — % dos respondentes que marcaram cada opção (n=54)</p>
-      <p class="calc">Cálculo: cada opção contada uma vez por respondente que a marcou · a soma passa de 100% porque a pergunta aceita mais de uma resposta</p>
+      <p class="calc">Cálculo: cada opção contada uma vez por respondente que a marcou · 8 respondentes marcaram mais de uma opção, por isso a soma passa de 100%</p>
       <div class="chart-wrap" style="height:250px;">
-        <canvas id="cDescreve" role="img" aria-label="Barras horizontais com o percentual de respondentes por tipo de mudança relatada">Evito compras impulsivas: 46,3%. Passei a planejar melhor: 38,9%. Passei a guardar dinheiro: 35,2%. Passei a gastar menos: 29,6%.</canvas>
+        <canvas id="cDescreve" role="img" aria-label="Barras horizontais com o percentual de respondentes por tipo de mudança relatada">Evito compras impulsivas: 44,4%. Passei a planejar melhor: 33,3%. Passei a guardar dinheiro: 27,8%. Passei a gastar menos: 22,2%.</canvas>
       </div>
-      <div class="insight">Evitar compras por impulso é a mudança mais citada (46,3%), seguida por planejar melhor e guardar dinheiro — as três apontam para controle consciente, e não para simples corte de gastos, que aparece por último (29,6%).</div>
+      <div class="insight">Evitar compras por impulso é a mudança mais citada, por 44,4% do grupo — bem à frente de planejar melhor (33,3%) e guardar dinheiro (27,8%). Cortar gastos aparece por último (22,2%), o que reforça que a mudança relatada é de controle consciente, e não de simples restrição.</div>
       <button class="dl-btn" onclick="baixarCard(this,'22_descreve_mudanca')">⬇ Baixar Imagem</button>
     </div>
   </div>
@@ -796,8 +796,8 @@ simpleBar('cPercMud',
 
 simpleBar('cDescreve',
   ['Evito compras impulsivas','Passei a planejar melhor','Passei a guardar dinheiro','Passei a gastar menos'],
-  [46.3,38.9,35.2,29.6], ORANGE,
-  {horizontal:true, formatter:fmtPct1, min:0, max:54, tickSize:10});
+  [44.4,33.3,27.8,22.2], ORANGE,
+  {horizontal:true, formatter:fmtPct1, min:0, max:50, tickSize:10});
 
 simpleBar('cGuarda',
   ['Até R$ 50','De R$ 51 a R$ 100','Não guardo dinheiro','De R$ 101 a R$ 300','Acima de R$ 300'],
