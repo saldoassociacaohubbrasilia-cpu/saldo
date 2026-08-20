@@ -470,11 +470,11 @@
   <div class="kpis">
     <div class="kpi b1"><div class="label">ALUNOS INSCRITOS</div><div class="value">1.096</div></div>
     <div class="kpi b2"><div class="label"><abbr title="Engajados ÷ Inscritos">TAXA DE ATIVAÇÃO</abbr></div><div class="value">46,0%</div></div>
-    <div class="kpi b3"><div class="label"><abbr title="Índice de Transformação Financeira">ITF</abbr> GERAL (<abbr title="Antes do programa">T0</abbr> → <abbr title="Depois do programa">T1</abbr>)</div><div class="value">3,71 → 4,10</div></div>
-    <div class="kpi b4"><div class="label">PASSARAM A PLANEJAR GASTOS</div><div class="value">94,1%</div></div>
+    <div class="kpi b3"><div class="label"><abbr title="Índice de Transformação Financeira">ITF</abbr> GERAL (<abbr title="Antes do programa">T0</abbr> → <abbr title="Depois do programa">T1</abbr>)</div><div class="value">3,71 → 3,95</div></div>
+    <div class="kpi b4"><div class="label">PASSARAM A PLANEJAR GASTOS</div><div class="value">98,1%</div></div>
   </div>
 
-  <div class="note">Glossário: <abbr title="Índice de Transformação Financeira"><strong>ITF</strong></abbr> = Índice de Transformação Financeira (média das notas de conhecimento, comportamento e planejamento, escala 1 a 5). <abbr title="Antes do programa"><strong>T0</strong></abbr> = antes do programa · <abbr title="Depois do programa"><strong>T1</strong></abbr> = depois do programa.</div>
+  <div class="note">Glossário: <abbr title="Índice de Transformação Financeira"><strong>ITF</strong></abbr> = Índice de Transformação Financeira (média das notas de conhecimento, comportamento e planejamento, escala 1 a 5). <abbr title="Antes do programa"><strong>T0</strong></abbr> = antes do programa · <abbr title="Depois do programa"><strong>T1</strong></abbr> = depois do programa. <strong>Base do <abbr title="Depois do programa">T1</abbr>: 54 respondentes</strong> do Formulário Final, reunindo as respostas coletadas pelo formulário digital e pelos formulários impressos aplicados no encerramento.</div>
 
   <div class="grid">
     <div class="card">
@@ -490,16 +490,16 @@
 
     <div class="card">
       <h3>16 · <abbr title="Índice de Transformação Financeira">ITF</abbr> por dimensão — <abbr title="Antes do programa">T0</abbr> x <abbr title="Depois do programa">T1</abbr></h3>
-      <p class="sub">Conhecimento, comportamento e planejamento (escala 1–5, grupo n=142/17)</p>
+      <p class="sub">Conhecimento, comportamento e planejamento (escala 1–5 · <abbr title="Antes do programa">T0</abbr> n=142 · <abbr title="Depois do programa">T1</abbr> n=54)</p>
       <p class="calc">Cálculo: <abbr title="Índice de Transformação Financeira">ITF</abbr> = média das notas de cada dimensão (escala 1–5), comparando <abbr title="Antes do programa">T0</abbr> e <abbr title="Depois do programa">T1</abbr></p>
       <div class="chart-wrap" style="height:260px;">
-        <canvas id="cRadar" role="img" aria-label="Gráfico radar comparando conhecimento, comportamento e planejamento financeiro antes e depois do programa">Conhecimento: 3,88 para 4,29. Comportamento: 3,67 para 3,97. Planejamento: 3,57 para 4,03.</canvas>
+        <canvas id="cRadar" role="img" aria-label="Gráfico radar comparando conhecimento, comportamento e planejamento financeiro antes e depois do programa">Conhecimento: 3,88 para 4,22. Comportamento: 3,67 para 3,88. Planejamento: 3,57 para 3,76.</canvas>
       </div>
       <div class="legend">
         <span><span class="dot" style="background:var(--navy);"></span><abbr title="Antes do programa">T0</abbr></span>
         <span><span class="dot" style="background:var(--orange);"></span><abbr title="Depois do programa">T1</abbr></span>
       </div>
-      <div class="insight">As três dimensões do ITF avançam de T0 para T1, com Planejamento puxando o crescimento (3,57→4,03) — sinal de que o programa está formando hábito prático, não só conhecimento teórico.</div>
+      <div class="insight">As três dimensões do <abbr title="Índice de Transformação Financeira">ITF</abbr> avançam de <abbr title="Antes do programa">T0</abbr> para <abbr title="Depois do programa">T1</abbr>, e o ganho é bem distribuído: nenhuma dimensão fica para trás, o que indica evolução consistente e não um efeito isolado de conteúdo.</div>
       <button class="dl-btn" onclick="baixarCard(this,'16_itf_radar')">⬇ Baixar Imagem</button>
     </div>
   </div>
@@ -510,53 +510,111 @@
       <p class="sub">Mesmo dado do radar acima, em formato mais preciso para leitura de valor</p>
       <p class="calc">Cálculo: <abbr title="Índice de Transformação Financeira">ITF</abbr> = média das notas de cada dimensão (escala 1–5), comparando <abbr title="Antes do programa">T0</abbr> e <abbr title="Depois do programa">T1</abbr></p>
       <div class="chart-wrap" style="height:240px;">
-        <canvas id="cRadarBar" role="img" aria-label="Barras agrupadas comparando conhecimento, comportamento e planejamento financeiro entre T0 e T1">Conhecimento: 3,88 para 4,29. Comportamento: 3,67 para 3,97. Planejamento: 3,57 para 4,03.</canvas>
+        <canvas id="cRadarBar" role="img" aria-label="Barras agrupadas comparando conhecimento, comportamento e planejamento financeiro entre T0 e T1">Conhecimento: 3,88 para 4,22. Comportamento: 3,67 para 3,88. Planejamento: 3,57 para 3,76.</canvas>
       </div>
       <div class="legend">
         <span><span class="dot" style="background:var(--navy);"></span><abbr title="Antes do programa">T0</abbr></span>
         <span><span class="dot" style="background:var(--orange);"></span><abbr title="Depois do programa">T1</abbr></span>
       </div>
-      <div class="insight">Em números exatos, Conhecimento chega a 4,29 — a maior nota entre as três dimensões — mostrando que o conteúdo da trilha está sendo bem absorvido pelos alunos.</div>
+      <div class="insight">Em números exatos, Conhecimento chega a 4,22 — a maior nota entre as três dimensões — enquanto Planejamento (3,76) segue como a dimensão com mais espaço para crescer nas próximas edições.</div>
       <button class="dl-btn" onclick="baixarCard(this,'17_itf_barras')">⬇ Baixar Imagem</button>
     </div>
   </div>
 
   <div class="grid">
     <div class="card">
-      <h3>18 · Mudança de comportamento (concluintes, T1)</h3>
-      <p class="sub">% que passou a adotar cada hábito após o programa (n=17)</p>
-      <p class="calc">Cálculo: % de concluintes (<abbr title="Depois do programa">T1</abbr>, n=17) que passaram a adotar cada hábito</p>
-      <div class="chart-wrap" style="height:280px;">
-        <canvas id="cComport" role="img" aria-label="Barras horizontais mostrando percentuais de mudança comportamental">Registrar gastos: 100%. Reduzir compras por impulso: 100%. Planejar gastos: 94,1%. Compartilhar conhecimento: 70,6%. Poupar dinheiro: 64,7%. Discutir com a família: 58,8%.</canvas>
+      <h3>18 · Distribuição do <abbr title="Índice de Transformação Financeira">ITF</abbr> individual</h3>
+      <p class="sub">Quantos respondentes ficaram em cada faixa de <abbr title="Índice de Transformação Financeira">ITF</abbr> ao fim do programa (n=54)</p>
+      <p class="calc">Cálculo: <abbr title="Índice de Transformação Financeira">ITF</abbr> de cada respondente, agrupado em faixas de 0,5 ponto</p>
+      <div class="chart-wrap" style="height:260px;">
+        <canvas id="cItfFaixas" role="img" aria-label="Colunas mostrando a distribuição do ITF individual por faixa">Menor que 3,0: 2. De 3,0 a 3,4: 7. De 3,5 a 3,9: 18. De 4,0 a 4,4: 18. De 4,5 a 5,0: 9.</canvas>
       </div>
-      <div class="insight">100% dos concluintes passaram a registrar gastos e a reduzir compras por impulso — dois hábitos centrais de educação financeira totalmente consolidados nesse grupo, com mais 94,1% planejando gastos.</div>
-      <button class="dl-btn" onclick="baixarCard(this,'18_mudanca_comportamento')">⬇ Baixar Imagem</button>
+      <div class="insight">Metade do grupo (27 de 54) fecha o programa com <abbr title="Índice de Transformação Financeira">ITF</abbr> igual ou acima de 4,0, e só 2 ficam abaixo de 3,0 — a distribuição está concentrada na parte alta da escala.</div>
+      <button class="dl-btn" onclick="baixarCard(this,'18_itf_distribuicao')">⬇ Baixar Imagem</button>
     </div>
 
     <div class="card">
-      <h3>19 · Intenção de uso do Pé-de-Meia</h3>
-      <p class="sub">Entre quem conhece o programa (n=128)</p>
-      <p class="calc">Cálculo: % de respostas por categoria, entre quem conhece o programa</p>
-      <div class="chart-wrap" style="height:280px;">
-        <canvas id="cPeDeMeia" role="img" aria-label="Barras horizontais mostrando a intenção de uso do benefício Pé-de-Meia">Guardar o dinheiro: 39,1%. Ainda não sei: 30,5%. Gastar no dia a dia: 12,5%. Ajudar a família: 9,4%. Investir em estudos: 8,6%.</canvas>
+      <h3>19 · Percepção e transformação — médias</h3>
+      <p class="sub">Escala 1–5 de concordância nas três afirmações finais do questionário (n=54)</p>
+      <div class="chart-wrap" style="height:260px;">
+        <canvas id="cPercepcao" role="img" aria-label="Colunas com as médias de percepção e transformação">Me sinto mais preparado: 3,96. O programa mudou minha forma de pensar sobre consumo: 4,09. Pretendo continuar aplicando o que aprendi: 4,31.</canvas>
       </div>
-      <div class="insight">39,1% já pretendem guardar o benefício, e a altíssima penetração espontânea do programa (90,1% já conhecem o Pé-de-Meia) mostra terreno fértil para a trilha reforçar esse hábito de poupança.</div>
-      <button class="dl-btn" onclick="baixarCard(this,'19_pe_de_meia')">⬇ Baixar Imagem</button>
+      <div class="insight">"Pretendo continuar aplicando o que aprendi" é a nota mais alta das três (4,31) — a intenção de continuidade supera até a percepção de preparo (3,96), o que sugere um grupo motivado e ciente de que ainda está em construção.</div>
+      <button class="dl-btn" onclick="baixarCard(this,'19_percepcao_medias')">⬇ Baixar Imagem</button>
     </div>
   </div>
 
   <div class="grid wide">
     <div class="card">
+      <h3>20 · Mudança de comportamento</h3>
+      <p class="sub">% que respondeu "Sim" a cada hábito adotado após o programa (n=54)</p>
+      <p class="calc">Cálculo: respostas "Sim" ÷ respostas válidas de cada pergunta</p>
+      <div class="chart-wrap" style="height:280px;">
+        <canvas id="cComport" role="img" aria-label="Barras horizontais com o percentual de sim em cada mudança de comportamento">Planejar gastos: 98,1%. Pensar antes de comprar: 90,6%. Guardar dinheiro: 88,7%. Controlar ou registrar gastos: 85,2%. Compartilhar o que aprendeu: 63,0%. Conversar sobre dinheiro com a família: 55,6%.</canvas>
+      </div>
+      <div class="insight">Os hábitos individuais se consolidam com força — 98,1% passaram a planejar gastos e 9 em cada 10 pensam mais antes de comprar. Já os efeitos de transbordamento são bem menores: conversar sobre dinheiro em casa (55,6%) é o ponto mais fraco do conjunto e o alvo mais claro para a próxima edição.</div>
+      <button class="dl-btn" onclick="baixarCard(this,'20_mudanca_comportamento')">⬇ Baixar Imagem</button>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>21 · Percepção da própria mudança</h3>
+      <p class="sub">Intensidade da mudança percebida na forma de usar o dinheiro (n=53)</p>
+      <div class="chart-wrap" style="height:250px;">
+        <canvas id="cPercMud" role="img" aria-label="Barras com a percepção de mudança no uso do dinheiro">Sim, alguma mudança: 27. Sim, grande mudança: 18. Pouca mudança: 7. Nenhuma mudança: 1.</canvas>
+      </div>
+      <div class="insight">84,9% percebem mudança concreta na forma de usar o dinheiro (alguma ou grande), e apenas 1 respondente relata nenhuma mudança.</div>
+      <button class="dl-btn" onclick="baixarCard(this,'21_percepcao_mudanca')">⬇ Baixar Imagem</button>
+    </div>
+
+    <div class="card">
+      <h3>22 · O que melhor descreve a mudança</h3>
+      <p class="sub">Pergunta de múltipla escolha — % dos respondentes que marcaram cada opção (n=54)</p>
+      <p class="calc">Cálculo: cada opção contada uma vez por respondente que a marcou · a soma passa de 100% porque a pergunta aceita mais de uma resposta</p>
+      <div class="chart-wrap" style="height:250px;">
+        <canvas id="cDescreve" role="img" aria-label="Barras horizontais com o percentual de respondentes por tipo de mudança relatada">Evito compras impulsivas: 46,3%. Passei a planejar melhor: 38,9%. Passei a guardar dinheiro: 35,2%. Passei a gastar menos: 29,6%.</canvas>
+      </div>
+      <div class="insight">Evitar compras por impulso é a mudança mais citada (46,3%), seguida por planejar melhor e guardar dinheiro — as três apontam para controle consciente, e não para simples corte de gastos, que aparece por último (29,6%).</div>
+      <button class="dl-btn" onclick="baixarCard(this,'22_descreve_mudanca')">⬇ Baixar Imagem</button>
+    </div>
+  </div>
+
+  <div class="grid wide">
+    <div class="card">
+      <h3>23 · Quanto consegue guardar por mês</h3>
+      <p class="sub">Faixa de poupança mensal declarada após o programa (n=54)</p>
+      <div class="chart-wrap" style="height:260px;">
+        <canvas id="cGuarda" role="img" aria-label="Barras horizontais com as faixas de quanto o aluno consegue guardar por mês">Até R$ 50: 22. De R$ 51 a R$ 100: 19. Não guardo dinheiro: 5. De R$ 101 a R$ 300: 4. Acima de R$ 300: 4.</canvas>
+      </div>
+      <div class="insight">49 dos 54 respondentes (90,7%) declaram guardar algum valor por mês, e a maior parte se concentra até R$ 100 — coerente com o perfil de renda de estudantes de ensino médio e com o Pé-de-Meia como principal fonte.</div>
+      <button class="dl-btn" onclick="baixarCard(this,'23_guarda_mensal')">⬇ Baixar Imagem</button>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>24 · Intenção de uso do Pé-de-Meia</h3>
+      <p class="sub">Entre quem conhece o programa, no questionário de entrada (n=128)</p>
+      <p class="calc">Cálculo: % de respostas por categoria, entre quem conhece o programa</p>
+      <div class="chart-wrap" style="height:280px;">
+        <canvas id="cPeDeMeia" role="img" aria-label="Barras horizontais mostrando a intenção de uso do benefício Pé-de-Meia">Guardar o dinheiro: 39,1%. Ainda não sei: 30,5%. Gastar no dia a dia: 12,5%. Ajudar a família: 9,4%. Investir em estudos: 8,6%.</canvas>
+      </div>
+      <div class="insight">39,1% já pretendem guardar o benefício, e a altíssima penetração espontânea do programa (90,1% já conhecem o Pé-de-Meia) mostra terreno fértil para a trilha reforçar esse hábito de poupança.</div>
+      <button class="dl-btn" onclick="baixarCard(this,'24_pe_de_meia')">⬇ Baixar Imagem</button>
+    </div>
+
+    <div class="card">
       <span class="badge">Cruzamento sugerido</span>
-      <h3>20 · Intenção do Pé-de-Meia × Taxa de conclusão da trilha</h3>
+      <h3>25 · Intenção do Pé-de-Meia × Taxa de conclusão da trilha</h3>
       <p class="sub">Querer guardar o benefício não prediz engajamento com o curso — é o oposto</p>
       <p class="calc">Cálculo: Taxa de conclusão do subgrupo = concluintes do subgrupo ÷ total do subgrupo</p>
-      <div class="chart-wrap" style="height:260px;">
+      <div class="chart-wrap" style="height:280px;">
         <canvas id="cCruzamento" role="img" aria-label="Barras mostrando taxa de conclusão da trilha por grupo de intenção de uso do Pé-de-Meia">Guardar o dinheiro: 2,0% concluem a trilha. Ainda não sei: 15,4%. Investir em estudos: 18,2%.</canvas>
       </div>
       <div class="note">Atenção: subgrupos pequenos (1–2 concluintes em cada) — ler como indício a explorar, não como conclusão estatística fechada.</div>
       <div class="insight">O achado mais valioso da base: o grupo que mais precisa do curso — quem ainda não guarda dinheiro — é justamente quem mais conclui a trilha. O programa está alcançando exatamente quem mais se beneficia dele.</div>
-      <button class="dl-btn" onclick="baixarCard(this,'20_cruzamento_pe_de_meia')">⬇ Baixar Imagem</button>
+      <button class="dl-btn" onclick="baixarCard(this,'25_cruzamento_pe_de_meia')">⬇ Baixar Imagem</button>
     </div>
   </div>
 </section>
@@ -571,6 +629,7 @@
     <li><strong><abbr title="Engajados ÷ Inscritos">Ativação</abbr>:</strong> Calculada como Engajados / Inscritos.</li>
     <li><strong><abbr title="Concluintes ÷ Engajados">Retenção</abbr>:</strong> Calculada estritamente como Concluintes / Engajados.</li>
     <li><strong><abbr title="Índice de Transformação Financeira">ITF</abbr> (Índice de Transformação Financeira):</strong> mede a evolução de conhecimento e comportamento financeiro entre a aplicação do questionário <abbr title="Antes do programa">T0</abbr> (antes do programa) e o questionário <abbr title="Depois do programa">T1</abbr> (depois do programa).</li>
+    <li><strong>Base do <abbr title="Depois do programa">T1</abbr> (cards 16 a 23):</strong> 54 respondentes do Formulário Final, reunindo as respostas do formulário digital e os formulários impressos aplicados no encerramento, após remoção de respostas duplicadas da mesma pessoa nos dois canais.</li>
   </ul>
   <p>Dados consolidados e extraídos da Planilha de Checagem e Controle Operacional.</p>
 </footer>
@@ -692,6 +751,8 @@ simpleBar('cLimitacoes', limitacoesLabels, limitacoesData, [MAGENTA,CYAN,NAVY,OR
   {horizontal:true, min:0, max:4, labelSize:12, tickSize:11,
    formatter:v => v + ' (' + (v/8*100).toLocaleString('pt-BR',{maximumFractionDigits:1}) + '%)'});
 
+/* ---- Aba 5 · Impacto Social (base consolidada do Formulário Final, n=54) ---- */
+
 simpleBar('cFunil', ['Inscritos','Iniciaram','Concluintes'], [1096,504,168], [NAVY,CYAN,ORANGE]);
 
 new Chart(document.getElementById('cRadar'), {
@@ -700,7 +761,7 @@ new Chart(document.getElementById('cRadar'), {
     datasets:[
       {label:'T0', data:[3.88,3.67,3.57], borderColor:NAVY, backgroundColor:'rgba(27,28,70,0.15)', pointBackgroundColor:NAVY,
         datalabels:{color:NAVY,align:'end',font:{size:9,weight:600},formatter:fmtDec2}},
-      {label:'T1', data:[4.29,3.97,4.03], borderColor:ORANGE, backgroundColor:'rgba(247,148,29,0.15)', pointBackgroundColor:ORANGE,
+      {label:'T1', data:[4.22,3.88,3.76], borderColor:ORANGE, backgroundColor:'rgba(247,148,29,0.15)', pointBackgroundColor:ORANGE,
         datalabels:{color:GOLD,align:'start',font:{size:9,weight:600},formatter:fmtDec2}}
     ]},
   options:{responsive:true,maintainAspectRatio:false,
@@ -710,13 +771,38 @@ new Chart(document.getElementById('cRadar'), {
 
 groupedBar('cRadarBar', ['Conhecimento','Comportamento','Planejamento'],
   [{label:'T0', data:[3.88,3.67,3.57], color:NAVY},
-   {label:'T1', data:[4.29,3.97,4.03], color:ORANGE}],
+   {label:'T1', data:[4.22,3.88,3.76], color:ORANGE}],
   {max:5, formatter:fmtDec2});
 
+simpleBar('cItfFaixas',
+  ['< 3,0','3,0 a 3,4','3,5 a 3,9','4,0 a 4,4','4,5 a 5,0'],
+  [2,7,18,18,9], [MAGENTA,ORANGE,GOLD,CYAN,GREEN],
+  {formatter:fmtInt, max:22});
+
+simpleBar('cPercepcao',
+  [['Me sinto mais','preparado(a)'],['Mudou minha forma','de pensar sobre consumo'],['Pretendo continuar','aplicando']],
+  [3.96,4.09,4.31], [NAVY,ORANGE,GREEN],
+  {formatter:fmtDec2, min:0, max:5, labelSize:10});
+
 simpleBar('cComport',
-  ['Registrar gastos','Reduzir compras por impulso','Planejar gastos','Compartilhar conhecimento','Poupar dinheiro','Discutir com a família'],
-  [100,100,94.1,70.6,64.7,58.8], CYAN,
+  ['Planejar gastos','Pensar antes de comprar','Guardar dinheiro','Controlar ou registrar gastos','Compartilhar o que aprendeu','Conversar com a família'],
+  [98.1,90.6,88.7,85.2,63.0,55.6], CYAN,
   {horizontal:true, formatter:fmtPct1, min:0, max:108, tickSize:10});
+
+simpleBar('cPercMud',
+  [['Sim, alguma','mudança'],['Sim, grande','mudança'],['Pouca','mudança'],['Nenhuma','mudança']],
+  [27,18,7,1], [CYAN,GREEN,ORANGE,MAGENTA],
+  {formatter:fmtInt, max:32});
+
+simpleBar('cDescreve',
+  ['Evito compras impulsivas','Passei a planejar melhor','Passei a guardar dinheiro','Passei a gastar menos'],
+  [46.3,38.9,35.2,29.6], ORANGE,
+  {horizontal:true, formatter:fmtPct1, min:0, max:54, tickSize:10});
+
+simpleBar('cGuarda',
+  ['Até R$ 50','De R$ 51 a R$ 100','Não guardo dinheiro','De R$ 101 a R$ 300','Acima de R$ 300'],
+  [22,19,5,4,4], [NAVY,CYAN,MAGENTA,ORANGE,GOLD],
+  {horizontal:true, formatter:fmtInt, min:0, max:26, tickSize:10});
 
 simpleBar('cPeDeMeia',
   ['Guardar o dinheiro','Ainda não sei','Gastar no dia a dia','Ajudar a família','Investir em estudos'],
