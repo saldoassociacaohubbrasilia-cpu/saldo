@@ -525,11 +525,11 @@
     <div class="card">
       <h3>18 · Distribuição do <abbr title="Índice de Transformação Financeira">ITF</abbr> individual</h3>
       <p class="sub">Quantos respondentes ficaram em cada faixa de <abbr title="Índice de Transformação Financeira">ITF</abbr> ao fim do programa (n=54)</p>
-      <p class="calc">Cálculo: <abbr title="Índice de Transformação Financeira">ITF</abbr> de cada respondente, agrupado em faixas de 0,5 ponto</p>
+      <p class="calc">Cálculo: <abbr title="Índice de Transformação Financeira">ITF</abbr> de cada respondente, agrupado em faixas de 0,5 ponto · % sobre os 54 respondentes</p>
       <div class="chart-wrap" style="height:260px;">
-        <canvas id="cItfFaixas" role="img" aria-label="Colunas mostrando a distribuição do ITF individual por faixa">Menor que 3,0: 2. De 3,0 a 3,4: 7. De 3,5 a 3,9: 18. De 4,0 a 4,4: 18. De 4,5 a 5,0: 9.</canvas>
+        <canvas id="cItfFaixas" role="img" aria-label="Colunas mostrando a distribuição do ITF individual por faixa">Menor que 3,0: 3,7%. De 3,0 a 3,4: 13,0%. De 3,5 a 3,9: 33,3%. De 4,0 a 4,4: 33,3%. De 4,5 a 5,0: 16,7%.</canvas>
       </div>
-      <div class="insight">Metade do grupo (27 de 54) fecha o programa com <abbr title="Índice de Transformação Financeira">ITF</abbr> igual ou acima de 4,0, e só 2 ficam abaixo de 3,0 — a distribuição está concentrada na parte alta da escala.</div>
+      <div class="insight">Metade do grupo (50,0%) fecha o programa com <abbr title="Índice de Transformação Financeira">ITF</abbr> igual ou acima de 4,0, e só 3,7% ficam abaixo de 3,0 — a distribuição está concentrada na parte alta da escala.</div>
       <button class="dl-btn" onclick="baixarCard(this,'18_itf_distribuicao')">⬇ Baixar Imagem</button>
     </div>
 
@@ -560,11 +560,11 @@
   <div class="grid">
     <div class="card">
       <h3>21 · Percepção da própria mudança</h3>
-      <p class="sub">Intensidade da mudança percebida na forma de usar o dinheiro (n=53)</p>
+      <p class="sub">Intensidade da mudança percebida na forma de usar o dinheiro · % sobre os 53 respondentes desta pergunta</p>
       <div class="chart-wrap" style="height:250px;">
-        <canvas id="cPercMud" role="img" aria-label="Barras com a percepção de mudança no uso do dinheiro">Sim, alguma mudança: 27. Sim, grande mudança: 18. Pouca mudança: 7. Nenhuma mudança: 1.</canvas>
+        <canvas id="cPercMud" role="img" aria-label="Barras com a percepção de mudança no uso do dinheiro">Sim, alguma mudança: 50,9%. Sim, grande mudança: 34,0%. Pouca mudança: 13,2%. Nenhuma mudança: 1,9%.</canvas>
       </div>
-      <div class="insight">84,9% percebem mudança concreta na forma de usar o dinheiro (alguma ou grande), e apenas 1 respondente relata nenhuma mudança.</div>
+      <div class="insight">84,9% percebem mudança concreta na forma de usar o dinheiro (alguma ou grande), e apenas 1,9% relatam nenhuma mudança.</div>
       <button class="dl-btn" onclick="baixarCard(this,'21_percepcao_mudanca')">⬇ Baixar Imagem</button>
     </div>
 
@@ -583,11 +583,11 @@
   <div class="grid wide">
     <div class="card">
       <h3>23 · Quanto consegue guardar por mês</h3>
-      <p class="sub">Faixa de poupança mensal declarada após o programa (n=54)</p>
+      <p class="sub">Faixa de poupança mensal declarada após o programa · % sobre os 54 respondentes</p>
       <div class="chart-wrap" style="height:260px;">
-        <canvas id="cGuarda" role="img" aria-label="Barras horizontais com as faixas de quanto o aluno consegue guardar por mês">Até R$ 50: 22. De R$ 51 a R$ 100: 19. Não guardo dinheiro: 5. De R$ 101 a R$ 300: 4. Acima de R$ 300: 4.</canvas>
+        <canvas id="cGuarda" role="img" aria-label="Barras horizontais com as faixas de quanto o aluno consegue guardar por mês">Até R$ 50: 40,7%. De R$ 51 a R$ 100: 35,2%. Não guardo dinheiro: 9,3%. De R$ 101 a R$ 300: 7,4%. Acima de R$ 300: 7,4%.</canvas>
       </div>
-      <div class="insight">49 dos 54 respondentes (90,7%) declaram guardar algum valor por mês, e a maior parte se concentra até R$ 100 — coerente com o perfil de renda de estudantes de ensino médio e com o Pé-de-Meia como principal fonte.</div>
+      <div class="insight">90,7% dos respondentes declaram guardar algum valor por mês, e a maior parte se concentra até R$ 100 — coerente com o perfil de renda de estudantes de ensino médio e com o Pé-de-Meia como principal fonte.</div>
       <button class="dl-btn" onclick="baixarCard(this,'23_guarda_mensal')">⬇ Baixar Imagem</button>
     </div>
   </div>
@@ -776,8 +776,8 @@ groupedBar('cRadarBar', ['Conhecimento','Comportamento','Planejamento'],
 
 simpleBar('cItfFaixas',
   ['< 3,0','3,0 a 3,4','3,5 a 3,9','4,0 a 4,4','4,5 a 5,0'],
-  [2,7,18,18,9], [MAGENTA,ORANGE,GOLD,CYAN,GREEN],
-  {formatter:fmtInt, max:22});
+  [3.7,13.0,33.3,33.3,16.7], [MAGENTA,ORANGE,GOLD,CYAN,GREEN],
+  {formatter:fmtPct1, max:40});
 
 simpleBar('cPercepcao',
   [['Me sinto mais','preparado(a)'],['Mudou minha forma','de pensar sobre consumo'],['Pretendo continuar','aplicando']],
@@ -791,8 +791,8 @@ simpleBar('cComport',
 
 simpleBar('cPercMud',
   [['Sim, alguma','mudança'],['Sim, grande','mudança'],['Pouca','mudança'],['Nenhuma','mudança']],
-  [27,18,7,1], [CYAN,GREEN,ORANGE,MAGENTA],
-  {formatter:fmtInt, max:32});
+  [50.9,34.0,13.2,1.9], [CYAN,GREEN,ORANGE,MAGENTA],
+  {formatter:fmtPct1, max:58});
 
 simpleBar('cDescreve',
   ['Evito compras impulsivas','Passei a planejar melhor','Passei a guardar dinheiro','Passei a gastar menos'],
@@ -801,8 +801,8 @@ simpleBar('cDescreve',
 
 simpleBar('cGuarda',
   ['Até R$ 50','De R$ 51 a R$ 100','Não guardo dinheiro','De R$ 101 a R$ 300','Acima de R$ 300'],
-  [22,19,5,4,4], [NAVY,CYAN,MAGENTA,ORANGE,GOLD],
-  {horizontal:true, formatter:fmtInt, min:0, max:26, tickSize:10});
+  [40.7,35.2,9.3,7.4,7.4], [NAVY,CYAN,MAGENTA,ORANGE,GOLD],
+  {horizontal:true, formatter:fmtPct1, min:0, max:48, tickSize:10});
 
 simpleBar('cPeDeMeia',
   ['Guardar o dinheiro','Ainda não sei','Gastar no dia a dia','Ajudar a família','Investir em estudos'],
